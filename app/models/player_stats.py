@@ -1,20 +1,19 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
-class Team_Stat(db.Model):
-    __tablename__ = 'team_stats'
+class Player_Stat(db.Model):
+    __tablename__ = 'player_stats'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
     game_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('games.id')), nullable=False, primary_key=True)
-    team_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('teams.id')), nullable=False, primary_key=True)
-    home = db.Column(db.Boolean)
-    win = db.Column(db.Boolean)
+    player_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('players.id')), nullable=False, primary_key=True)
     points = db.Column(db.Integer, default=0)
+    assists = db.Column(db.Integer, default=0)
+    rebounds = db.Column(db.Integer, default=0)
     
 
     def to_dict(self):
         return {
         }
-    
 
