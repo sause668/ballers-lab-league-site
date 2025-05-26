@@ -15,9 +15,25 @@ class Team_Stat(db.Model):
     game = db.relationship("Game", back_populates="team_stats")
     team = db.relationship("Team", back_populates="team_stats")
 
-    def to_dict(self):
+    def game_day_info(self):
         return {
+            'game_id': self.game_id,
+            'team': self.team.to_dict(),
+            'home': self.home,
+            'win': self.win,
+            'points': self.points,
         }
+    
+    def game_info(self):
+        return {
+            'game_id': self.game_id,
+            'team': self.team.to_dict(),
+            'home': self.home,
+            'win': self.win,
+            'points': self.points,
+        }
+    
+    
 
 
     
