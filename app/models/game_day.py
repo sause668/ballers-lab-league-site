@@ -18,4 +18,9 @@ class Game_Day(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'name': self.name,
+            'location': self.location,
+            'start_time': self.start_time,
+            'end_time': self.end_time,
+            'games': [game.game_day_info() for game in self.games]
         }
