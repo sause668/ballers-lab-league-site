@@ -12,8 +12,12 @@ class Player_Stat(db.Model):
     assists = db.Column(db.Integer, default=0)
     rebounds = db.Column(db.Integer, default=0)
     
+    game = db.relationship("Game", back_populates="player_stats")
+    player = db.relationship("Player", back_populates="player_stats")
 
     def to_dict(self):
         return {
         }
+
+
 

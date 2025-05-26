@@ -9,6 +9,9 @@ class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=False, unique=True)
 
+    players = db.relationship("Player", uselist=True, back_populates="team", cascade="all, delete-orphan")
+    team_stats = db.relationship("Team_Stat", uselist=True, back_populates="team", cascade="all, delete-orphan")
+
     def to_dict(self):
         return {
             'id': self.id,

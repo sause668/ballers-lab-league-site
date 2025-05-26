@@ -12,9 +12,13 @@ class Team_Stat(db.Model):
     win = db.Column(db.Boolean)
     points = db.Column(db.Integer, default=0)
     
+    game = db.relationship("Game", back_populates="team_stats")
+    team = db.relationship("Team", back_populates="team_stats")
 
     def to_dict(self):
         return {
         }
+
+
     
 
