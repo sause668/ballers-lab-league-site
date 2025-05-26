@@ -12,8 +12,9 @@ class Game_Day(db.Model):
     date = db.Column(db.Date, nullable=False)
     start_time = db.Column(db.Time, nullable=False)
     end_time = db.Column(db.Time, nullable=False)
-    
 
+    games = db.relationship("Games", uselist=True, back_populates="game_day", cascade="all, delete-orphan")
+    
     def to_dict(self):
         return {
             'id': self.id,

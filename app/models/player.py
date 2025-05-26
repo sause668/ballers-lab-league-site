@@ -12,6 +12,8 @@ class Player(db.Model):
     last_name = db.Column(db.String(20), nullable=False)
     number = db.Column(db.Integer, nullable=False)
     
+    team = db.relationship("Team", back_populates="players")
+    player_stats = db.relationship("Player_Stat", uselist=True, back_populates="player", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -20,3 +22,4 @@ class Player(db.Model):
             'last_name': self.last_name,
             'number': self.number,
         }
+
