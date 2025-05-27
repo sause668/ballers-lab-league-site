@@ -19,5 +19,9 @@ def range(min=0, max=5):
     return _range
 
 def isDate(form, field): 
-    if re.match('^/d{4}-/d{2}-/d{2}$', field.data):
+    if re.match('^/d{4}-/d{2}-/d{2}$', str(field.data)):
         raise ValidationError(f'Improper date')
+    
+def isTime(form, field): 
+    if re.match('^/d{2}:/d{2}$', str(field.data)):
+        raise ValidationError(f'Improper time')

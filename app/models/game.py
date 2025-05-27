@@ -21,8 +21,8 @@ class Game(db.Model):
             'id': self.id,
             'game_day_id': self.game_day_id,
             'name': self.name,
-            'start_time': self.start_time,
-            'end_time': self.end_time,
+            'start_time': str(self.start_time),
+            'end_time': str(self.end_time),
             'teams': [team_stat.game_day_info() for team_stat in self.team_stats]
         }
     
@@ -31,8 +31,8 @@ class Game(db.Model):
             'id': self.id,
             'game_day_id': self.game_day_id,
             'name': self.name,
-            'start_time': self.start_time,
-            'end_time': self.end_time,
+            'start_time': str(self.start_time),
+            'end_time': str(self.end_time),
             'teams': [team_stat.game_day_info() for team_stat in self.team_stats],
             'players': [player_stat.game_day_info() for player_stat in self.player_stats]
         }
