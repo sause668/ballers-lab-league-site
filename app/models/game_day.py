@@ -13,7 +13,7 @@ class Game_Day(db.Model):
     start_time = db.Column(db.Time, nullable=False)
     end_time = db.Column(db.Time, nullable=False)
 
-    games = db.relationship("Games", uselist=True, back_populates="game_day", cascade="all, delete-orphan")
+    games = db.relationship("Game", uselist=True, back_populates="game_day", cascade="all, delete-orphan")
     
     def to_dict(self):
         return {

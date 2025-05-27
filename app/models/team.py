@@ -17,9 +17,9 @@ class Team(db.Model):
         loses = 0
 
         for stat in team_stats:
-            if stat.win:
+            if stat.win == True:
                 wins += 1
-            else:
+            elif stat.win == False:
                 loses += 1
         
         return f"{wins} - {loses}"
