@@ -13,10 +13,7 @@ def authenticate():
     """
 
     if not current_user.is_authenticated:
-        isLandingPage = request.headers.get('Landing-Page')
-        if isLandingPage:
-            return {'landing': 'true'}
-        return {'errors': {'message': 'Unauthorized'}}, 401
+        return {'user': None}
     
     return current_user.to_dict()
 
@@ -32,7 +29,7 @@ def login():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
-        user = User.query.filter(User.email == form.data['email']).first()
+        user = User.query.filter(User.username == form.data['username']).first()
         login_user(user)
         return user.to_dict()
     return form.errors, 401
