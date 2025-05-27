@@ -20,7 +20,8 @@ class Game_Day(db.Model):
             'id': self.id,
             'name': self.name,
             'location': self.location,
-            'start_time': self.start_time,
-            'end_time': self.end_time,
+            'date': str(self.date),
+            'start_time': str(self.start_time),
+            'end_time': str(self.end_time),
             'games': [game.game_day_info() for game in self.games]
         }

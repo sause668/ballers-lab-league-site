@@ -33,6 +33,11 @@ class Team_Stat(db.Model):
             'points': self.points,
         }
     
+    def record(self):
+        return {
+            'win': self.win,
+        }
+    
     
 
 

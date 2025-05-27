@@ -15,7 +15,7 @@ def authenticate():
     if not current_user.is_authenticated:
         return {'user': None}
     
-    return current_user.to_dict()
+    return {'user': current_user.to_dict()}
 
 
 @auth_routes.route('/login', methods=['POST'])
@@ -31,8 +31,8 @@ def login():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.username == form.data['username']).first()
         login_user(user)
-        return user.to_dict()
-    return form.errors, 401
+        return {'user': user.to_dict()}
+    return {'errors': form.errors}, 401
 
 
 @auth_routes.route('/logout')
