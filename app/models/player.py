@@ -18,6 +18,15 @@ class Player(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'team': self.team_id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'number': self.number,
+        }
+    
+    def team_info(self):
+        return {
+            'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
             'number': self.number,

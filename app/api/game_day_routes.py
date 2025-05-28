@@ -55,7 +55,8 @@ def create_game_day():
         db.session.add(game_day_new)
         db.session.commit()
 
-        return {'game_day': game_day_new.to_dict()}, 201
+        game_days = Game_Day.query.all()
+        return {'game_days': [game_day.to_dict() for game_day in game_days]}, 201
 
     return form.errors, 400
 
@@ -82,7 +83,8 @@ def edit_game_day(game_day_id):
 
         db.session.commit()
 
-        return {'game_day': game_day_edit.to_dict()}, 201
+        game_days = Game_Day.query.all()
+        return {'game_days': [game_day.to_dict() for game_day in game_days]}, 201
 
     return form.errors, 400
 
@@ -101,5 +103,6 @@ def delete_game_day(game_day_id):
     db.session.delete(game_day_delete)
     db.session.commit()
 
-    return {'message': 'Game Day deleted'}, 200
+    game_days = Game_Day.query.all()
+    return {'game_days': [game_day.to_dict() for game_day in game_days]}, 200
 
