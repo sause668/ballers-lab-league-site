@@ -25,3 +25,11 @@ class Game_Day(db.Model):
             'end_time': str(self.end_time),
             'games': [game.game_day_info() for game in self.games]
         }
+    
+    def list(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'location': self.location,
+            'date': str(self.date),
+        }

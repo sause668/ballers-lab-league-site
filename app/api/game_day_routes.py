@@ -14,6 +14,14 @@ def game_days():
     game_days = Game_Day.query.all()
     return {'game_days': [game_day.to_dict() for game_day in game_days]}
 
+# @game_day_routes.route('/list')
+# def game_days():
+#     """
+#     Get all Game Days IDs
+#     """
+#     game_days = Game_Day.query.all()
+#     return {'game_days': [game_day.to_dict() for game_day in game_days]}
+
 @game_day_routes.route('/<int:game_day_id>')
 def game_day(game_day_id):
     """
@@ -94,8 +102,4 @@ def delete_game_day(game_day_id):
     db.session.commit()
 
     return {'message': 'Game Day deleted'}, 200
-
-
-
-
 

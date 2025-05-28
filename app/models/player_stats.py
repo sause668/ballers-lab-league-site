@@ -22,7 +22,15 @@ class Player_Stat(db.Model):
             'points': self.points,
             'assists': self.assists,
             'rebounds': self.rebounds,
-
+        }
+    
+    def game_info(self):
+        return {
+            'game_id': self.game_id,
+            'player': self.player.to_dict(),
+            'points': self.points,
+            'assists': self.assists,
+            'rebounds': self.rebounds,
         }
 
 
