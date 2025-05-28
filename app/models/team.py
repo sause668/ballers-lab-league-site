@@ -12,10 +12,7 @@ class Team(db.Model):
     players = db.relationship("Player", uselist=True, back_populates="team", cascade="all, delete-orphan")
     team_stats = db.relationship("Team_Stat", uselist=True, back_populates="team", cascade="all, delete-orphan")
 
-    
-
-    def to_dict(self):
-        def get_record(team_stats):
+    def get_record(self, team_stats):
             wins = 0
             loses = 0
 
@@ -26,9 +23,25 @@ class Team(db.Model):
                     loses += 1
             
             return f"{wins} - {loses}"
-        
+
+    def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
-            'record': get_record([team_stat.record() for team_stat in self.team_stats])
+            'record': self.get_record([team_stat.record() for team_stat in self.team_stats])
+        }
+    
+    def teams_info(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'record': self.get_record([team_stat.record() for team_stat in self.team_stats])
+        }
+    
+    def team_info(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'record': self.get_record([team_stat.record() for team_stat in self.team_stats]),
+            'players': [player.team_info() for player in self.players]
         }

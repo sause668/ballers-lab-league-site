@@ -33,7 +33,7 @@ def game(game_id):
 @login_required
 def create_game():
     """
-    New Game 
+    New Game ****Add to GameDay Routes******
     """
     form = Game_Form()
     form['csrf_token'].data = request.cookies['csrf_token']
