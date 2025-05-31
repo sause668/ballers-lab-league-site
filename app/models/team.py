@@ -45,3 +45,9 @@ class Team(db.Model):
             'record': self.get_record([team_stat.record() for team_stat in self.team_stats]),
             'players': [player.team_info() for player in self.players]
         }
+    
+    def team_list(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
