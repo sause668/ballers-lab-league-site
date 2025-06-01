@@ -16,6 +16,15 @@ class Game(db.Model):
     team_stats = db.relationship("Team_Stat", uselist=True, back_populates="game", cascade="all, delete-orphan")
     player_stats = db.relationship("Player_Stat", uselist=True, back_populates="game", cascade="all, delete-orphan")
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'game_day_id': self.game_day_id,
+            'name': self.name,
+            'start_time': str(self.start_time),
+            'end_time': str(self.end_time),
+        }
+    
     def game_day_info(self):
         return {
             'id': self.id,
@@ -23,17 +32,35 @@ class Game(db.Model):
             'name': self.name,
             'start_time': str(self.start_time),
             'end_time': str(self.end_time),
-            'teams': [team_stat.game_day_info() for team_stat in self.team_stats]
         }
     
     def game_info(self):
         return {
             'id': self.id,
             'game_day_id': self.game_day_id,
+            'game_day': self.game_day.game_info(),
             'name': self.name,
             'start_time': str(self.start_time),
             'end_time': str(self.end_time),
-            'teams': [team_stat.game_day_info() for team_stat in self.team_stats],
-            'players': [player_stat.game_info() for player_stat in self.player_stats]
+            'teams': [team_stat.game_info() for team_stat in self.team_stats],
         }
+    
+    def game_stats_info(self):
+        return {
+            'id': self.id,
+            'game_day_id': self.game_day_id,
+            'name': self.name,
+            'start_time': str(self.start_time),
+            'end_time': str(self.end_time),
+            'team_stats': [team_stat.game_info() for team_stat in self.team_stats],
+            'player_stats': [player_stat.game_info() for player_stat in self.player_stats]
+        }
+    
+    def list_info(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+        }
+    
+    
 

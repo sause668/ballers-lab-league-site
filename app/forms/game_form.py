@@ -6,7 +6,6 @@ from .validators import isTime
 
 
 class Game_Form(FlaskForm):
-    game_day_id = IntegerField('game_day_id', validators=[DataRequired()])
     name = StringField('name', validators=[DataRequired()])
     start_time = TimeField('start_time', validators=[DataRequired(), isTime])
     end_time = TimeField('end_time', validators=[DataRequired(), isTime])

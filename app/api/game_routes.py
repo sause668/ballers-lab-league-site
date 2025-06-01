@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Game, Game_Day
-from app.forms import Game_Form
+from app.models import db, Game, Team_Stat, Player, Player_Stat
+from app.forms import Team_Stat_Form, Player_Stat_Form
 
 game_routes = Blueprint('games', __name__)
 
@@ -15,89 +15,152 @@ def game(game_id):
     if not game:
         return jsonify({"message": "Game not found"}), 404
     
-    return {'game': game.game_day_info()}
+    return {'game': game.game_info()}
 
-# @game_routes.route('/<int:game_id>/info')
-# def game(game_id):
-#     """
-#     Get Game by ID
-#     """
-#     game = Game.query.filter_by(id=game_id,).first()
+@game_routes.route('/<int:game_id>/stats')
+def game_stats(game_id):
+    """
+    Get Game by ID with stats
+    """
+    game = Game.query.filter_by(id=game_id,).first()
 
-#     if not game:
-#         return jsonify({"message": "Game not found"}), 404
+    if not game:
+        return jsonify({"message": "Game not found"}), 404
     
-#     return {'game': game.game_info()}
+    return {'game': game.game_stats_info()}
 
-@game_routes.route('', methods=['POST'])
+
+"""
+In Game Routes
+"""
+
+@game_routes.route('/<int:game_id>/teams/<int:team_id>', methods=['POST'])
 @login_required
-def create_game():
+def add_team(game_id, team_id):
     """
-    New Game ****Add to GameDay Routes******
+    Add Team
     """
-    form = Game_Form()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
 
-        game_new = Game(
-            game_day_id=form.data['game_day_id'],
-            name=form.data['name'],
-            start_time=form.data['start_time'],
-            end_time=form.data['end_time']
+    game = Game.query.filter_by(id=game_id,).first()
+
+    if not game:
+            return jsonify({"message": "Game not found"}), 404
+
+    team_stats = Team_Stat.query.filter_by(game_id=game_id).all()
+
+    if len(team_stats) > 1:
+        return jsonify({"message": "Already Two Teams"}), 400
+    
+    for team_stat in team_stats:
+        if team_stat.team_id == team_id:
+            return jsonify({"message": "Team already in game"}), 400
+    
+    home = (not team_stats)
+
+    players = Player.query.filter_by(team_id=team_id).all()
+
+    game_new = Team_Stat(
+        game_id=game_id,
+        team_id=team_id,
+        home=home,
+    )
+
+    for player in players:
+        player_stat_new = Player_Stat(
+            game_id=game_id,
+            player_id = player.id
         )
 
-        db.session.add(game_new)
-        db.session.commit()
+        db.session.add(player_stat_new)
 
-        game_days = Game_Day.query.all()
-        return {'game_days': [game_day.to_dict() for game_day in game_days]}
+    db.session.add(game_new)
+    db.session.commit()
 
-    return form.errors, 400
+    game = Game.query.filter_by(id=game_id).first()
+    return {'game': game.game_info()}
 
-@game_routes.route('/<int:game_id>', methods=['PUT'])
+@game_routes.route('/<int:game_id>/teams/<int:team_id>', methods=['DELETE'])
 @login_required
-def edit_game(game_id):
+def remove_team(game_id, team_id):
     """
-    Edit Game
+    Remove Team 
     """
-    form = Game_Form()
+
+    game = Game.query.filter_by(id=game_id,).first()
+
+    if not game:
+            return jsonify({"message": "Game not found"}), 404
+    
+    team_stat_delete = Team_Stat.query.filter_by(game_id=game_id, team_id=team_id).first()
+
+    if not team_stat_delete:
+        return jsonify({"message": "Team not in game"}), 404
+    
+    player_stats = Player_Stat.query.filter_by(game_id=game_id).all()
+
+    player_stats_delete = filter(lambda player_stat: player_stat.player.team_id == team_id, player_stats)
+    
+    db.session.delete(team_stat_delete)
+    for player_stat in player_stats_delete:
+        db.session.delete(player_stat)
+    db.session.commit()
+
+    game = Game.query.filter_by(id=game_id).first()
+    return {'game': game.game_info()}
+
+@game_routes.route('/<int:game_id>/teams/<int:team_id>', methods=['PUT'])
+@login_required
+def edit_team_stats(game_id, team_id):
+    """
+    Edit Team Stats
+    """
+    form = Team_Stat_Form()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
 
-        game_edit = Game.query.filter_by(id=game_id).first()
+        game = Game.query.filter_by(id=game_id,).first()
 
-        if not game_edit:
-            return jsonify({"message": "Game not found"}), 404
+        if not game:
+                return jsonify({"message": "Game not found"}), 404
+
+        team_stat_edit = Team_Stat.query.filter_by(game_id=game_id, team_id=team_id).first()
+
+        if not team_stat_edit:
+            return jsonify({"message": "Team stat not found"}), 404
         
-        game_edit.game_day_id = form.data['game_day_id']
-        game_edit.name = form.data['name']
-        game_edit.start_time = form.data['start_time']
-        game_edit.end_time = form.data['end_time']
+        team_stat_edit.win = form.data['win']
+        team_stat_edit.points = form.data['points']
 
         db.session.commit()
 
-        game_days = Game_Day.query.all()
-        return {'game_days': [game_day.to_dict() for game_day in game_days]}
+        game = Game.query.filter_by(id=game_id).first()
+        return {'game': game.game_stats_info()}
 
     return form.errors, 400
 
-@game_routes.route('/<int:game_id>', methods=['DELETE'])
+@game_routes.route('/<int:game_id>/players/<int:player_id>', methods=['PUT'])
 @login_required
-def delete_game(game_id):
+def edit_player_stats(game_id, player_id):
     """
-    Delete Game 
+    Edit Player Stats
     """
-    
-    game_delete = Game.query.filter_by(id=game_id,).first()
+    form = Player_Stat_Form()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
 
-    if not game_delete:
-            return jsonify({"message": "Game not found"}), 404
-    
-    db.session.delete(game_delete)
-    db.session.commit()
+        player_stat_edit = Player_Stat.query.filter_by(game_id=game_id, player_id=player_id).first()
 
-    game_days = Game_Day.query.all()
-    return {'game_days': [game_day.to_dict() for game_day in game_days]}
+        if not player_stat_edit:
+            return jsonify({"message": "Player stat not found"}), 404
+        
+        player_stat_edit.points = form.data['points']
+        player_stat_edit.assists = form.data['assists']
+        player_stat_edit.rebounds = form.data['rebounds']
 
+        db.session.commit()
 
+        game = Game.query.filter_by(id=game_id).first()
+        return {'game': game.game_stats_info()}
+
+    return form.errors, 400
 
