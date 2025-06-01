@@ -17,10 +17,10 @@ def teams():
 @team_routes.route('/list')
 def teams_list():
     """
-    Get all Teams (names only)
+    Get all Teams List
     """
     teams = Team.query.all()
-    return {'teams': [team.team_list() for team in teams]}
+    return {'teams': [team.list_info() for team in teams]}
 
 @team_routes.route('/<int:team_id>')
 def team(team_id):
@@ -75,7 +75,8 @@ def edit_team(team_id):
 
         db.session.commit()
 
-        return {'team': team_edit.team_info()}
+        teams = Team.query.all()
+        return {'teams': [team.teams_info() for team in teams]}
 
     return form.errors, 400
 
@@ -94,7 +95,8 @@ def delete_team(team_id):
     db.session.delete(team_delete)
     db.session.commit()
 
-    return {'message': "Team Delete Successful"}
+    teams = Team.query.all()
+    return {'teams': [team.teams_info() for team in teams]}
 
 
 """
