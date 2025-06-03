@@ -6,8 +6,8 @@ import os
 def seed_users():
 
     db.session.add(User(
-        username=os.environ.get("USERNAME"), 
-        password=os.environ.get("USER_PASSWORD"),
+        username='livadmin', 
+        password='ballerswithsoul94',
     ))
 
     db.session.commit()
