@@ -1,19 +1,11 @@
 from app.models import db, Team, environment, SCHEMA
 from sqlalchemy.sql import text
+from app.utils import roster
 
 
 def seed_teams():
 
-    teams = [
-        {
-            'name': 'Bulls'
-        },
-        {
-            'name': 'Lakers'
-        }
-    ]
-
-    for team in teams:
+    for team in roster:
         db.session.add(Team(
             name=team['name']
         ))
