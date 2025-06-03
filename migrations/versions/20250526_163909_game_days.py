@@ -23,7 +23,7 @@ depends_on = None
 def upgrade():
     op.create_table('game_days',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=20), nullable=False),
+    sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('location', sa.String(length=50), nullable=False, default= 'Mater Academy Charter Middle/High School, 7901 NW 103rd St, Hialeah Gardens, FL, 33016'),
     sa.Column('date', sa.Date(), nullable=False),
     sa.Column('start_time', sa.Time(), nullable=False, default=time(13, 0)),
