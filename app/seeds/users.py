@@ -7,7 +7,7 @@ def seed_users():
 
     users = [
         {
-            'username': 'test', 
+            'username': os.environ.get("USERNAME"),
             'password': os.environ.get("USER_PASSWORD"),
         }
     ]
