@@ -9,6 +9,7 @@ ARG FLASK_ENV
 ARG DATABASE_URL
 ARG SCHEMA
 ARG SECRET_KEY
+ARG USER_PASSWORD
 
 WORKDIR /var/www
 
@@ -19,7 +20,7 @@ RUN pip install psycopg2
 
 COPY . .
 
-RUN flask db downgrade base
+# RUN flask db downgrade base
 RUN flask db upgrade head
 RUN flask seed all
 CMD gunicorn app:app
