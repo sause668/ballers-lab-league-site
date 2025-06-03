@@ -5,18 +5,10 @@ import os
 
 def seed_users():
 
-    users = [
-        {
-            'username': os.environ.get("USERNAME"),
-            'password': os.environ.get("USER_PASSWORD"),
-        }
-    ]
-
-    for user in users:
-        db.session.add(User(
-            username=user['username'], 
-            password=user['password'],
-        ))
+    db.session.add(User(
+        username='livadmin', 
+        password='ballerswithsoul94',
+    ))
 
     db.session.commit()
 
