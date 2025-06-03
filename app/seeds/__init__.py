@@ -27,6 +27,10 @@ def seed():
     seed_games()
     seed_stats()
 
+@seed_commands.command('cur')
+def seed_cur():
+    pass
+
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
