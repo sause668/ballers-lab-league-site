@@ -8,7 +8,7 @@ class Game(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     game_day_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('game_days.id')), nullable=False)
-    name = db.Column(db.String(30), nullable=False)
+    name = db.Column(db.String(40), nullable=False)
     start_time = db.Column(db.Time, nullable=False)
     end_time = db.Column(db.Time, nullable=False)
     

@@ -8,7 +8,7 @@ class Game_Day(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(20), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
     location = db.Column(db.String(50), nullable=False, default= 'Mater Academy Charter Middle/High School, 7901 NW 103rd St, Hialeah Gardens, FL, 33016')
     date = db.Column(db.Date, nullable=False)
     start_time = db.Column(db.Time, nullable=False, default=time(13, 0))
