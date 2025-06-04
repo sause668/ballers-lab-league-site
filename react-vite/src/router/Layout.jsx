@@ -8,16 +8,19 @@ import { useUser } from "../context/User";
 export default function Layout() {
   const {restoreUser} = useUser()
   const [isLoaded, setIsLoaded] = useState(false);
+  const [message, setMessage] = useState(null);
   
   useEffect(() => {
-    restoreUser({setIsLoaded});
+    restoreUser({setIsLoaded, setMessage});
   }, [restoreUser]);
 
   return (
     <>
       <ModalProvider>
+        NavBar
         {isLoaded && <Outlet />}
         <Modal />
+        Footer
       </ModalProvider>
     </>
   );

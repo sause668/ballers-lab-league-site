@@ -10,12 +10,12 @@ export function UserProvider({children}) {
 
     function restoreUser(params) {
         const { setIsLoaded, setMessage } = params;
-        apiFetch('api/session', {}, userState, setUser, setIsLoaded, setMessage)
+        apiFetch('api/auth', {}, userState, setUser, setIsLoaded, setMessage)
     }
 
     function login(params) {
         const { username, password, setIsLoaded, setMessage } = params;
-        apiFetch('api/session', {
+        apiFetch('api/auth', {
             method: 'POST',
             body: JSON.stringify({username, password})
         }, userState, setUser, setIsLoaded, setMessage)
@@ -23,7 +23,7 @@ export function UserProvider({children}) {
 
     function logout(params) {
         const { setIsLoaded, setMessage } = params;
-        apiFetch('api/session', {method: 'DELETE'}, userState, setUser, setIsLoaded, setMessage)
+        apiFetch('api/auth', {method: 'DELETE'}, userState, setUser, setIsLoaded, setMessage)
     }
 
     
