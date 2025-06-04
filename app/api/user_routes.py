@@ -11,8 +11,8 @@ def users():
     """
     Query for all users and returns them in a list of user dictionaries
     """
-    users = User.query.all()
-    return {'users': [user.to_dict() for user in users]}
+    # users = User.query.all()
+    return {'users': None}
 
 
 @user_routes.route('/<int:id>')
@@ -21,5 +21,5 @@ def user(id):
     """
     Query for a user by id and returns that user in a dictionary
     """
-    user = User.query.get(id)
-    return user.to_dict()
+    # user = User.query.get(id)
+    return {'user': None}

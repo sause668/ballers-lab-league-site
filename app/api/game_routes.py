@@ -27,7 +27,7 @@ def game_stats(game_id):
     if not game:
         return jsonify({"message": "Game not found"}), 404
     
-    return {'game': game.game_stats_info()}
+    return {'gameStats': game.game_stats_info()}
 
 
 """
@@ -134,7 +134,7 @@ def edit_team_stats(game_id, team_id):
         db.session.commit()
 
         game = Game.query.filter_by(id=game_id).first()
-        return {'game': game.game_stats_info()}
+        return {'gameStats': game.game_stats_info()}
 
     return form.errors, 400
 
@@ -160,7 +160,7 @@ def edit_player_stats(game_id, player_id):
         db.session.commit()
 
         game = Game.query.filter_by(id=game_id).first()
-        return {'game': game.game_stats_info()}
+        return {'gameStats': game.game_stats_info()}
 
     return form.errors, 400
 
