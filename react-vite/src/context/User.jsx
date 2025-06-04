@@ -8,22 +8,22 @@ export function UserProvider({children}) {
     const [user, setUser] = useState(null);
     
 
-    function restoreUser(params) {
+    async function restoreUser(params) {
         const { setIsLoaded, setMessage } = params;
-        apiFetch('api/auth', {}, userState, setUser, setIsLoaded, setMessage)
+        return await apiFetch('/api/auth', {}, userState, setUser, setIsLoaded, setMessage)
     }
 
-    function login(params) {
+    async function login(params) {
         const { username, password, setIsLoaded, setMessage } = params;
-        apiFetch('api/auth', {
+        return await apiFetch('/api/auth', {
             method: 'POST',
             body: JSON.stringify({username, password})
         }, userState, setUser, setIsLoaded, setMessage)
     }
 
-    function logout(params) {
+    async function logout(params) {
         const { setIsLoaded, setMessage } = params;
-        apiFetch('api/auth', {method: 'DELETE'}, userState, setUser, setIsLoaded, setMessage)
+        return await apiFetch('/api/auth', {method: 'DELETE'}, userState, setUser, setIsLoaded, setMessage)
     }
 
     

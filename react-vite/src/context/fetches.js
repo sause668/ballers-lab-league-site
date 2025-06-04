@@ -29,7 +29,7 @@ export async function apiFetch(url, options = {}, state, setter, setIsLoaded, se
       if (data[state]) setter(data[state]);
       else if (data.message) setMessage(data);
       if (setIsLoaded) setIsLoaded(true);
-      return;
+      return true;
   }
   const errorObj ={};
   if (response.status < 500) {
@@ -39,6 +39,6 @@ export async function apiFetch(url, options = {}, state, setter, setIsLoaded, se
       errorObj.errors = { message: "Something went wrong. Please try again" }
   }
   setMessage(errorObj);
-  return;
+  return false;
 }
 

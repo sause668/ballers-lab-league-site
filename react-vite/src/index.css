@@ -41,16 +41,38 @@
 }
 
 @font-face {
+    font-family: 'Syne';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/fonts/Syne-VariableFont.ttf');
+}
+
+@font-face {
     font-family: 'Roboto Flex';
     font-style: normal;
-    font-weight: normal;
-    src: url('/fonts/RobotoFlex-Regular.ttf');
+    font-weight: 200;
+    src: url('/fonts/RobotoFlex-VariableFont.ttf');
 }
+
 
 body {
     font-family: 'Roboto Flex';
+    background-color: #0d0d0d;
+    color: #fdfdfd;
     padding: 0px 0px;
     margin: 0px;
+}
+
+.pageCon {
+    opacity: 0;
+    transition: opacity .5s ease-in;
+
+}
+
+.pageCon.load {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+
 }
 
 #mainPageCon {
@@ -63,12 +85,13 @@ body {
 }
 
 h1,h2  {
-    font-family: 'Sour Gummy';
+    font-family: 'Syne';
+    font-weight: 700;
     margin: 0px;
 }
 
 h3,h4 {
-    font-family: 'BalsamiqSans';
+    font-family: 'Roboto Flex';
     margin: 0px;
 }
 
@@ -78,11 +101,11 @@ h5,h6,p {
 }
 
 button {
-    font-family: 'Delius';
-    border: 1px solid #007AFF;
-    background-color: #007AFF;
+    font-family: 'Roboto Flex';
+    border: 1px solid #ffb600;
+    background-color: #0d0d0d;
     transition: background-color .2s;
-    color: white;
+    color: #ffb600;
     border-radius: 10px;
     padding: .5rem 1rem;
     font-size: 1rem;
@@ -90,8 +113,9 @@ button {
 }
 
 button:hover {
-    border: 1px solid #005ec3;
-    background-color: #005ec3;
+    background-color: #ffb600;
+    color: #0d0d0d;
+    
     transition: background-color .2s;
 }
 
@@ -147,13 +171,16 @@ button:hover {
 
 .formInput {
     width: 200px;
-    border: 1px solid #007AFF;
+    color-scheme: dark;
+    background-color: #0d0d0d;
+    border: 1px solid #ffb600;
     border-radius: 5px;
+    color: #fdfdfd;
     padding: .5rem;
 }
 
 .formInput:focus {
-    border-color: #005ec3;
+    border: 1px solid #ffb7007e;
     outline: none;
 }
 
@@ -180,8 +207,9 @@ button:hover {
 }
 
 .submitButton:disabled {
-    border: 1px solid #9bb4cf;
-    background-color: #9bb4cf;
+    border: 1px solid #262c32;
+    background-color: #262c32;
+    color: #868686;
 }
 
 .confirmText {

@@ -14,24 +14,24 @@ export function GameDayProvider({children}) {
     const [gamesList, setGamesList] = useState(null);
     
 
-    function allGameDays(params) {
+    async function allGameDays(params) {
         const { setIsLoaded, setMessage } = params;
-        apiFetch(`api/game-days`, {}, gameDaysState, setGameDays, setIsLoaded, setMessage)
+        return await apiFetch(`/api/game-days`, {}, gameDaysState, setGameDays, setIsLoaded, setMessage)
     }
 
-    function allGameDaysList(params) {
+    async function allGameDaysList(params) {
         const { setIsLoaded, setMessage } = params;
-        apiFetch(`api/game-days/list`, {}, gameDaysListState, setGameDaysList, setIsLoaded, setMessage)
+        return await apiFetch(`/api/game-days/list`, {}, gameDaysListState, setGameDaysList, setIsLoaded, setMessage)
     }
 
-    function gameDayById(params) {
+    async function gameDayById(params) {
         const { gameDayId, setIsLoaded, setMessage } = params;
-        apiFetch(`api/game-days/${gameDayId}`, {}, gameDayState, setGameDay, setIsLoaded, setMessage)
+        return await apiFetch(`/api/game-days/${gameDayId}`, {}, gameDayState, setGameDay, setIsLoaded, setMessage)
     }
 
-    function newGameDay(params) {
+    async function newGameDay(params) {
         const { name, location, date, startTime, endTime, setIsLoaded, setMessage } = params;
-        apiFetch(`api/game-days`, {
+        return await apiFetch(`/api/game-days`, {
             method: 'POST',
             body: JSON.stringify({
                 name,
@@ -43,9 +43,9 @@ export function GameDayProvider({children}) {
         }, gameDaysState, setGameDays, setIsLoaded, setMessage)
     }
 
-    function editGameDay(params) {
+    async function editGameDay(params) {
         const { gameDayId, name, location, date, startTime, endTime, setIsLoaded, setMessage } = params;
-        apiFetch(`api/game-days/${gameDayId}`, {
+        return await apiFetch(`/api/game-days/${gameDayId}`, {
             method: 'PUT',
             body: JSON.stringify({
                 name,
@@ -57,19 +57,19 @@ export function GameDayProvider({children}) {
         }, gameDaysState, setGameDays, setIsLoaded, setMessage)
     }
 
-    function deleteGameDay(params) {
+    async function deleteGameDay(params) {
         const { gameDayId, setIsLoaded, setMessage } = params;
-        apiFetch(`api/game-days/${gameDayId}`, {method: 'DELETE'}, gameDaysState, setGameDays, setIsLoaded, setMessage)
+        return await apiFetch(`/api/game-days/${gameDayId}`, {method: 'DELETE'}, gameDaysState, setGameDays, setIsLoaded, setMessage)
     }
 
-    function allGamesList(params) {
+    async function allGamesList(params) {
         const { gameDayId, setIsLoaded, setMessage } = params;
-        apiFetch(`api/game-days/${gameDayId}`, {}, gamesListState, setGamesList, setIsLoaded, setMessage)
+        return await apiFetch(`/api/game-days/${gameDayId}`, {}, gamesListState, setGamesList, setIsLoaded, setMessage)
     }
 
-    function newGame(params) {
+    async function newGame(params) {
         const { gameDayId, name, startTime, endTime, setIsLoaded, setMessage } = params;
-        apiFetch(`api/game-days/${gameDayId}/games/list`, {
+        return await apiFetch(`/api/game-days/${gameDayId}/games/list`, {
             method: 'POST',
             body: JSON.stringify({
                 name, 
@@ -79,9 +79,9 @@ export function GameDayProvider({children}) {
         }, gameDayState, setGameDay, setIsLoaded, setMessage)
     }
 
-    function editGame(params) {
+    async function editGame(params) {
         const { gameDayId, gameId, name, startTime, endTime, setIsLoaded, setMessage } = params;
-        apiFetch(`api/game-days/${gameDayId}/games/${gameId}`, {
+        return await apiFetch(`/api/game-days/${gameDayId}/games/${gameId}`, {
             method: 'POST',
             body: JSON.stringify({
                 name, 
@@ -91,9 +91,9 @@ export function GameDayProvider({children}) {
         }, gameDayState, setGameDay, setIsLoaded, setMessage)
     }
 
-    function deleteGame(params) {
+    async function deleteGame(params) {
         const { gameDayId, gameId, setIsLoaded, setMessage } = params;
-        apiFetch(`api/game-days/${gameDayId}/games/${gameId}`, {method: 'DELETE'}, gameDayState, setGameDay, setIsLoaded, setMessage)
+        return await apiFetch(`/api/game-days/${gameDayId}/games/${gameId}`, {method: 'DELETE'}, gameDayState, setGameDay, setIsLoaded, setMessage)
     }
 
     return (

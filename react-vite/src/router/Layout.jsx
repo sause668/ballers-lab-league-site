@@ -11,8 +11,8 @@ export default function Layout() {
   const [message, setMessage] = useState(null);
   
   useEffect(() => {
-    restoreUser({setIsLoaded, setMessage});
-  }, [restoreUser]);
+    !isLoaded && restoreUser({setIsLoaded, setMessage});
+  }, []);
 
   return (
     <>

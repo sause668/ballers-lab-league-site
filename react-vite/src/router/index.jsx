@@ -1,5 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Layout from './Layout';
+import { GameDayProvider } from '../context/GameDay';
+import SchedulePage from '../components/SchedulePage/SchedulePage';
+import GameDayPage from '../components/GameDayPage/GameDayPage';
 
 export const router = createBrowserRouter([
   {
@@ -7,7 +10,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: (<>HomePage</>),
+        element: 'HomePage'
       },
       {
         path: "league/",
@@ -31,17 +34,17 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "",
-            element: 'SchedulePage',
+            element: <GameDayProvider><SchedulePage/></GameDayProvider>,
           },
           {
             path: ":gameDayId/",
             children: [
               {
                 path: "",
-                element: 'GameDayPage',
+                element: <GameDayProvider><GameDayPage/></GameDayProvider>,
               },
               {
-                path: ":gameId/",
+                path: "games/:gameId/",
                 children: [
                   {
                     path: "",
@@ -68,6 +71,22 @@ export const router = createBrowserRouter([
             element: 'SeasonPhotosPage',
           },
         ]
+      },
+      {
+        path: "teams/",
+        children: [
+          {
+            path: "",
+            element: 'TeamsPage',
+          },{
+            path: ":teamId",
+            element: 'PlayersPage',
+          },
+        ]
+      },
+      {
+        path: "admin",
+        element: 'LoginPage'
       },
     ],
   },
