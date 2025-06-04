@@ -20,7 +20,7 @@ def teams_list():
     Get all Teams List
     """
     teams = Team.query.all()
-    return {'teams': [team.list_info() for team in teams]}
+    return {'teamsList': [team.list_info() for team in teams]}
 
 @team_routes.route('/<int:team_id>')
 def team(team_id):
