@@ -42,3 +42,22 @@ export async function apiFetch(url, options = {}, state, setter, setIsLoaded, se
   return false;
 }
 
+export async function apiFetchLight(url, options = {}, setMessage) {
+  const response = await csrfFetch(url, options);
+  if (response.ok) {
+      const data = await response.json();
+      return data;
+  }
+  const errorObj ={};
+  if (response.status < 500) {
+      const errorMessages = await response.json();
+      errorObj.errors = errorMessages
+  } else {
+      errorObj.errors = { message: "Something went wrong. Please try again" }
+  }
+  setMessage(errorObj);
+  return null;
+}
+
+
+

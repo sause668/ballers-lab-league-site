@@ -48,7 +48,7 @@ export default function SchedulePage() {
                   <h5 className="location">{gameDay.location}</h5>
                 </div>
               </div>
-              <a href={`schedule/${gameDay.id}`}><button className="buttonS">Learn More</button></a>
+              <a href={`/schedule/${gameDay.id}`}><button className="buttonS">Learn More</button></a>
               {user && <OpenModalButton
                 buttonText={'Edit Game Day'}
                 modalComponent={<EditGameDayModel gameDay={gameDay}/>}

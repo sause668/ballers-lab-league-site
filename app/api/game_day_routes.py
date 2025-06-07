@@ -118,6 +118,14 @@ def games_list(game_day_id):
     games = Game.query.filter_by(game_day_id=game_day_id).all()
     return {'gamesList': [game.list_info() for game in games]}
 
+@game_day_routes.route('/<int:game_day_id>/games/list/first')
+def games_list_first(game_day_id):
+    """
+    Get first Game in List
+    """
+    game = Game.query.filter_by(game_day_id=game_day_id).first()
+    return {'gamesListFirst': game.list_info()}
+
 @game_day_routes.route('/<int:game_day_id>/games', methods=['POST'])
 @login_required
 def create_game(game_day_id):
