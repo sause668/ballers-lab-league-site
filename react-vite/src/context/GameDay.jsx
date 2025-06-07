@@ -64,12 +64,12 @@ export function GameDayProvider({children}) {
 
     async function allGamesList(params) {
         const { gameDayId, setIsLoaded, setMessage } = params;
-        return await apiFetch(`/api/game-days/${gameDayId}`, {}, gamesListState, setGamesList, setIsLoaded, setMessage)
+        return await apiFetch(`/api/game-days/${gameDayId}/games/list`, {}, gamesListState, setGamesList, setIsLoaded, setMessage)
     }
 
     async function newGame(params) {
         const { gameDayId, name, startTime, endTime, setIsLoaded, setMessage } = params;
-        return await apiFetch(`/api/game-days/${gameDayId}/games/list`, {
+        return await apiFetch(`/api/game-days/${gameDayId}/games`, {
             method: 'POST',
             body: JSON.stringify({
                 name, 
