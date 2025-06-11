@@ -64,7 +64,7 @@ export default function GameDayPage() {
                 modalComponent={<EditGameModel game={game}/>}
                 cssClasses={'buttonS'}
               />
-            <div className="border"></div>
+            <div className="borderGD"></div>
           </div>
         ))}
       </>}

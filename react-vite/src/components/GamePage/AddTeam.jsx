@@ -16,7 +16,7 @@ function AddTeamModel({gameId}) {
   };
 
   useEffect(() => {
-    allTeamsList({isLoaded, setMessage});
+    allTeamsList({setIsLoaded, setMessage});
   }, []);
 
 

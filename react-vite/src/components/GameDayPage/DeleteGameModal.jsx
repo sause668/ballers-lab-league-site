@@ -19,7 +19,7 @@ const DeleteGameModel = ({gameId}) => {
                 <button onClick={handleDelete} className="submitButton yes">Yes</button>
                 <button onClick={closeModal} className="submitButton no">No</button>
             </div>
-            {message?.errors.message && <p className='labelTitle error'>{errors.message}</p>}
+            {message?.errors.message && <p className='labelTitle error'>{message?.errors.message}</p>}
         </div>
     )
 }

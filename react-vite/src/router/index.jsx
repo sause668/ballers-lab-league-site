@@ -6,6 +6,7 @@ import GameDayPage from '../components/GameDayPage/GameDayPage';
 import { GameProvider } from '../context/Game';
 import GamePage from '../components/GamePage/GamePage';
 import { TeamProvider } from '../context/Team';
+import GameStatsPage from '../components/GameStatsPage/GameStatsPage';
 
 export const router = createBrowserRouter([
   {
@@ -61,7 +62,7 @@ export const router = createBrowserRouter([
                   },
                   {
                     path: "stats",
-                    element: <GameProvider>'GameStatsPage'</GameProvider>,
+                    element: <GameProvider><GameStatsPage/></GameProvider>,
                   },
                 ]
               },
