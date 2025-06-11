@@ -2,18 +2,24 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./SchedulePage.css";
+import { useGameDay } from "../../context/GameDay";
 
 function NewGameDayModel() {
+    const { newGameDay } = useGameDay();
     const [message, setMessage] = useState(null);
-    const [name, setName] = useState(null);
+    const [name, setName] = useState('');
     const [location, setLocation] = useState('Mater Academy Charter Middle/High School, 7901 NW 103rd St, Hialeah Gardens, FL, 33016');
-    const [date, setDate] = useState(null);
-    const [startTime, setStartTime] = useState('13:00:00');
-    const [endTime, setEndTime] = useState('18:00:00');
+    const [date, setDate] = useState('');
+    const [startTime, setStartTime] = useState('13:00');
+    const [endTime, setEndTime] = useState('18:00');
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    newGameDay({name, location, date, startTime, endTime, setMessage})
+    .then((res) => {if (res) closeModal();})
+    .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
+    
   };
 
 
@@ -41,9 +47,9 @@ function NewGameDayModel() {
           {message?.errors.name && <p className='labelTitle error'>{message.errors.name}</p>}
         </div>
         {/* Location */}
-        <div classLocation='inputCon'>
+        <div className='inputCon'>
           <label htmlFor='location'>
-            <p classLocation='labelTitle'>
+            <p className='labelTitle'>
               Location
             </p>
           </label>
@@ -57,7 +63,7 @@ function NewGameDayModel() {
           />
           {message?.errors.name && <p className='labelTitle error'>{message.errors.name}</p>}
         </div>
-        {/* Due Date */}
+        {/* Date */}
         <div className='inputCon'>
           <label htmlFor='date'>
             <p className='labelTitle'>
@@ -78,7 +84,7 @@ function NewGameDayModel() {
         <div className='inputCon'>
           <label htmlFor='startTime'>
             <p className='labelTitle'>
-              Due Date
+              Start Time
             </p>
           </label>
           <input
@@ -90,12 +96,13 @@ function NewGameDayModel() {
             required
           />
           {message?.errors.start_time && <p className='labelTitle error'>{message.errors.start_time}</p>}
+          {startTime}
         </div>
-        {/* Start Time */}
+        {/* End Time */}
         <div className='inputCon'>
           <label htmlFor='endTime'>
             <p className='labelTitle'>
-              Due Date
+              End Time
             </p>
           </label>
           <input

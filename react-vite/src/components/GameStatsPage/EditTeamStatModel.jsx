@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import "./GameStatsPage.css";
+import { useGame } from "../../context/Game";
 
 function EditTeamStatModel({teamStat}) {
+  const { editTeamStats } = useGame();
   const [points, setPoints] = useState(teamStat.points);
   const [message, setMessage] = useState(null);
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    editTeamStats({gameId: teamStat.game_id, teamId: teamStat.team_id, points, setMessage})
+    .then((res) => {if (res) closeModal();})
+    .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
   };
 
 

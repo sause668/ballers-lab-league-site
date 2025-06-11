@@ -26,6 +26,7 @@ export async function apiFetch(url, options = {}, state, setter, setIsLoaded, se
   const response = await csrfFetch(url, options);
   if (response.ok) {
       const data = await response.json();
+      console.log('data', data);
       if (data[state]) setter(data[state]);
       else if (data.message) setMessage(data);
       if (setIsLoaded) setIsLoaded(true);

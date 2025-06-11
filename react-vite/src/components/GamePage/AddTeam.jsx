@@ -3,27 +3,36 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./GamePage.css";
 import { useTeam } from "../../context/Team";
+import { useGame } from "../../context/Game";
+import { useEffect } from "react";
 
 function AddTeamModel({gameId}) {
-    const { teamsList, allTeamsList } = useTeam()
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [message, setMessage] = useState(null);
-    const [teamId, setTeamId] = useState(teamsList[0]?.id);
+  const { addTeam} = useGame();
+  const { teamsList, allTeamsList } = useTeam();
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [teamId, setTeamId] = useState(teamsList ? teamsList[0]?.id:'');
   const { closeModal } = useModal();
+
+  console.log('TeamsList', teamsList)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    addTeam({gameId, teamId, setMessage})
+    .then((res) => {if (res) closeModal();})
+    .catch(()=>setMessage({errors: {message: 'Error with request'}}));
   };
 
   useEffect(() => {
-    allTeamsList({setIsLoaded, setMessage});
+    allTeamsList({setIsLoaded, setMessage})
+    .catch(()=>setMessage({errors: {message: 'Error with request'}}));
   }, []);
 
 
 
   return (
     <>
-        {(isLoaded) && (
+        {isLoaded && (
             <div className='formCon'>
                 <h1 className='inputTitle'>Add Team</h1>
                 <form onSubmit={handleSubmit}>
@@ -35,7 +44,7 @@ function AddTeamModel({gameId}) {
                         value={teamId} 
                         onChange={(e) => setTeamId(e.target.value)}
                     >
-                        {teamsList.map((team, index) => (
+                        {teamsList && teamsList.map((team, index) => (
                             <option value={team.id} key={`addTeam${index}`}>{team.name}</option>
                         ))}
                     </select>

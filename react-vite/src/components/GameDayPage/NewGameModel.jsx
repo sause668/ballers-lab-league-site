@@ -2,16 +2,21 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./GameDayPage.css";
+import { useGameDay } from "../../context/GameDay";
 
-function NewGameModel() {
-    const [message, setMessage] = useState(null);
-    const [name, setName] = useState(null);
-    const [startTime, setStartTime] = useState(null);
-    const [endTime, setEndTime] = useState(null);
+function NewGameModel({gameDayId}) {
+  const { newGame } = useGameDay();
+  const [message, setMessage] = useState(null);
+  const [name, setName] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    newGame({gameDayId, name, startTime, endTime, setMessage})
+    .then((res) => {if (res) closeModal();})
+    .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
   };
 
 
@@ -19,7 +24,7 @@ function NewGameModel() {
   return (
     
     <div className='formCon'>
-        <h1 className='inputTitle'>New Game Day</h1>
+        <h1 className='inputTitle'>New Game</h1>
         <form onSubmit={handleSubmit}>
         {/* Name */}
         <div className='inputCon'>
@@ -42,7 +47,7 @@ function NewGameModel() {
         <div className='inputCon'>
           <label htmlFor='startTime'>
             <p className='labelTitle'>
-              Due Date
+              Start Time
             </p>
           </label>
           <input
@@ -59,7 +64,7 @@ function NewGameModel() {
         <div className='inputCon'>
           <label htmlFor='endTime'>
             <p className='labelTitle'>
-              Due Date
+              End Time
             </p>
           </label>
           <input

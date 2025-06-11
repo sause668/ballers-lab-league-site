@@ -82,7 +82,7 @@ export function GameDayProvider({children}) {
     async function editGame(params) {
         const { gameDayId, gameId, name, startTime, endTime, setIsLoaded, setMessage } = params;
         return await apiFetch(`/api/game-days/${gameDayId}/games/${gameId}`, {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify({
                 name, 
                 start_time: startTime,
