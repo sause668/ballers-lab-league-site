@@ -2,14 +2,18 @@ import { useDispatch, } from "react-redux"
 import { useModal } from "../../context/Modal";
 import "./GamePage.css";
 import { useState } from "react";
+import { useGame } from "../../context/Game";
 
 
 const RemoveTeamModel = ({gameId, team}) => {
-    const {closeModal} = useModal();
+    const { removeTeam} = useGame();
+    const { closeModal } = useModal();
     const [message, setMessage] = useState(null);
 
     const handleDelete = async () => {
-        closeModal()
+        removeTeam({gameId, teamId:team.id, setMessage})
+        .then((res) => {if (res) closeModal();})
+        .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
     }
     
     return (

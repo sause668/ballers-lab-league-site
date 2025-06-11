@@ -15,13 +15,14 @@ import { useGame } from "../../context/Game";
 import { apiFetch, apiFetchLight } from "../../context/fetches";
 import RemoveTeamModel from "./RemoveTeamModel";
 import AddTeamModel from "./AddTeam";
+import { useTeam } from "../../context/Team";
 
 
 export default function GamePage() {
   // const { user } = useUser();
   const nav = useNavigate();
   const { gameDayId, gameId } = useParams();
-  const { game, gameById } = useGame();
+  const { game, gameById} = useGame();
   const { gamesList, gameDaysList, allGamesList, allGameDaysList } = useGameDay();
   const [gameDaySel, setGameDaySel] = useState(gameDayId);
   const [gameSel, setGameSel] = useState(false);
@@ -99,11 +100,11 @@ export default function GamePage() {
             <h5 className="gameLocationGD"><SlLocationPin />Mater Academy Charter</h5>
             <h3 className="preGameTeams">{game.teams[0] ? game.teams[0].team.name: (<OpenModalButton
                 buttonText={<FiPlus />}
-                modalComponent={<AddTeamModel gameId={game.id} team={team}/>}
+                modalComponent={<AddTeamModel gameId={game.id} />}
                 cssClasses={''}
               />)} vs {game.teams[1] ? game.teams[1].team.name: (<OpenModalButton
                 buttonText={<FiPlus />}
-                modalComponent={<AddTeamModel gameId={game.id}/>}
+                modalComponent={<AddTeamModel gameId={game.id} />}
                 cssClasses={''}
               />)}</h3>
         </div>
@@ -118,7 +119,7 @@ export default function GamePage() {
             if (!teamStats) return (<div className="teamConG noTeam" key={key}>
               {user && <OpenModalButton
                 buttonText={<FiPlus />}
-                modalComponent={<AddTeamModel gameId={game.id}/>}
+                modalComponent={<AddTeamModel gameId={game.id} />}
                 cssClasses={''}
               />}
             </div>);
@@ -127,7 +128,7 @@ export default function GamePage() {
               <div className="teamInfoConG">
                 <OpenModalButton
                   buttonText={<IoMdClose />}
-                  modalComponent={<RemoveTeamModel gameId={game.id} team={teamStats.team}/>}
+                  modalComponent={<RemoveTeamModel gameId={game.id} team={teamStats.team} />}
                   cssClasses={''}
                 />
                 <h3 className="teamInfoG">{teamStats.team.name} {teamStats.team.record}</h3>

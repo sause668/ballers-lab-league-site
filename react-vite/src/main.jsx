@@ -6,6 +6,9 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
 import "./index.css";
 import { UserProvider } from "./context/User";
+import { GameDayProvider } from "./context/GameDay";
+import { GameProvider } from "./context/Game";
+import { TeamProvider } from "./context/Team";
 
 // const store = configureStore();
 
@@ -18,7 +21,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     {/* <ReduxProvider store={store}> */}
     <UserProvider>
-      <RouterProvider router={router} />
+      <TeamProvider>
+        <GameDayProvider>
+          <GameProvider>
+            <RouterProvider router={router} />
+          </GameProvider>
+        </GameDayProvider>
+      </TeamProvider>
     </UserProvider>
     {/* </ReduxProvider> */}
   </React.StrictMode>

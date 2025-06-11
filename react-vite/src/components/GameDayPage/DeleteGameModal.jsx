@@ -4,17 +4,20 @@ import "./GameDayPage.css";
 import { useState } from "react";
 
 
-const DeleteGameModel = ({gameId}) => {
+const DeleteGameModel = ({game}) => {
+    const { deleteGame } = useGameDay();
     const {closeModal} = useModal();
     const [message, setMessage] = useState(null);
 
     const handleDelete = async () => {
-        closeModal()
+        deleteGame({gameDayId: game.game_day_id, gameId: game.id, setMessage})
+        .then((res) => {if (res) closeModal();})
+        .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
     }
     
     return (
         <div className="formCon">
-            <h3 className="confirmText">{`Are you sure you want to delete this Grade?`}</h3>
+            <h3 className="confirmText">{`Are you sure you want to delete ${game.name}?`}</h3>
             <div className="confirmButtonCon">
                 <button onClick={handleDelete} className="submitButton yes">Yes</button>
                 <button onClick={closeModal} className="submitButton no">No</button>

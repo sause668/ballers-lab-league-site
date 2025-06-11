@@ -15,7 +15,7 @@ export function UserProvider({children}) {
 
     async function login(params) {
         const { username, password, setIsLoaded, setMessage } = params;
-        return await apiFetch('/api/auth', {
+        return await apiFetch('/api/auth/login', {
             method: 'POST',
             body: JSON.stringify({username, password})
         }, userState, setUser, setIsLoaded, setMessage)

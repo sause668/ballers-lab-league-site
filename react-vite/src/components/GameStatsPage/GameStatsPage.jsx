@@ -6,7 +6,7 @@ import { useGame } from "../../context/Game";
 import { useUser } from "../../context/User";
 import { useModal } from "../../context/Modal";
 import EditTeamStatModel from "./EditTeamStatModel";
-import EditPlayerStatModel from "./EditPlayerStatModel copy";
+import EditPlayerStatModel from "./EditPlayerStatModel";
 
 export default function GameStatsPage() {
   const { gameId } = useParams();
@@ -50,7 +50,7 @@ export default function GameStatsPage() {
             </div>
             <h1 
               className="teamPointGS" 
-              onClick={()=>setModalContent(<EditTeamStatModel teamStat={teamStat}/>)}
+              onClick={()=>setModalContent(<EditTeamStatModel teamStat={teamStat} />)}
             >{teamStat.points}</h1>
           </>}
         </div>
@@ -83,8 +83,8 @@ export default function GameStatsPage() {
                           <td 
                             className="tableCellGS tableBodyCellGS statCellGS" 
                             key={`playerStatCell${iPlayerStat}-${iStat}`}
-                            onClick={()=>setModalContent(<EditPlayerStatModel playerStat={playerStat}/>)}
-                          >{playerStat['stat']}</td>
+                            onClick={()=>setModalContent(<EditPlayerStatModel playerStat={playerStat} />)}
+                          >{playerStat[stat]}</td>
                         ))}
                       </tr>
                     ))}

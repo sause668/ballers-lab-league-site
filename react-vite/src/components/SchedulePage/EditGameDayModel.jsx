@@ -4,18 +4,23 @@ import { useModal } from "../../context/Modal";
 import "./SchedulePage.css";
 import DeleteGameDayModel from "./DeleteGameDayModal";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import { useGameDay } from "../../context/GameDay";
 
 function EditGameDayModel({gameDay}) {
+  const { editGameDay } = useGameDay();
     const [message, setMessage] = useState(null);
     const [name, setName] = useState(gameDay.name);
     const [location, setLocation] = useState(gameDay.location);
     const [date, setDate] = useState(gameDay.date);
-    const [startTime, setStartTime] = useState(gameDay.start_time);
-    const [endTime, setEndTime] = useState(gameDay.end_time);
+    const [startTime, setStartTime] = useState(gameDay.start_time.slice(0, 5));
+    const [endTime, setEndTime] = useState(gameDay.end_time.slice(0, 5));
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    editGameDay({gameDayId: gameDay.id, name, location, date, startTime, endTime, setMessage})
+    .then((res) => {if (res) closeModal();})
+    .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
   };
 
 
@@ -23,7 +28,7 @@ function EditGameDayModel({gameDay}) {
   return (
     
     <div className='formCon'>
-        <h1 className='inputTitle'>New Game Day</h1>
+        <h1 className='inputTitle'>Edit Game Day</h1>
         <form onSubmit={handleSubmit}>
         {/* Name */}
         <div className='inputCon'>
@@ -43,9 +48,9 @@ function EditGameDayModel({gameDay}) {
           {message?.errors.name && <p className='labelTitle error'>{message.errors.name}</p>}
         </div>
         {/* Location */}
-        <div classLocation='inputCon'>
+        <div className='inputCon'>
           <label htmlFor='location'>
-            <p classLocation='labelTitle'>
+            <p className='labelTitle'>
               Location
             </p>
           </label>
@@ -120,7 +125,7 @@ function EditGameDayModel({gameDay}) {
             >Submit</button>
             <OpenModalButton
               buttonText={'Delete'}
-              modalComponent={<DeleteGameDayModel gameDayId={gameDay.id}/>}
+              modalComponent={<DeleteGameDayModel gameDay={gameDay} />}
               cssClasses={''}
             />
         </div>

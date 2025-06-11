@@ -28,7 +28,7 @@ export default function SchedulePage() {
         <h1 id='titleS'>Season 4 Schedule</h1>
         {user && <OpenModalButton
                 buttonText={'New Game Day'}
-                modalComponent={<NewGameDayModel/>}
+                modalComponent={<NewGameDayModel />}
                 cssClasses={'buttonS'}
               />}
         {gameDays.map((gameDay, index) => (
@@ -51,7 +51,7 @@ export default function SchedulePage() {
               <a href={`/schedule/${gameDay.id}`}><button className="buttonS">Learn More</button></a>
               {user && <OpenModalButton
                 buttonText={'Edit Game Day'}
-                modalComponent={<EditGameDayModel gameDay={gameDay}/>}
+                modalComponent={<EditGameDayModel gameDay={gameDay} />}
                 cssClasses={'buttonS'}
               />}
             </div>

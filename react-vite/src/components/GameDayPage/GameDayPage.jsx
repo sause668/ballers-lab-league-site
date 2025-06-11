@@ -14,7 +14,7 @@ import EditGameModel from "./EditGameModel";
 export default function GameDayPage() {
   // const { user } = useUser();
   const { gameDayId } = useParams();
-  const { gameDay, gamesList, gameDayById, allGameDaysList } = useGameDay();
+  const { gameDay, gamesList, gameDayById, allGameDaysList} = useGameDay();
   const [isLoaded, setIsLoaded] = useState(false);
   const [message, setMessage] = useState(null);
   const [fade, setFade] = useState('');
@@ -47,7 +47,7 @@ export default function GameDayPage() {
         <h5 id='disLocationGD'>{gameDay.location}</h5>
         {user && <OpenModalButton
                 buttonText={'New Game'}
-                modalComponent={<NewGameModel/>}
+                modalComponent={<NewGameModel gameDayId={gameDayId} newGame={newGame}/>}
                 cssClasses={'buttonS'}
               />}
         <h3 id='dateGD'>{gameDay.date}</h3>
@@ -61,7 +61,7 @@ export default function GameDayPage() {
             <a href={`/schedule/${gameDay.id}/games/${game.id}`}><h4>Show More</h4><SlArrowRight /></a>
             <OpenModalButton
                 buttonText={'Edit Game'}
-                modalComponent={<EditGameModel game={game}/>}
+                modalComponent={<EditGameModel game={game} editGame={editGame} deleteGame={deleteGame}/>}
                 cssClasses={'buttonS'}
               />
             <div className="borderGD"></div>

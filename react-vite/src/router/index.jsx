@@ -7,6 +7,7 @@ import { GameProvider } from '../context/Game';
 import GamePage from '../components/GamePage/GamePage';
 import { TeamProvider } from '../context/Team';
 import GameStatsPage from '../components/GameStatsPage/GameStatsPage';
+import LoginPage from '../components/LoginPage/LoginPage';
 
 export const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: 'HomePage'
+      },
+      {
+        path: "/admin",
+        element: <LoginPage/>
       },
       {
         path: "league/",
@@ -38,31 +43,25 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "",
-            element: <GameDayProvider><SchedulePage/></GameDayProvider>,
+            element: <SchedulePage/>,
           },
           {
             path: ":gameDayId/",
             children: [
               {
                 path: "",
-                element: <GameDayProvider><GameDayPage/></GameDayProvider>,
+                element: <GameDayPage/>,
               },
               {
                 path: "games/:gameId/",
                 children: [
                   {
                     path: "",
-                    element: <GameDayProvider>
-                              <GameProvider>
-                                <TeamProvider>
-                                  <GamePage/>
-                                </TeamProvider>
-                              </GameProvider>
-                            </GameDayProvider>,
+                    element: <GamePage/>,
                   },
                   {
                     path: "stats",
-                    element: <GameProvider><GameStatsPage/></GameProvider>,
+                    element: <GameStatsPage/>,
                   },
                 ]
               },

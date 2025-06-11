@@ -5,16 +5,21 @@ import "./GameDayPage.css";
 import DeleteGameDayModel from "./DeleteGameModal";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteGameModel from "./DeleteGameModal";
+import { useGameDay } from "../../context/GameDay";
 
 function EditGameModel({game}) {
+  const { editGame } = useGameDay();
     const [message, setMessage] = useState(null);
     const [name, setName] = useState(game.name);
-    const [startTime, setStartTime] = useState(game.start_time);
-    const [endTime, setEndTime] = useState(game.end_time);
+    const [startTime, setStartTime] = useState(game.start_time.slice(0, 5));
+    const [endTime, setEndTime] = useState(game.end_time.slice(0, 5));
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    editGame({gameDayId: game.game_day_id, gameId: game.id, name, startTime, endTime, setMessage})
+    .then((res) => {if (res) closeModal();})
+    .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
   };
 
 
@@ -22,7 +27,7 @@ function EditGameModel({game}) {
   return (
     
     <div className='formCon'>
-        <h1 className='inputTitle'>New Game Day</h1>
+        <h1 className='inputTitle'>Edit Game</h1>
         <form onSubmit={handleSubmit}>
         {/* Name */}
         <div className='inputCon'>
@@ -85,7 +90,7 @@ function EditGameModel({game}) {
             >Submit</button>
             <OpenModalButton
               buttonText={'Delete'}
-              modalComponent={<DeleteGameModel gameId={game.id}/>}
+              modalComponent={<DeleteGameModel game={game} />}
               cssClasses={''}
             />
         </div>
