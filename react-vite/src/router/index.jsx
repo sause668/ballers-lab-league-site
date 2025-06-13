@@ -9,6 +9,8 @@ import HomePage from '../components/HomePage/HomePage';
 import LeaguePage from '../components/LeuguePage/LeaguePage';
 import RulesPage from '../components/RulesPage/RulesPage';
 import HistoryPage from '../components/HistoryPage/HistoryPage';
+import PhotosPage from '../components/PhotosPage/PhotosPage';
+import SeasonPhotosPage from '../components/SeasonPhotosPage/SeasonPhotosPage';
 
 export const router = createBrowserRouter([
   {
@@ -75,10 +77,10 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "",
-            element: 'PhotosPage',
+            element: <PhotosPage/>,
           },{
             path: ":seasonId",
-            element: 'SeasonPhotosPage',
+            element: <SeasonPhotosPage/>,
           },
         ]
       },
