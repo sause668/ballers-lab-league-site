@@ -6,6 +6,9 @@ import GamePage from '../components/GamePage/GamePage';
 import GameStatsPage from '../components/GameStatsPage/GameStatsPage';
 import LoginPage from '../components/LoginPage/LoginPage';
 import HomePage from '../components/HomePage/HomePage';
+import LeaguePage from '../components/LeuguePage/LeaguePage';
+import RulesPage from '../components/RulesPage/RulesPage';
+import HistoryPage from '../components/HistoryPage/HistoryPage';
 
 export const router = createBrowserRouter([
   {
@@ -24,15 +27,15 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "",
-            element: 'LeaguePage',
+            element: <LeaguePage/>,
           },
           {
             path: "rules",
-            element: 'RulesPage',
+            element: <RulesPage/>,
           },
           {
             path: "history",
-            element: 'HistoryPage',
+            element: <HistoryPage/>,
           },
         ]
       },
