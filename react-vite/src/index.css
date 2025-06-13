@@ -49,14 +49,16 @@
 
 @font-face {
     font-family: 'Roboto Flex';
-    font-style: normal;
-    font-weight: 200;
+    /* font-style: normal;
+    font-weight: 200; */
     src: url('/fonts/RobotoFlex-VariableFont.ttf');
 }
 
 
 body {
     font-family: 'Roboto Flex';
+    font-style: normal;
+    font-weight: 200;
     background-color: #0d0d0d;
     color: #fdfdfd;
     padding: 0px 0px;
@@ -98,6 +100,32 @@ h3,h4 {
 h5,h6,p {
     font-family: 'Roboto Flex';
     margin: 0px;
+}
+
+b {
+    font-weight: 650;
+}
+
+.saturate { filter: saturate(3); }
+.grayscale { filter: grayscale(100%); }
+.contrast { filter: contrast(160%); }
+.brightness { filter: brightness(0.25); }
+.blur { filter: blur(3px); }
+.invert { filter: invert(100%); }
+.sepia { filter: sepia(100%); }
+.huerotate { filter: hue-rotate(180deg); }
+.rss.opacity { filter: opacity(50%); }
+
+.crop {
+    width: 200px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.crop img {
+    width: 400px;
+    height: 300px;
+    margin: -75px 0 0 -100px;
 }
 
 button {
