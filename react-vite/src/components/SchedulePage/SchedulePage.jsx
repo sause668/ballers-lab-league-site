@@ -8,18 +8,21 @@ import NewGameDayModel from "./NewGameDayModel";
 import EditGameDayModel from "./EditGameDayModel";
 
 export default function SchedulePage() {
-  // const { user } = useUser();
+  const { user } = useUser();
   const { gameDays, allGameDays } = useGameDay();
   const [isLoaded, setIsLoaded] = useState(false);
   const [message, setMessage] = useState(null);
-  const user = {id: 1, username: 'sauce'}
 
-  console.log('User', user);
-  console.log('GameDays', gameDays);
+  if (message) console.log(message);
+  if (import.meta.env.MODE !== "production") {
+    console.log('User', user);
+    console.log('GameDays', gameDays);
+  }
+ 
   
   useEffect(() => {
-    allGameDays({setIsLoaded, setMessage})
-  }, []);
+    if (!isLoaded) allGameDays({setIsLoaded, setMessage})
+  }, [allGameDays, isLoaded, setIsLoaded, setMessage]);
 
   return (
     <div id='mainConS'>

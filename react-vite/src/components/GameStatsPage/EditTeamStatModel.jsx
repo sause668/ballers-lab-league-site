@@ -13,7 +13,7 @@ function EditTeamStatModel({teamStat}) {
     e.preventDefault();
     editTeamStats({gameId: teamStat.game_id, teamId: teamStat.team_id, points, setMessage})
     .then((res) => {if (res) closeModal();})
-    .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
+    .catch(()=>setMessage({errors: {message: 'Error with request'}}));
   };
 
 

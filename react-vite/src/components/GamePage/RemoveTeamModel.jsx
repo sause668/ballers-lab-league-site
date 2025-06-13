@@ -1,4 +1,3 @@
-import { useDispatch, } from "react-redux"
 import { useModal } from "../../context/Modal";
 import "./GamePage.css";
 import { useState } from "react";
@@ -13,7 +12,7 @@ const RemoveTeamModel = ({gameId, team}) => {
     const handleDelete = async () => {
         removeTeam({gameId, teamId:team.id, setMessage})
         .then((res) => {if (res) closeModal();})
-        .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
+        .catch(()=>setMessage({errors: {message: 'Error with request'}}));
     }
     
     return (
@@ -23,7 +22,7 @@ const RemoveTeamModel = ({gameId, team}) => {
                 <button onClick={handleDelete} className="submitButton yes">Yes</button>
                 <button onClick={closeModal} className="submitButton no">No</button>
             </div>
-            {message?.errors.message && <p className='labelTitle error'>{errors.message}</p>}
+            {message?.errors.message && <p className='labelTitle error'>{message?.errors.message}</p>}
         </div>
     )
 }

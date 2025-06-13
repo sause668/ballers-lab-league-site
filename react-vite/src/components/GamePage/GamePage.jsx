@@ -5,21 +5,18 @@ import { useGameDay } from "../../context/GameDay";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { SlLocationPin } from "react-icons/sl";
 import { SlCalender } from "react-icons/sl";
-import { SlArrowRight } from "react-icons/sl";
 import { IoMdClose } from "react-icons/io";
 import { FiPlus } from "react-icons/fi";
 
-import { RiArrowDropDownLine } from "react-icons/ri";
 import { useUser } from "../../context/User";
 import { useGame } from "../../context/Game";
-import { apiFetch, apiFetchLight } from "../../context/fetches";
+import { apiFetchLight } from "../../context/fetches";
 import RemoveTeamModel from "./RemoveTeamModel";
 import AddTeamModel from "./AddTeam";
-import { useTeam } from "../../context/Team";
 
 
 export default function GamePage() {
-  // const { user } = useUser();
+  const { user } = useUser();
   const nav = useNavigate();
   const { gameDayId, gameId } = useParams();
   const { game, gameById} = useGame();
@@ -29,12 +26,15 @@ export default function GamePage() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [message, setMessage] = useState(null);
   const teamSetup = [true, false];
-  const user = {id: 1, username: 'sauce'}
 
-  console.log('User', user);
-  console.log('Game', game);
-  console.log('GameDaysList', gameDaysList);
-  console.log('GamesList', gamesList);
+  if (message) console.log(message);
+  if (import.meta.env.MODE !== "production") {
+    console.log('User', user);
+    console.log('Game', game);
+    console.log('GameDaysList', gameDaysList);
+    console.log('GamesList', gamesList);
+  }
+  
 
   async function gameDaySelChange(e) {
     const gameDaySelId = e.target.value;
@@ -55,10 +55,10 @@ export default function GamePage() {
   }
   
   useEffect(() => {
-    gameById({gameId, setIsLoaded, setMessage})
+    if (!isLoaded) gameById({gameId, setIsLoaded, setMessage})
     allGameDaysList({setMessage})
     allGamesList({gameDayId, setMessage})
-  }, []);
+  }, [gameById, allGameDaysList, allGamesList, gameId, gameDayId, isLoaded, setIsLoaded, setMessage]);
 
   return (
     <div id='mainConG'>
@@ -98,11 +98,11 @@ export default function GamePage() {
             <h6 className="gameDurGD">1 hour</h6>
             <h3 className="gameNameGD">{game.name}</h3>
             <h5 className="gameLocationGD"><SlLocationPin />Mater Academy Charter</h5>
-            <h3 className="preGameTeams">{game.teams[0] ? game.teams[0].team.name: (<OpenModalButton
+            <h3 className="preGameTeams">{game.teams[0] ? game.teams[0].team.name: user && (<OpenModalButton
                 buttonText={<FiPlus />}
                 modalComponent={<AddTeamModel gameId={game.id} />}
                 cssClasses={''}
-              />)} vs {game.teams[1] ? game.teams[1].team.name: (<OpenModalButton
+              />)} vs {game.teams[1] ? game.teams[1].team.name: user && (<OpenModalButton
                 buttonText={<FiPlus />}
                 modalComponent={<AddTeamModel gameId={game.id} />}
                 cssClasses={''}
@@ -126,11 +126,11 @@ export default function GamePage() {
 
             return (<div className="teamConG homeTeam" key={key}>
               <div className="teamInfoConG">
-                <OpenModalButton
+                {user && <OpenModalButton
                   buttonText={<IoMdClose />}
                   modalComponent={<RemoveTeamModel gameId={game.id} team={teamStats.team} />}
                   cssClasses={''}
-                />
+                />}
                 <h3 className="teamInfoG">{teamStats.team.name} {teamStats.team.record}</h3>
               </div>
                 

@@ -1,4 +1,4 @@
-import { useDispatch, } from "react-redux"
+import { useGameDay } from "../../context/GameDay";
 import { useModal } from "../../context/Modal";
 import "./GameDayPage.css";
 import { useState } from "react";
@@ -12,7 +12,7 @@ const DeleteGameModel = ({game}) => {
     const handleDelete = async () => {
         deleteGame({gameDayId: game.game_day_id, gameId: game.id, setMessage})
         .then((res) => {if (res) closeModal();})
-        .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
+        .catch(()=>setMessage({errors: {message: 'Error with request'}}));
     }
     
     return (

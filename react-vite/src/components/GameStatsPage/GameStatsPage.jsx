@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./GameStatsPage.css";
-import { useTeam } from "../../context/Team";
 import { useGame } from "../../context/Game";
 import { useUser } from "../../context/User";
 import { useModal } from "../../context/Modal";
@@ -10,8 +9,8 @@ import EditPlayerStatModel from "./EditPlayerStatModel";
 
 export default function GameStatsPage() {
   const { gameId } = useParams();
-  // const { user } = useUser();
-  const {gameStats, gameByIdStats, editTeamStats, editPlayerStats } = useGame();
+  const { user } = useUser();
+  const {gameStats, gameByIdStats } = useGame();
   const teamStats = [
     gameStats?.team_stats[0],
     gameStats?.team_stats[1]
@@ -23,10 +22,12 @@ export default function GameStatsPage() {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [message, setMessage] = useState(null);
-  const user = {id: 1, username: 'sauce'};
 
-  console.log('User', user);
-  console.log('GameStats', gameStats);
+  if (import.meta.env.MODE !== "production") {
+    if (message) console.log(message);
+    console.log('User', user);
+    console.log('GameStats', gameStats);
+  }
 
   const tableHeaders = ['Players', 'PPG', 'RPG', 'APG'];
   const tableBody = ['points', 'rebounds', 'assists'];
@@ -34,8 +35,8 @@ export default function GameStatsPage() {
   const { setModalContent } = useModal();
   
   useEffect(() => {
-    gameByIdStats({gameId, setIsLoaded, setMessage})
-  }, [setIsLoaded, setMessage]);
+    if (!isLoaded) gameByIdStats({gameId, setIsLoaded, setMessage})
+  }, [gameByIdStats, gameId, isLoaded, setIsLoaded, setMessage]);
 
   return (
     <>
@@ -50,7 +51,7 @@ export default function GameStatsPage() {
             </div>
             <h1 
               className="teamPointGS" 
-              onClick={()=>setModalContent(<EditTeamStatModel teamStat={teamStat} />)}
+              onClick={()=>user && setModalContent(<EditTeamStatModel teamStat={teamStat} />)}
             >{teamStat.points}</h1>
           </>}
         </div>
@@ -83,7 +84,7 @@ export default function GameStatsPage() {
                           <td 
                             className="tableCellGS tableBodyCellGS statCellGS" 
                             key={`playerStatCell${iPlayerStat}-${iStat}`}
-                            onClick={()=>setModalContent(<EditPlayerStatModel playerStat={playerStat} />)}
+                            onClick={()=>user && setModalContent(<EditPlayerStatModel playerStat={playerStat} />)}
                           >{playerStat[stat]}</td>
                         ))}
                       </tr>

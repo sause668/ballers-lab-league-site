@@ -1,11 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Layout from './Layout';
-import { GameDayProvider } from '../context/GameDay';
 import SchedulePage from '../components/SchedulePage/SchedulePage';
 import GameDayPage from '../components/GameDayPage/GameDayPage';
-import { GameProvider } from '../context/Game';
 import GamePage from '../components/GamePage/GamePage';
-import { TeamProvider } from '../context/Team';
 import GameStatsPage from '../components/GameStatsPage/GameStatsPage';
 import LoginPage from '../components/LoginPage/LoginPage';
 

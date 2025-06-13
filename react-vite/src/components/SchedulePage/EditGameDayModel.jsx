@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./SchedulePage.css";
 import DeleteGameDayModel from "./DeleteGameDayModal";
@@ -20,7 +19,7 @@ function EditGameDayModel({gameDay}) {
     e.preventDefault();
     editGameDay({gameDayId: gameDay.id, name, location, date, startTime, endTime, setMessage})
     .then((res) => {if (res) closeModal();})
-    .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
+    .catch(()=>setMessage({errors: {message: 'Error with request'}}));
   };
 
 

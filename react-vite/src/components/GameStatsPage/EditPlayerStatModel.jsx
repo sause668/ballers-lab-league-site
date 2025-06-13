@@ -15,7 +15,7 @@ function EditPlayerStatModel({playerStat}) {
     e.preventDefault();
     editPlayerStats({gameId: playerStat.game_id, playerId: playerStat.player.id, points, rebounds, assists, setMessage})
     .then((res) => {if (res) closeModal();})
-    .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
+    .catch(()=>setMessage({errors: {message: 'Error with request'}}));
   };
 
 
