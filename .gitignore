@@ -5,4 +5,4 @@ __pycache__/
 .DS_Store
 .vscode/
 
-react-vite/public/videos/
+react-vite/public/videos
