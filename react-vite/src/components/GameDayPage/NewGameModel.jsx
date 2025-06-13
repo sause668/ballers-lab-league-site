@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./GameDayPage.css";
 import { useGameDay } from "../../context/GameDay";
@@ -16,7 +15,7 @@ function NewGameModel({gameDayId}) {
     e.preventDefault();
     newGame({gameDayId, name, startTime, endTime, setMessage})
     .then((res) => {if (res) closeModal();})
-    .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
+    .catch(()=>setMessage({errors: {message: 'Error with request'}}));
   };
 
 

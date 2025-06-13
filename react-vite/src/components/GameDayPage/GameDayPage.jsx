@@ -5,39 +5,29 @@ import { useGameDay } from "../../context/GameDay";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { SlLocationPin } from "react-icons/sl";
 import { SlArrowRight } from "react-icons/sl";
-
-import { RiArrowDropDownLine } from "react-icons/ri";
 import { useUser } from "../../context/User";
 import NewGameModel from "./NewGameModel";
 import EditGameModel from "./EditGameModel";
 
 export default function GameDayPage() {
-  // const { user } = useUser();
+  const { user } = useUser();
   const { gameDayId } = useParams();
-  const { gameDay, gamesList, gameDayById, allGameDaysList} = useGameDay();
+  const { gameDay, gameDayById } = useGameDay();
   const [isLoaded, setIsLoaded] = useState(false);
   const [message, setMessage] = useState(null);
-  const [fade, setFade] = useState('');
-  const user = {id: 1, username: 'sauce'}
 
-  console.log('User', user);
-  console.log('GameDay', gameDay);
-
-  function fadeIn() {
-    setFade('load')
+  if (message) console.log(message);
+  if (import.meta.env.MODE !== "production") {
+    console.log('User', user);
+    console.log('GameDay', gameDay);
   }
 
-  function fadeOut() {
-    setFade('')
-  }
   
   useEffect(() => {
-    gameDayById({gameDayId, setIsLoaded, setMessage})
-    // fadeIn()
-  }, []);
+    if (!isLoaded) gameDayById({gameDayId, setIsLoaded, setMessage})
+  }, [gameDayById, gameDayId, isLoaded, setIsLoaded, setMessage]);
 
   return (
-    // <div id='mainConGD' onLoad={fadeIn} className={`pageCon ${fade}`}>
     <div id='mainConGD'>
      {isLoaded && 
       <>
@@ -46,10 +36,10 @@ export default function GameDayPage() {
         <h5 id='disDateGD'>{gameDay.date}{gameDay.start_time}{gameDay.end_time}</h5>
         <h5 id='disLocationGD'>{gameDay.location}</h5>
         {user && <OpenModalButton
-                buttonText={'New Game'}
-                modalComponent={<NewGameModel gameDayId={gameDayId} newGame={newGame}/>}
-                cssClasses={'buttonS'}
-              />}
+          buttonText={'New Game'}
+          modalComponent={<NewGameModel gameDayId={gameDayId}/>}
+          cssClasses={'buttonS'}
+        />}
         <h3 id='dateGD'>{gameDay.date}</h3>
         <div className="border"></div>
         {gameDay.games.map((game, index) => (
@@ -59,11 +49,11 @@ export default function GameDayPage() {
             <h3 className="gameNameGD">{game.name}</h3>
             <h5 className="gameLocationGD"><SlLocationPin />Mater Academy Charter</h5>
             <a href={`/schedule/${gameDay.id}/games/${game.id}`}><h4>Show More</h4><SlArrowRight /></a>
-            <OpenModalButton
-                buttonText={'Edit Game'}
-                modalComponent={<EditGameModel game={game} editGame={editGame} deleteGame={deleteGame}/>}
-                cssClasses={'buttonS'}
-              />
+            {user && <OpenModalButton
+              buttonText={'Edit Game'}
+              modalComponent={<EditGameModel game={game}/>}
+              cssClasses={'buttonS'}
+            />}
             <div className="borderGD"></div>
           </div>
         ))}

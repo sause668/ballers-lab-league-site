@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
 import { useUser } from "../../context/User";
@@ -6,7 +6,6 @@ import { useUser } from "../../context/User";
 export default function LoginPage() {
   const { login } = useUser();
   const nav = useNavigate();
-  const [isLoaded, setIsLoaded] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
@@ -15,9 +14,6 @@ export default function LoginPage() {
     e.preventDefault();
     login({username, password, setMessage}).then((res) => {if (res) nav('/')});
   };
-  
-  useEffect(() => {
-  }, [setIsLoaded, setMessage]);
 
   return (
     <div className='formCon'>

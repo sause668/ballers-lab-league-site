@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 import { Outlet} from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
 import { ModalProvider, Modal } from "../context/Modal";
-// import { thunkAuthenticate } from "../redux/session";
 import { useUser } from "../context/User";
+import NavBar from "../components/NavBar/NavBar";
 
 export default function Layout() {
   const {restoreUser} = useUser()
   const [isLoaded, setIsLoaded] = useState(false);
   const [message, setMessage] = useState(null);
+  if (message) console.log(message); 
   
   useEffect(() => {
     !isLoaded && restoreUser({setIsLoaded, setMessage});
-  }, []);
+  }, [isLoaded, restoreUser]);
 
   return (
     <>
       <ModalProvider>
-        NavBar
+        <NavBar/>
         {isLoaded && <Outlet />}
         <Modal />
         Footer

@@ -10,7 +10,7 @@ export function UserProvider({children}) {
 
     async function restoreUser(params) {
         const { setIsLoaded, setMessage } = params;
-        return await apiFetch('/api/auth', {}, userState, setUser, setIsLoaded, setMessage)
+        return await apiFetch('/api/auth/', {}, userState, setUser, setIsLoaded, setMessage)
     }
 
     async function login(params) {
@@ -23,7 +23,7 @@ export function UserProvider({children}) {
 
     async function logout(params) {
         const { setIsLoaded, setMessage } = params;
-        return await apiFetch('/api/auth', {method: 'DELETE'}, userState, setUser, setIsLoaded, setMessage)
+        return await apiFetch('/api/auth/logout', {}, userState, setUser, setIsLoaded, setMessage)
     }
 
     

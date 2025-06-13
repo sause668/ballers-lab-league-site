@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./GamePage.css";
 import { useTeam } from "../../context/Team";
@@ -24,9 +23,9 @@ function AddTeamModel({gameId}) {
   };
 
   useEffect(() => {
-    allTeamsList({setIsLoaded, setMessage})
+    if (!isLoaded) allTeamsList({setIsLoaded, setMessage})
     .catch(()=>setMessage({errors: {message: 'Error with request'}}));
-  }, []);
+  }, [allTeamsList, isLoaded, setIsLoaded, setMessage]);
 
 
 

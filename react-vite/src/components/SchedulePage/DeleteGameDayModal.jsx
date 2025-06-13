@@ -1,4 +1,3 @@
-import { useDispatch, } from "react-redux"
 import { useModal } from "../../context/Modal";
 import "./SchedulePage.css";
 import { useState } from "react";
@@ -14,7 +13,7 @@ const DeleteGameDayModel = ({gameDay}) => {
         e.preventDefault();
         deleteGameDay({gameDayId: gameDay.id, setMessage})
         .then((res) => {if (res) closeModal();})
-        .catch((err)=>setMessage({errors: {message: 'Error with request'}}));
+        .catch(()=>setMessage({errors: {message: 'Error with request'}}));
       };
     
     return (
@@ -24,7 +23,7 @@ const DeleteGameDayModel = ({gameDay}) => {
                 <button onClick={handleDelete} className="submitButton yes">Yes</button>
                 <button onClick={closeModal} className="submitButton no">No</button>
             </div>
-            {message?.errors.message && <p className='labelTitle error'>{errors.message}</p>}
+            {message?.errors.message && <p className='labelTitle error'>{message?.errors.message}</p>}
         </div>
     )
 }
