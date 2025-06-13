@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 #Disk files
-public/videos
+public/videos/
