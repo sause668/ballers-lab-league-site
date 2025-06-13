@@ -5,6 +5,7 @@ import GameDayPage from '../components/GameDayPage/GameDayPage';
 import GamePage from '../components/GamePage/GamePage';
 import GameStatsPage from '../components/GameStatsPage/GameStatsPage';
 import LoginPage from '../components/LoginPage/LoginPage';
+import HomePage from '../components/HomePage/HomePage';
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: 'HomePage'
+        element: <HomePage/>
       },
       {
         path: "/admin",
