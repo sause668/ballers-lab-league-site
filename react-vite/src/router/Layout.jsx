@@ -3,6 +3,7 @@ import { Outlet} from "react-router-dom";
 import { ModalProvider, Modal } from "../context/Modal";
 import { useUser } from "../context/User";
 import NavBar from "../components/NavBar/NavBar";
+import Footer from "../components/Footer/Footer";
 
 export default function Layout() {
   const {restoreUser} = useUser()
@@ -20,7 +21,7 @@ export default function Layout() {
         <NavBar/>
         {isLoaded && <Outlet />}
         <Modal />
-        Footer
+        <Footer/>
       </ModalProvider>
     </>
   );
