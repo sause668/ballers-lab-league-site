@@ -1,31 +1,52 @@
 #mainConFO {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
 }
 
 /* Sponsors */
 #sponsorsConFO {
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 1rem 0rem;
+    margin-bottom: 1rem;
 }
 
 .spLogoConFO {
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33%;
 }
 
 .spLogoFO {
-
+    width: 80%;
 }
 
 /* Socials */
-.socialsConFO {
-
+#socialsConFO {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .socialLinkFO {
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
 }
 
 .socialIconFO {
-
+    font-size: 2rem;
+    color: #ffffff7d;
 }
 
 /* Creators */

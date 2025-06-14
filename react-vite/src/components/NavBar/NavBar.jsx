@@ -5,6 +5,9 @@ import "./NavBar.css";
 import { useUser } from "../../context/User";
 import { IoMenu } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
+import { SlArrowUp } from "react-icons/sl";
+
 
 export default function NavBar() {
   const { logout, user } = useUser();
@@ -49,8 +52,16 @@ export default function NavBar() {
   }
 
   function toggleMenu() {
-    if (menu) setMenu(false);
+    if (menu) {
+      setMenu(false);
+      setShowChildren('');
+    }
     else setMenu(true);
+  }
+
+  function toggleChildren(parent) {
+    if (showChildren !== parent) setShowChildren(parent);
+    else setShowChildren('');
   }
 
   function changeChildren(parent) {
@@ -59,8 +70,10 @@ export default function NavBar() {
   }
 
   return (
-    <div id='mainConN'>
+    <div id='mainConN' className="fadein">
+    
     {!mobile ?
+    // Nav
       <div className="navConN">
         {navItems.map((navItem, iNavItem) => (
           <div 
@@ -71,59 +84,79 @@ export default function NavBar() {
             <a className="navLinkN"  href={navItem.link}>
               <h3 className="navItem">{navItem.title}</h3>
             </a>
+            {/* Children */}
             {navItem.children && (
-              <div className="navConN childCon" hidden={showChildren !== navItem.title}>
+              <div className="navConN childConN" hidden={showChildren !== navItem.title}>
                 {navItem.children.map((navChild, iNavChild) => (
                   <a 
-                  className="navLinkN childLink" 
+                  className="navLinkN childLinkN" 
                   key={`navChildN${iNavChild}`}
                   href={navChild.link}
                 >
-                  <h3 className="navItem childItem ">{navChild.title}</h3>
+                  <h3 className="navItem childItemN ">{navChild.title}</h3>
                 </a>
                 ))}
               </div>
             )}
           </div>
-          
-          
         ))}
-        {user && <button className="logOutButton" onClick={handleLogout}>Logout</button>}
+        {user && <button className="logOutButtonN" onClick={handleLogout}>Logout</button>}
       </div>
     :
+    // Mobile
       <>
         <div id="navMobileDashN">
-          <div id="navLogoConN">
-            <img id="navLogoN" src="" alt="" />
-          </div>
+          <a id="navLogoConN" href={'/'}>
+            <img id="navLogoN" src="/imgs/logo-main.png" alt="Logo" />
+          </a>
           <div id="mobileButtonN" onClick={toggleMenu}>
             {!menu ? <IoMenu className="mobileButtonIconN"/> :  <IoMdClose className="mobileButtonIconN"/>}
           </div>
         </div>
-        <div hidden={menu} className="navConN mobileConN">
-        {navItems.map((navItem, iNavItem) => (
-            <div key={`navLinkN${iNavItem}`} onMouseEnter={()=>changeChildren(navItem.title)} onMouseLeave={()=>changeChildren()}>
-              <a className="navLinkN mobileLinkN"  href={navItem.link} >
-                <h3 className="navItem mobileItemN">{navItem.title}</h3>
+        {/* Mobile Menu */}
+        <div className={`mobileConN ${!menu && 'hidden'} fadein`}>
+        {navItems.map((navItem, iNavItem) => {
+            return !navItem.children ? 
+            <div key={`navLinkN${iNavItem}`}>
+              <a className="mobileLinkN"  href={navItem.link} >
+                <h3 className="mobileItemN">{navItem.title}</h3>
+                <div className="borderN"/>
               </a>
+              
+            </div>
+            :
+            <div className="mobileConSubN" key={`navLinkN${iNavItem}`}>
+              <div className="mobileLinkConN">
+                <div className="mobileToggleBnN" onClick={()=>toggleChildren(navItem.title)}>
+                  {showChildren !== navItem.title ?
+                    <IoIosArrowDown className="toggleIconN"/>
+                  :
+                    <SlArrowUp className="toggleIconN"/>
+                  }
+                </div>
+                <a className="mobileLinkN"  href={navItem.link} >
+                  <h3 className="mobileItemN">{navItem.title}</h3>
+                  
+                </a>
+              </div>
+              {/* Children */}
               {navItem.children && (
-                <div  className="navConN childCon mobileConN" hidden={showChildren !== navItem.title}>
+                <div  className={`mobileConN mobileChildConN ${showChildren !== navItem.title && 'hidden'}`} >
                   {navItem.children.map((navChild, iNavChild) => (
                     <a 
-                    className="navLinkN childLink mobileLinkN" 
+                    className="mobileLinkN mobileChildLinkN" 
                     key={`navChildN${iNavChild}`}
                     href={navChild.link}
                   >
-                    <h3 className="navItem childItem mobileItemN">{navChild.title}</h3>
+                    <h3 className="mobileItemN mobileChildItemN">{navChild.title}</h3>
                   </a>
                   ))}
                 </div>
               )}
+              <div className="borderN"/>
             </div>
-            
-            
-          ))}
-          {user && <button className="logOutButton mobileLogoutBnN" onClick={handleLogout}>Logout</button>}
+          })}
+          {user && <button className="logOutButtonN mobileLogoutBnN" onClick={handleLogout}>Logout</button>}
         </div>
       </>
     }

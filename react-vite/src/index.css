@@ -42,8 +42,8 @@
 
 @font-face {
     font-family: 'Syne';
-    font-style: normal;
-    font-weight: 700;
+    /* font-style: normal;
+    font-weight: 700; */
     src: url('/fonts/Syne-VariableFont.ttf');
 }
 
@@ -88,6 +88,7 @@ body {
 
 h1,h2  {
     font-family: 'Syne';
+    font-style: normal;
     font-weight: 700;
     margin: 0px;
 }
@@ -102,6 +103,21 @@ h5,h6,p {
     margin: 0px;
 }
 
+a {
+    font-family: 'Roboto Flex';
+    text-decoration: none;
+}
+
+a:visited {
+    color: #fdfdfd;
+}
+
+a:active {
+    color: #0d0d0d;
+}
+
+
+
 b {
     font-weight: 650;
 }
@@ -115,6 +131,10 @@ b {
 .sepia { filter: sepia(100%); }
 .huerotate { filter: hue-rotate(180deg); }
 .rss.opacity { filter: opacity(50%); }
+.blackout {
+    filter: brightness(0%) invert(50%) grayscale(0%);
+}
+
 
 .crop {
     width: 200px;
@@ -127,6 +147,8 @@ b {
     height: 300px;
     margin: -75px 0 0 -100px;
 }
+
+
 
 button {
     font-family: 'Roboto Flex';
@@ -166,8 +188,30 @@ button:hover {
     border-radius: 20px;
 }
 
+.hidden {
+    display: none;
+}
+
+.fadein {
+    animation: fin .3s ease-in-out;
+}
+
+@keyframes fin {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fout {
+    from { opacity: 1;}
+    to   { opacity: 0;}
+}
 
 
+
+
+
+
+/* Forms */
 .formCon {
     display: flex;
     flex-direction: column;

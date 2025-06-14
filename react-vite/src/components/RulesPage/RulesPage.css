@@ -1,14 +1,34 @@
 #mainConRU {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 85%;
+    margin-top: 3rem;
+    padding-bottom: 4rem;
 }
 
 /* Title */
-#titleRU {
+#titleConRU {
 
+} 
+#titleRU {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 500;
 }
 
 /* Info */
+#infoConRU {
+    width: 85%;
+    text-wrap: wrap;
+
+}
+
 .titleSubRU {
+    font-size: 2rem;
+    font-weight: 500;
+    font-stretch: expanded;
 
 }
 
@@ -20,9 +40,15 @@
 }
 
 .listInfoRU {
+    font-size: 1.3rem;
+    font-weight: 200;
+    line-height: 1.7;
 
 }
 .subInfoRU {
+    font-size: 1.2rem;
+    font-weight: 200;
+    line-height: 1.5;
 
 }
 

@@ -1,11 +1,25 @@
 #mainConSP {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    width: 100%;
 }
 
 .imgConCP {
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 22rem;
+    width: 90%;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 0rem -2rem 0rem -2rem;
+    margin-bottom: 1.5rem;
 }
 
 .imgCP {
-
+    width: 150%;
 }
