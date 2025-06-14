@@ -7,8 +7,8 @@ export default function RulesPage() {
       <h2 className="titleSubRU">Game Format</h2>
       <ul className="listConRU">
         <li className="listInfoRU">4 quarters</li>
-        <ul className="listSubConRU">
-          <li className="listSubInfoRU">10 minutes each</li>
+        <ul className="listConRU subConRU">
+          <li className="listInfo subInfoRU">10 minutes each</li>
         </ul>
         <li className="listInfoRU">Running clock until final 2 minutes of 4th quarter</li>
         <li className="listInfoRU">2 timeouts per half (4 total)</li>
@@ -29,14 +29,14 @@ export default function RulesPage() {
         <li className="listInfoRU">3-pointer foul = 1 free throw attempt valued at 3 points </li>
         <li className="listInfoRU">And-1 foul = 2 points and 1 free throw attempt; 3 points total </li>
         <li className="listInfoRU">5 team fouls = Bonus (per quarter)</li>
-        <ul className="listSubConRU">
-          <li className="listSubInfoRU">Fouls reset per quarter</li>
-          <li className="listSubInfoRU">Only defensive AND loose ball fouls count</li>
+        <ul className="listConRU subConRU">
+          <li className="listInfo subInfoRU">Fouls reset per quarter</li>
+          <li className="listInfo subInfoRU">Only defensive AND loose ball fouls count</li>
         </ul>
         <li className="listInfoRU">10 team fouls= Double Bonus (per quarter)</li>
-        <ul className="listSubConRU">
-          <li className="listSubInfoRU">Fouls reset per quarter</li>
-          <li className="listSubInfoRU">Only defensive AND loose ball fouls count</li>
+        <ul className="listConRU subConRU">
+          <li className="listInfo subInfoRU">Fouls reset per quarter</li>
+          <li className="listInfo subInfoRU">Only defensive AND loose ball fouls count</li>
         </ul>
         <li className="listInfoRU">1 Technical: 1 free throw (2pts) + possession</li>
         <li className="listInfoRU">2 Technicals: Ejection</li>

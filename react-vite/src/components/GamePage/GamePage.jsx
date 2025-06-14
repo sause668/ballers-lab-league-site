@@ -64,13 +64,14 @@ export default function GamePage() {
     <div id='mainConG'>
      {isLoaded && 
       <>
+      {/* Title Info */}
         <h1 id='titleG'>Game Schedule & Scores</h1>
-        <div id='selectConG'>
-          <div id="gameDaySelConG">
+        <div id='selectMainConG'>
+          <div className="selectConG">
             <select 
               name="gameDaySel" 
               id="gameDaySel" 
-              className="gameDaySelG"
+              className="selectG"
               value={gameDaySel} 
               onChange={(e) => gameDaySelChange(e)}
             >
@@ -79,11 +80,11 @@ export default function GamePage() {
               ))}
             </select>
           </div>
-          <div id="gameSelConG">
+          <div id="selectConG gameSelConG">
             <select 
               name="gameSel" 
               id="gameSel" 
-              className="gameSelG"
+              className="selectG gameSelG"
               value={gameSel} 
               onChange={(e) => gameSelChange(e)}
             >
@@ -93,53 +94,91 @@ export default function GamePage() {
             </select>
           </div>
         </div>
+        {/* Pregame */}
         <div id="preGameInfoConG">
-        <h4 className="gameTimeGD">{game.start_time} {game.end_time}</h4>
-            <h6 className="gameDurGD">1 hour</h6>
-            <h3 className="gameNameGD">{game.name}</h3>
-            <h5 className="gameLocationGD"><SlLocationPin />Mater Academy Charter</h5>
-            <h3 className="preGameTeams">{game.teams[0] ? game.teams[0].team.name: user && (<OpenModalButton
-                buttonText={<FiPlus />}
-                modalComponent={<AddTeamModel gameId={game.id} />}
-                cssClasses={''}
-              />)} vs {game.teams[1] ? game.teams[1].team.name: user && (<OpenModalButton
-                buttonText={<FiPlus />}
-                modalComponent={<AddTeamModel gameId={game.id} />}
-                cssClasses={''}
-              />)}</h3>
+          <h4 id="preGameTimeG">{game.start_time} {game.end_time}</h4>
+          <h6 id="preGameDurG">1 hour</h6>
+          <h3 id="preGameNameG">{game.name}</h3>
+          <div id="preGameLocConG">
+            <SlLocationPin id="preGameLocIconG"/>
+            <h5 id="preGameLocInfoGD">Mater Academy Charter</h5>
+          </div>
+          {/* Pregame Teams */}
+          <div id="preGameTeamsConG">
+            {game.teams[0] ? 
+              <div className="preGameTeamConG">
+                <h5 className="preGameTeamG">{game.teams[0].team.name}</h5>
+                {user && <OpenModalButton
+                  buttonText={<IoMdClose className="buttonIcon" />}
+                  modalComponent={<RemoveTeamModel gameId={game.id} team={teamStats.team} />}
+                  cssClasses={'buttonG pregameBnG removeG'}
+                />}
+              </div>
+            : 
+            user && (<OpenModalButton
+              buttonText={<FiPlus className="buttonIcon" />}
+              modalComponent={<AddTeamModel gameId={game.id} />}
+              cssClasses={'buttonG pregameBnG addG'}
+            />)} 
+            vs 
+            {game.teams[1] ? 
+              <div className="preGameTeamConG">
+                <h5 className="preGameTeamG">{game.teams[1].team.name}</h5>
+                {user && <OpenModalButton
+                  buttonText={<IoMdClose className="buttonIcon" />}
+                  modalComponent={<RemoveTeamModel gameId={game.id} team={teamStats.team} />}
+                  cssClasses={'buttonG pregameBnG removeG'}
+                />}
+              </div>
+            : 
+            user && (<OpenModalButton
+              buttonText={<FiPlus className="buttonIcon"/>}
+              modalComponent={<AddTeamModel gameId={game.id} />}
+              cssClasses={'buttonG pregameBnG addG'}
+            />)}
+          </div>
         </div>
+        {/* Postgame */}
         <div id="gameInfoConG">
-          <h3 id="gameDateG"><SlCalender />{game.game_day.date}</h3>
-          <h3 id='gameLocationG'><SlLocationPin />{game.game_day.location}</h3>
+          <div id="gameDateConG">
+            <SlCalender id="gameDateIconG"/>
+            <h3 id="gameDateInfoG">{game.game_day.date}</h3>
+          </div>
+          <div id='gameLocConG'>
+            <SlLocationPin id='gameLocIconG'/>
+            <h3 id='gameLocInfoG'>{game.game_day.location}</h3>
+          </div>
           <div className="gameListDivG"/>
+          {/* Postgame Teams */}
           {teamSetup.map((isHome, index) => {
             const key = `noTeamConGame${index}`
             const teamStats = game.teams[index];
 
-            if (!teamStats) return (<div className="teamConG noTeam" key={key}>
+            if (!teamStats) return (<div className="teamConG noTeamG" key={key}>
               {user && <OpenModalButton
-                buttonText={<FiPlus />}
+                buttonText={<FiPlus className="buttonIcon"/>}
                 modalComponent={<AddTeamModel gameId={game.id} />}
-                cssClasses={''}
+                cssClasses={'buttonG postgameBnG addG'}
               />}
             </div>);
 
-            return (<div className="teamConG homeTeam" key={key}>
+            return (<div className={`teamConG ${isHome && ''}`} key={key}>
               <div className="teamInfoConG">
                 {user && <OpenModalButton
-                  buttonText={<IoMdClose />}
+                  buttonText={<IoMdClose className="buttonIcon"/>}
                   modalComponent={<RemoveTeamModel gameId={game.id} team={teamStats.team} />}
-                  cssClasses={''}
+                  cssClasses={'buttonG postgameBnG removeG'}
                 />}
                 <h3 className="teamInfoG">{teamStats.team.name} {teamStats.team.record}</h3>
               </div>
                 
-              <h3 className={`teamScoreG ${teamStats.win && 'winningTeam'}`}>{teamStats.points}</h3>
+              <h3 className={`teamScoreG ${teamStats.win && 'winningTeamG'}`}>{teamStats.points}</h3>
             </div>);
           })}
           <div className="gameListDivG"/>
-          <a href={`/schedule/${gameDayId}/games/${gameId}/stats`}>
-            <div className="gameStatsButtonG">View Stats</div>
+          {/* Options */}
+          <a id="gameStatsLinkG" href={`/schedule/${gameDayId}/games/${gameId}/stats`}>
+            <div id="gameStatsButtonG">View Stats</div>
           </a>
         </div>
       </>}

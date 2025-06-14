@@ -1,3 +1,151 @@
 .border {
     border: 1px solid #fdfdfd;
 }
+
+#mainConG {
+
+}
+
+/* Title Info */
+#titleG {
+
+}
+
+#selectMainConG {
+
+}
+
+.selectConG {
+
+}
+.gameSelConG {
+
+}
+
+.selectG {
+
+}
+.gameSelG {
+
+}
+
+/* Pregame */
+#preGameInfoConG {
+
+}
+
+#preGameTimeG {
+
+}
+
+#preGameDurG {
+
+}
+
+#preGameNameG {
+
+}
+
+#preGameLocConG {
+
+}
+#preGameLocIconG {
+
+}
+#preGameLocInfoGD {
+
+}
+
+/* Pregame Teams */
+#preGameTeamsConG {
+
+}
+
+.preGameTeamConG {
+
+}
+
+.preGameTeamG {
+
+}
+
+/* Postgame */
+#gameInfoConG {
+
+}
+
+#gameDateConG {
+
+}
+
+#gameDateIconG {
+
+}
+
+#gameDateInfoG {
+
+}
+
+#gameLocConG {
+
+}
+
+#gameLocIconG {
+
+}
+
+#gameLocInfoG {
+
+}
+
+/* Postgame Teams */
+.teamConG {
+
+}
+.noTeamG {
+
+}
+
+.teamInfoConG {
+
+}
+
+.teamInfoG {
+
+}
+
+.teamScoreG {
+
+}
+.winningTeamG {
+
+}
+
+/* Options */
+#gameStatsLinkG {
+
+}
+
+#gameStatsButtonG {
+
+}
+
+.gameListDivG {
+
+}
+
+.buttonG {
+
+}
+.pregameBnG {
+
+}
+.postgameBnG {
+
+}
+.newG {
+
+}
+.editG {
+
+}

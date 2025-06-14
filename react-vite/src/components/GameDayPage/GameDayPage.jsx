@@ -38,7 +38,7 @@ export default function GameDayPage() {
         {user && <OpenModalButton
           buttonText={'New Game'}
           modalComponent={<NewGameModel gameDayId={gameDayId}/>}
-          cssClasses={'buttonS'}
+          cssClasses={'buttonGD newGD'}
         />}
         <h3 id='dateGD'>{gameDay.date}</h3>
         <div className="border"></div>
@@ -48,11 +48,11 @@ export default function GameDayPage() {
             <h6 className="gameDurGD">1 hour</h6>
             <h3 className="gameNameGD">{game.name}</h3>
             <h5 className="gameLocationGD"><SlLocationPin />Mater Academy Charter</h5>
-            <a href={`/schedule/${gameDay.id}/games/${game.id}`}><h4>Show More</h4><SlArrowRight /></a>
+            <a className="gameLinkGD" href={`/schedule/${gameDay.id}/games/${game.id}`}><h4>Show More</h4><SlArrowRight /></a>
             {user && <OpenModalButton
               buttonText={'Edit Game'}
               modalComponent={<EditGameModel game={game}/>}
-              cssClasses={'buttonS'}
+              cssClasses={'buttonGD editGD'}
             />}
             <div className="borderGD"></div>
           </div>

@@ -30,10 +30,10 @@ export default function SchedulePage() {
       <>
         <h1 id='titleS'>Season 4 Schedule</h1>
         {user && <OpenModalButton
-                buttonText={'New Game Day'}
-                modalComponent={<NewGameDayModel />}
-                cssClasses={'buttonS'}
-              />}
+          buttonText={'New Game Day'}
+          modalComponent={<NewGameDayModel />}
+          cssClasses={'buttonS newS'}
+        />}
         {gameDays.map((gameDay, index) => (
           <div className="cardS" key={`gameDayCard${index}`}>
             <div className="imgConS">
@@ -49,14 +49,14 @@ export default function SchedulePage() {
               <div className="moreInfoConS">
                   <h5 className="dateTimeS">{`${gameDay.date}, ${gameDay.start_time}, ${gameDay.end_time}`}</h5>
                   <h5 className="location">{gameDay.location}</h5>
-                </div>
               </div>
-              <a href={`/schedule/${gameDay.id}`}><button className="buttonS">Learn More</button></a>
-              {user && <OpenModalButton
-                buttonText={'Edit Game Day'}
-                modalComponent={<EditGameDayModel gameDay={gameDay} />}
-                cssClasses={'buttonS'}
-              />}
+            </div>
+            <a href={`/schedule/${gameDay.id}`}><button className="linkS">Learn More</button></a>
+            {user && <OpenModalButton
+              buttonText={'Edit Game Day'}
+              modalComponent={<EditGameDayModel gameDay={gameDay} />}
+              cssClasses={'buttonS editS'}
+            />}
             </div>
         ))}
       </>}
