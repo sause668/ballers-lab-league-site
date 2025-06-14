@@ -88,7 +88,7 @@ export default function NavBar() {
           
           
         ))}
-        {user && <button onClick={handleLogout}>Logout</button>}
+        {user && <button className="logOutButton" onClick={handleLogout}>Logout</button>}
       </div>
     :
       <>
@@ -96,25 +96,25 @@ export default function NavBar() {
           <div id="navLogoConN">
             <img id="navLogoN" src="" alt="" />
           </div>
-          <div id="navButtonConN" onClick={toggleMenu}>
-            {!menu ? <IoMenu /> :  <IoMdClose />}
+          <div id="mobileButtonN" onClick={toggleMenu}>
+            {!menu ? <IoMenu className="mobileButtonIconN"/> :  <IoMdClose className="mobileButtonIconN"/>}
           </div>
         </div>
         <div hidden={menu} className="navConN mobileConN">
         {navItems.map((navItem, iNavItem) => (
             <div key={`navLinkN${iNavItem}`} onMouseEnter={()=>changeChildren(navItem.title)} onMouseLeave={()=>changeChildren()}>
-              <a className="navLinkN"  href={navItem.link} >
-                <h3 className="navItem">{navItem.title}</h3>
+              <a className="navLinkN mobileLinkN"  href={navItem.link} >
+                <h3 className="navItem mobileItemN">{navItem.title}</h3>
               </a>
               {navItem.children && (
-                <div  className="navConN childCon" hidden={showChildren !== navItem.title}>
+                <div  className="navConN childCon mobileConN" hidden={showChildren !== navItem.title}>
                   {navItem.children.map((navChild, iNavChild) => (
                     <a 
-                    className="navLinkN childLink" 
+                    className="navLinkN childLink mobileLinkN" 
                     key={`navChildN${iNavChild}`}
                     href={navChild.link}
                   >
-                    <h3 className="navItem childItem ">{navChild.title}</h3>
+                    <h3 className="navItem childItem mobileItemN">{navChild.title}</h3>
                   </a>
                   ))}
                 </div>
@@ -123,7 +123,7 @@ export default function NavBar() {
             
             
           ))}
-          {user && <button onClick={handleLogout}>Logout</button>}
+          {user && <button className="logOutButton mobileLogoutBnN" onClick={handleLogout}>Logout</button>}
         </div>
       </>
     }

@@ -40,38 +40,41 @@ export default function GameStatsPage() {
 
   return (
     <>
-     {isLoaded && (<div id="gameStatsConGS">
+     {isLoaded && (<div id="mainConGS">
+      {/* Team Stats */}
       <div id="teamStatsConGS">
         {teamStats.map((teamStat, index) => (
-        <div className={`teamStatConGS ${index == 0 && 'home'}`} key={`teamStatsGS${index}`}>
+        <div className={`teamStatConGS ${index == 0 && 'homeG'}`} key={`teamStatsGS${index}`}>
           {teamStat && <>
             <div className="teamInfoConGS">
               <h2 className="teamNameGS">{teamStat.team.name}</h2>
               <h4 className="teamRecordGS">{teamStat.team.record}</h4>
             </div>
             <h1 
-              className="teamPointGS" 
+              className={`teamPointsGS ${teamStat.win && 'winningTeamGS'}`}
               onClick={()=>user && setModalContent(<EditTeamStatModel teamStat={teamStat} />)}
             >{teamStat.points}</h1>
           </>}
         </div>
       ))}
       </div>
+      {/* Player Stats */}
       <div id='playerStatsConGS'>
         {playerStats.map((playerTeamStats, iPlayerTeamStats) => {
           if (playerTeamStats) return(
             <div className="playerTeamStatsConGS" key={`playerTeamStatsGS${iPlayerTeamStats}`}>
               <h2 className="playerTeamNameGS">{teamStats[iPlayerTeamStats].team.name}</h2>
+              {/* Table */}
               <div className="tableConGS">
-                <table id="tableGS">
-                  <thead id="tableHeadGS">
-                    <tr id="tableHeadRowGS">
+                <table className="tableGS">
+                  <thead className="tableHeadGS">
+                    <tr className="tableHeadRowGS">
                       {tableHeaders.map((header, iHeader) => (
                         <td className="tableCellGS tableHeadCellGS" key={`tableHeadGS${iHeader}`}>{header}</td>
                       ))}
                     </tr>
                   </thead>
-                  <tbody id="tableBodyGB">
+                  <tbody className="tableBodyGB">
                     {playerTeamStats.map((playerStat, iPlayerStat) => (
                       <tr className="tableBodyRowGS" key={`playerStatRow${iPlayerStat}`}>
                         <td className="tableCellGS tableBodyCellGS playerInfoCellGS">
