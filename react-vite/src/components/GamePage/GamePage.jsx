@@ -110,7 +110,7 @@ export default function GamePage() {
                 <h5 className="preGameTeamG">{game.teams[0].team.name}</h5>
                 {user && <OpenModalButton
                   buttonText={<IoMdClose className="buttonIcon" />}
-                  modalComponent={<RemoveTeamModel gameId={game.id} team={teamStats.team} />}
+                  modalComponent={<RemoveTeamModel gameId={game.id} team={game.teams[0].team} />}
                   cssClasses={'buttonG pregameBnG removeG'}
                 />}
               </div>
@@ -126,7 +126,7 @@ export default function GamePage() {
                 <h5 className="preGameTeamG">{game.teams[1].team.name}</h5>
                 {user && <OpenModalButton
                   buttonText={<IoMdClose className="buttonIcon" />}
-                  modalComponent={<RemoveTeamModel gameId={game.id} team={teamStats.team} />}
+                  modalComponent={<RemoveTeamModel gameId={game.id} team={game.teams[1].team} />}
                   cssClasses={'buttonG pregameBnG removeG'}
                 />}
               </div>

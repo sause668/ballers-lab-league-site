@@ -6,7 +6,7 @@ export default function HistoryPage() {
   return (
     <div id="mainConHI">
       <div id="imageConHI">
-        <img id="imageHI" width={1365/imgScale} height={2048/imgScale} src="/imgs/history-main.jpg" alt="" />
+        <img id="imageHI" src="/imgs/history-main.jpg" alt="" />
       </div>
       <div id="infoConHI">
         <h1 id="titleHI">OUR MISSION</h1>

@@ -10,8 +10,8 @@ export default function Footer() {
     <div id="mainConFO">
       <div id="sponsorsConFO">
         {sponsors.map((sponsor, index) => (
-          <div className="spLogoConFO" key={`spLogoCon${index}`}>
-            <img className="spLogoFO" src={sponsor.img} alt={sponsor.name} width={50}/>
+          <div className="spLogoConFO " key={`spLogoCon${index}`}>
+            <img className="spLogoFO blackout" src={sponsor.img} alt={sponsor.name} width={50}/>
           </div>
         ))}
       </div>
