@@ -22,7 +22,7 @@ class Team(db.Model):
                 elif stat['win'] == False:
                     loses += 1
             
-            return f"{wins} - {loses}"
+            return f"({wins} - {loses})"
 
     def to_dict(self):
         return {

@@ -1,141 +1,292 @@
-.border {
-    border: 1px solid #fdfdfd;
-}
-
 #mainConG {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    padding: 0rem 1rem;
 
 }
 
 /* Title Info */
-#titleG {
+#titleConG {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .3rem;
+    margin-bottom: 1rem;
+}
 
+#titleIconG {
+    font-size: 1.7rem;
+    color: #ff9045;
+}
+
+#titleG {
+    font-size: 1.7rem;
+    font-weight: 200;
+    font-stretch: expanded;
 }
 
 #selectMainConG {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .3rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
 
+#selectIconG {
+    font-size: 1.5rem;
+    color: #ffb600;
 }
 
 .selectConG {
-
+    /* width: 50%; */
 }
 .gameSelConG {
 
 }
 
 .selectG {
-
+    background-color: #0d0d0d;
+    border: none;
+    border-radius: .25rem;
+    color: #ffb600;
+    font-size: 1.3rem;
+    font-weight: 100;
+    /* width: 100%; */
+    /* overflow-x: hidden; */
 }
 .gameSelG {
 
 }
 
+.selectG:focus {
+    border: none;
+    outline: none;
+}
+
 /* Pregame */
 #preGameInfoConG {
-
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 0rem;
+    margin-left: 2rem;
 }
 
 #preGameTimeG {
+    font-size: 1.7rem;
+    font-weight: 200;
+    font-stretch: expanded;
 
 }
 
 #preGameDurG {
+    font-size: 1.2rem;
+    font-weight: 200;
+    font-stretch: expanded;
+    margin-bottom: 2rem;
 
 }
 
 #preGameNameG {
-
+    font-size: 1.7rem;
+    font-weight: 300;
+    font-stretch: expanded;
+    margin-bottom: .3rem;
 }
 
 #preGameLocConG {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .5rem;
+    margin-left: 1rem;
+    margin-bottom: 2.5rem;
 
 }
 #preGameLocIconG {
 
 }
 #preGameLocInfoGD {
+    font-size: 1.2rem;
+    font-weight: 200;
+    font-stretch: expanded;
 
 }
 
 /* Pregame Teams */
 #preGameTeamsConG {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 
 }
 
 .preGameTeamConG {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
 .preGameTeamG {
+    font-size: 1.7rem;
+    font-weight: 200;
+    font-stretch: expanded;
+
+}
+
+.preGameVsG {
+    font-size: 1.7rem;
+    font-weight: 200;
+    font-stretch: expanded;
+    margin-bottom: .4rem;
+    margin-left: 1rem;
 
 }
 
 /* Postgame */
 #gameInfoConG {
+    /* background-color: #0d0d0d;
+    border: .5px solid #ffb600;  */
+    background-color: #2f2f2f1b;
+    border: .5px solid #9d9d9d57;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 0rem;
+    
+}
 
+#gameInfoSubConG {
+    box-sizing: border-box;
+    padding: 1rem;
+    width: 100%;
 }
 
 #gameDateConG {
-
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .5rem;
 }
 
 #gameDateIconG {
-
+    font-size: 1.3rem;
 }
 
 #gameDateInfoG {
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-stretch: expanded;
 
 }
 
 #gameLocConG {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .5rem;
 
 }
 
 #gameLocIconG {
+    font-size: 1.3rem;
 
 }
 
 #gameLocInfoG {
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-stretch: expanded;
 
 }
 
-/* Postgame Teams */
-.teamConG {
+.gameListDivG {
+    /* border: .5px solid #ffb600; */
+    border: .5px solid #9d9d9d57;
+    width: 100%;
+}
 
+/* Postgame Teams */
+#teamsMainConG {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    box-sizing: border-box;
+    padding: 1rem;
+    width: 100%;
+}
+
+.teamConG {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+    width: 100%;
 }
 .noTeamG {
 
 }
 
 .teamInfoConG {
-
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .teamInfoG {
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-stretch: expanded;
 
 }
 
 .teamScoreG {
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-stretch: expanded;
 
 }
 .winningTeamG {
-
+    color: #ff9045;
 }
 
 /* Options */
+#gameStatsConG {
+    padding: 1rem;
+
+}
+
 #gameStatsLinkG {
+    /* box-sizing: border-box;
+    padding: 9rem; */
 
 }
 
-#gameStatsButtonG {
-
-}
-
-.gameListDivG {
-
+#gameStatsLinkTextG {
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-stretch: expanded;
+    text-align: center;
+    color: #fdfdfd;
 }
 
 .buttonG {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0rem;
+    border-radius: .9rem;
 }
 .pregameBnG {
 
@@ -146,6 +297,10 @@
 .newG {
 
 }
-.editG {
+.removeG {
+    margin-right: .5rem;
+}
 
+.buttonIcon {
+    font-size: 1.5rem;
 }
