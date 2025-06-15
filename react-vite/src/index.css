@@ -156,7 +156,7 @@ button {
     background-color: #0d0d0d;
     transition: background-color .2s;
     color: #ffb600;
-    border-radius: 10px;
+    border-radius: 2rem;
     padding: .5rem 1rem;
     font-size: 1rem;
     cursor: pointer;
@@ -193,7 +193,7 @@ button:hover {
 }
 
 .fadein {
-    animation: fin .3s ease-in-out;
+    animation: fin .3s ease-in;
 }
 
 @keyframes fin {
@@ -204,6 +204,26 @@ button:hover {
 @keyframes fout {
     from { opacity: 1;}
     to   { opacity: 0;}
+}
+
+.rotate {
+    transform: rotate(180deg);
+    /* transition: transform .2s; */
+}
+.rotateBack {
+    transform: rotate(0deg);
+    /* transition: transform .2s; */
+}
+
+
+  
+@keyframes rotate180 {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(180deg);
+    }
 }
 
 

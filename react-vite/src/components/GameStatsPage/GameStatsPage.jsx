@@ -29,7 +29,7 @@ export default function GameStatsPage() {
     console.log('GameStats', gameStats);
   }
 
-  const tableHeaders = ['Players', 'PPG', 'RPG', 'APG'];
+  const tableHeaders = ['PPG', 'RPG', 'APG'];
   const tableBody = ['points', 'rebounds', 'assists'];
 
   const { setModalContent } = useModal();
@@ -40,35 +40,40 @@ export default function GameStatsPage() {
 
   return (
     <>
-     {isLoaded && (<div id="mainConGS">
+     {isLoaded && (<div id="mainConGS" className="fadein">
       {/* Team Stats */}
       <div id="teamStatsConGS">
-        {teamStats.map((teamStat, index) => (
-        <div className={`teamStatConGS ${index == 0 && 'homeG'}`} key={`teamStatsGS${index}`}>
-          {teamStat && <>
-            <div className="teamInfoConGS">
-              <h2 className="teamNameGS">{teamStat.team.name}</h2>
-              <h4 className="teamRecordGS">{teamStat.team.record}</h4>
+        <div id="teamStatsSubConGS" >
+          {teamStats.map((teamStat, index) => teamStat && 
+            <div 
+            className={`teamStatConGS ${index == 0 && 'homeG'}`} 
+            key={`teamStatsGS${index}`}
+            onClick={()=>user && setModalContent(<EditTeamStatModel teamStat={teamStat} />)}
+            >
+              <div className="teamInfoConGS">
+                <h2 className="teamNameGS">{teamStat.team.name}</h2>
+                <h4 className="teamRecordGS">{teamStat.team.record}</h4>
+              </div>
+              <h1 
+                className={`teamPointsGS ${teamStat.win && 'winningTeamGS'}`}
+              >{teamStat.points}</h1>
             </div>
-            <h1 
-              className={`teamPointsGS ${teamStat.win && 'winningTeamGS'}`}
-              onClick={()=>user && setModalContent(<EditTeamStatModel teamStat={teamStat} />)}
-            >{teamStat.points}</h1>
-          </>}
+          )}
         </div>
-      ))}
       </div>
+      
       {/* Player Stats */}
       <div id='playerStatsConGS'>
         {playerStats.map((playerTeamStats, iPlayerTeamStats) => {
           if (playerTeamStats) return(
-            <div className="playerTeamStatsConGS" key={`playerTeamStatsGS${iPlayerTeamStats}`}>
+            <div className="playerStatConGS" key={`playerTeamStatsGS${iPlayerTeamStats}`}>
               <h2 className="playerTeamNameGS">{teamStats[iPlayerTeamStats].team.name}</h2>
               {/* Table */}
               <div className="tableConGS">
                 <table className="tableGS">
                   <thead className="tableHeadGS">
                     <tr className="tableHeadRowGS">
+                        <td className="tableCellGS tableHeadCellGS" colSpan="2">Players</td>
                       {tableHeaders.map((header, iHeader) => (
                         <td className="tableCellGS tableHeadCellGS" key={`tableHeadGS${iHeader}`}>{header}</td>
                       ))}
@@ -77,8 +82,8 @@ export default function GameStatsPage() {
                   <tbody className="tableBodyGB">
                     {playerTeamStats.map((playerStat, iPlayerStat) => (
                       <tr className="tableBodyRowGS" key={`playerStatRow${iPlayerStat}`}>
+                        <td className="tableCellGS tableBodyCellGS playerNumberCellGS">{playerStat.player.number}</td>
                         <td className="tableCellGS tableBodyCellGS playerInfoCellGS">
-                          <h6 className="playerNumberGS">{playerStat.player.number}</h6>
                           <a href="" className="playerLinkGS">
                             <h6 className="playerNameGS">{playerStat.player.first_name} {playerStat.player.last_name}</h6>
                           </a>

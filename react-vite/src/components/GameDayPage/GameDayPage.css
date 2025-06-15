@@ -1,34 +1,58 @@
+/* #gameDayCon {
+    width: 100%;
+} */
 #mainConGD {
-
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; */
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    padding: 0rem 2rem;
+    max-width: 85%;
 }
 
 /* Title Info */
+#infoConGD {
+    margin-bottom: 2rem;
+}
 #titleGD {
-
+    /* margin-top: 3rem; */
+    margin-bottom: 2rem;
 }
 
 #disNameGD {
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1.5;
+    font-stretch: expanded;
+    /* margin-bottom: .5rem; */
 
 }
 
 #disDateGD {
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1.5;
+    font-stretch: expanded;
+    /* margin-bottom: .5rem; */
 
 }
 
 #disLocationGD {
-
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1.5;
+    font-stretch: expanded;
 }
 
-/* Options */
-.buttonGD {
-
+#dateGD {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-stretch: expanded;
 }
-.newGD {
 
-}
-.editGD {
 
-}
 
 /* Games */
 .gameInfoConGD {
@@ -36,25 +60,82 @@
 }
 
 .gameTimeGD {
+    font-size: 1.2rem;
+    font-weight: 200;
+    font-stretch: expanded;
+    margin-bottom: .3rem;
 
 }
 
 .gameDurGD {
+    font-size: 1rem;
+    font-weight: 200;
+    font-stretch: expanded;
+    margin-bottom: .5rem;
 
 }
 
 .gameNameGD {
+    font-size: 1.2rem;
+    font-weight: 200;
+    font-stretch: expanded;
+    margin-bottom: .5rem;
 
 }
 
-.gameLocationGD {
+.gameLocConGE {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .3rem;
+    margin-bottom: 1rem;
+    
+
+}
+
+.gameLocIconGD {
+
+}
+
+.gameLocGD {
+    font-size: 1rem;
+    font-weight: 200;
+    font-stretch: expanded;
 
 }
 
 .gameLinkGD {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .5rem;
+}
+
+.gameLinkInfoGD {
+    font-size: 1.1rem;
+    font-weight: 200;
+    font-stretch: expanded;
+    color: #ffb600;
+}
+
+.gameLinkIconGD {
+    font-size: .7rem;
+    color: #ffb600;
+}
+
+/* Options */
+.buttonGD {
+    margin-top: 1rem;
+
+}
+.newGD {
+}
+.editGD {
 
 }
 
 .borderGD {
-
+    margin: 1rem 0rem;
+    border: .5px solid #fdfdfd;
 }
+
