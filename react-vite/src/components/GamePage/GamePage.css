@@ -304,3 +304,49 @@
 .buttonIcon {
     font-size: 1.5rem;
 }
+
+@media (min-width:500px) {
+    #mainConG {
+        padding: 0rem 3rem;
+    
+    }
+}
+
+@media (min-width:600px) {
+    #mainConG {
+        padding: 0rem 5rem;
+    
+    }
+
+    #selectMainConG {
+        gap: 1rem;
+    }
+}
+
+@media (min-width:700px) {
+    #mainConG {
+        padding: 0rem 8rem;
+    
+    }
+}
+
+@media (min-width:800px) {
+    #mainConG {
+        padding: 0rem 11rem;
+    
+    }
+}
+
+@media (min-width:900px) {
+    #mainConG {
+        padding: 0rem 14rem;
+    
+    }
+}
+
+@media (min-width:1000px) {
+    #mainConG {
+        padding: 0rem 17rem;
+    
+    }
+}

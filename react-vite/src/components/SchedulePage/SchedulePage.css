@@ -111,7 +111,7 @@
 
 }
 
-.location {
+.locationS {
     font-size: 1.2rem;
     font-weight: 200;
     font-stretch: expanded;
@@ -139,4 +139,94 @@
 }
 .editS {
     width: 80%;
+}
+
+@media (min-width:600px) {
+    #cardsConS {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .cardS {
+        width: 47%;
+        margin: .5rem;
+    }
+
+    .moreInfoToggleConS {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .moreInfoConS {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #0d0d0d;
+        border-radius: 1rem;
+        position:absolute;
+        padding: 2rem;
+        box-sizing: border-box;
+        width: 47%;
+        z-index: 99;
+    }
+
+    .infoCloseConS {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+    }
+
+    .infoCloseIconS {
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+
+    .nameS {
+        text-align: center;
+    
+    }
+    .nameMS {
+        margin-bottom: 1rem;
+    
+    }
+    
+    .dateS {
+        text-align: center;
+    }
+    
+    .dateTimeS {
+        text-align: center;
+    }
+    .dateTimeMS {
+        margin-bottom: 2rem;
+    }
+    
+    .locationS {
+        text-align: center;
+    }
+    .locationMS {
+        text-align: center;
+    }
+
+    .hiddenS {
+        visibility: hidden;
+    }
+}
+
+@media (min-width:900px) {
+
+    .cardS {
+        width: 30%;
+    }
+
+    .moreInfoConS {
+        width: 30%;
+    }
+    
 }

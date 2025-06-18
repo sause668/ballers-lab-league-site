@@ -25,7 +25,7 @@
 }
 
 .spLogoFO {
-    width: 80%;
+    width: 50%;
 }
 
 /* Socials */
@@ -45,11 +45,44 @@
 }
 
 .socialIconFO {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #ffffff7d;
 }
 
 /* Creators */
 .creatorsConFO {
 
+}
+
+@media (min-width:600px) {
+    #sponsorsConFO {
+        margin-bottom: 0rem;
+    }
+
+    .spLogoConFO {
+        width: 25%;
+    }
+    
+    .spLogoFO {
+        width: 50%;
+    }
+    
+    /* Socials */
+    #socialsConFO {
+        justify-content: flex-end;
+    }
+    
+    .socialLinkFO {
+        width: auto;
+    }
+}
+
+@media (min-width:900px) {
+    .spLogoConFO {
+        width: 16%;
+    }
+    
+    .spLogoFO {
+        width: 60%;
+    }
 }

@@ -50,3 +50,22 @@
     opacity: 0;
     transition: opacity .3s ease-in;
 }
+
+@media (min-width:700px) {
+    #mainConPH {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 4rem;
+        margin-top: 2rem;
+    }
+
+    .imgConPH {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width:50%;
+    }
+}

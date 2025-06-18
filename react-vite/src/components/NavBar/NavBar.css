@@ -7,23 +7,42 @@
 
 /* Nav */
 .navConN {
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0d0d0d;
+    padding: 1rem 0rem;
 }
 .childConN {
-
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: .25rem;
+    position: absolute;
+    padding: 0rem 0rem;
 }
 
 .navLinkN {
-
 }
 .childLinkN {
-
 }
 
 .navItem {
+    font-weight: 200;
+    font-size: 1.2rem;
+    font-stretch: expanded;
+    padding: .25rem 1rem;
+    color: #fdfdfd;
+    transition: color .5s;
 
 }
 .childItemN {
+    /* padding: 0rem 1rem; */
+
+}
+
+.navItem:hover {
+    color: #ffb600;
+    transition: color .5s;
 
 }
 

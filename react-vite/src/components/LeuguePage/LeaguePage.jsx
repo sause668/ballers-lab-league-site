@@ -1,13 +1,15 @@
+import { useMediaQuery } from 'react-responsive';
 import "./LeaguePage.css";
 
 export default function LeaguePage() {
-  const imgScale = 8
+  const deskTop = !useMediaQuery({ query: '(max-width: 700px)' });
 
   return (
     <div id='mainConLE' className="fadein">
       <div id="titleConLE">
         <h1 id="titleLE">Adult Women&apos;s League</h1>
       </div>
+      {deskTop &&<div id='borderLE'></div>}
       {/* <div id="borderLE"/> */}
       <div id="pageBodyConLE">
         <div id="imgConLE">

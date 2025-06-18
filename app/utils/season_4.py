@@ -3,6 +3,7 @@ from datetime import time, date
 roster = [
     {
         'name': 'BALL & ORDER',
+        'name': 'BALL & ORDER',
         'players': [
             {
                 'first_name': 'Rachel',

@@ -55,10 +55,6 @@
 
 
 /* Games */
-.gameInfoConGD {
-
-}
-
 .gameTimeGD {
     font-size: 1.2rem;
     font-weight: 200;
@@ -139,3 +135,47 @@
     border: .5px solid #fdfdfd;
 }
 
+@media (min-width:600px) {
+    .gameInfoConGD {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    }
+
+    .gameInfoSubCon1GD {
+        width: 39%;
+        
+    }
+
+    .gameInfoSubCon2GD{
+        width: 60%;
+    }
+
+    .optionsConGD {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .editGD {
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .borderGD {
+        width: 100%;
+    }
+}
+
+@media (min-width:800px) {
+    .gameInfoSubCon1GD {
+        width: auto;
+        margin-right: 6rem;
+        
+    }
+
+    .gameInfoSubCon2GD{
+        width: 60%;
+    }
+}

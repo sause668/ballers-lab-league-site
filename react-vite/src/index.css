@@ -169,30 +169,15 @@ button:hover {
     transition: background-color .2s;
 }
 
-.whiteBox {
-    background-color: white;
-    border: 1px solid #007AFF;
-    border-radius: 20px;
-    
-}
-
-.blueBox {
-    background-color: #007AFF;
-    border: 1px solid #007AFF;
-    border-radius: 20px;
-    color: white;
-}
-
-.lightBlueBox {
-    background-color: #007bff4b;
-    border-radius: 20px;
-}
-
 .hidden {
     display: none;
 }
 
 .fadein {
+    animation: fin .3s ease-in;
+}
+
+.fadeout {
     animation: fin .3s ease-in;
 }
 
