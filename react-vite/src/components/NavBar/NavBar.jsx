@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from 'react-responsive';
 import "./NavBar.css";
 import { useUser } from "../../context/User";
 import { IoMenu } from "react-icons/io5";
@@ -86,7 +86,7 @@ export default function NavBar() {
             </a>
             {/* Children */}
             {navItem.children && (
-              <div className="navConN childConN" hidden={showChildren !== navItem.title}>
+              <div className={`navConN childConN ${showChildren !== navItem.title && 'hidden'}`}>
                 {navItem.children.map((navChild, iNavChild) => (
                   <a 
                   className="navLinkN childLinkN" 
@@ -122,7 +122,6 @@ export default function NavBar() {
                 <h3 className="mobileItemN">{navItem.title}</h3>
                 <div className="borderN"/>
               </a>
-              
             </div>
             :
             <div className="mobileConSubN" key={`navLinkN${iNavItem}`}>

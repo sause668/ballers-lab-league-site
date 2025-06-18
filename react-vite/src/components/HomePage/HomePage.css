@@ -54,3 +54,9 @@
     width: 180%;
     height: 100%;
 }
+
+@media (min-width:700px) {
+    #logoHM {
+        width: 40rem;
+    }
+}

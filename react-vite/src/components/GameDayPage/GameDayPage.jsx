@@ -47,23 +47,28 @@ export default function GameDayPage() {
         <div className="borderGD"></div>
         {gameDay.games.map((game, index) => (
           <div className="gameInfoConGD" key={`gameInfo${index}`}>
-            <h4 className="gameTimeGD">{game.start_time} {game.end_time}</h4>
-            <h6 className="gameDurGD">1 hour</h6>
-            <h3 className="gameNameGD">{game.name}</h3>
-            <div className="gameLocConGE">
-              <SlLocationPin className="gameLocIconGD"/>
-              <h5 className="gameLocGD">Mater Academy Charter</h5>
+            <div className="gameInfoSubCon1GD">
+              <h4 className="gameTimeGD">{game.start_time} {game.end_time}</h4>
+              <h6 className="gameDurGD">1 hour</h6>
             </div>
-            
-            <a className="gameLinkGD" href={`/schedule/${gameDay.id}/games/${game.id}`}>
-              <h4 className="gameLinkInfoGD">Show More</h4>
-              <SlArrowRight className="gameLinkIconGD"/>
-            </a>
-            {user && <OpenModalButton
-              buttonText={'Edit Game'}
-              modalComponent={<EditGameModel game={game}/>}
-              cssClasses={'buttonGD editGD'}
-            />}
+            <div className="gameInfoSubCon2GD">
+              <h3 className="gameNameGD">{game.name}</h3>
+              <div className="gameLocConGE">
+                <SlLocationPin className="gameLocIconGD"/>
+                <h5 className="gameLocGD">Mater Academy Charter</h5>
+              </div>
+              <div className="optionsConGD">
+                <a className="gameLinkGD" href={`/schedule/${gameDay.id}/games/${game.id}`}>
+                  <h4 className="gameLinkInfoGD">Show More</h4>
+                  <SlArrowRight className="gameLinkIconGD"/>
+                </a>
+                {user && <OpenModalButton
+                  buttonText={'Edit Game'}
+                  modalComponent={<EditGameModel game={game}/>}
+                  cssClasses={'buttonGD editGD'}
+                />}
+              </div>
+            </div>
             <div className="borderGD"></div>
           </div>
         ))}

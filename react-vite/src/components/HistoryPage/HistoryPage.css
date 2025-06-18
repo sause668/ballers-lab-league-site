@@ -46,3 +46,9 @@
     font-stretch: expanded;
     line-height: 1.7;
 }
+
+@media (min-width:700px) {
+    #imageConHI {
+        height: 25rem;
+    }
+}

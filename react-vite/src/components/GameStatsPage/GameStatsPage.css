@@ -3,8 +3,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
+    /* margin-bottom: 1rem; */
     padding: 0rem 1rem;
     box-sizing: border-box;
     width: 100%;
@@ -16,6 +15,8 @@
     position: sticky;
     top: 5.5rem;
     z-index: 80;
+    padding-bottom: .5rem;
+    background-color: #0d0d0d;
     width: 100%;
 
 }
@@ -28,7 +29,6 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: #0d0d0d;
 
 }
 
@@ -164,6 +164,15 @@
     font-stretch: expanded;
     color: #ff9045;
 
+}
+
+@media (min-width:700px) {
+    #teamStatsConGS {
+        top: 4.2rem;
+
+        padding-top: 2rem;
+    
+    }
 }
 
 
