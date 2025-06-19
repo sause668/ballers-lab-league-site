@@ -18,8 +18,8 @@ import AddTeamModel from "./AddTeam";
 
 
 export default function GamePage() {
-  // const { user } = useUser();
-  const user  = null;
+  const { user } = useUser();
+  // const user  = null;
   const nav = useNavigate();
   const { gameDayId, gameId } = useParams();
   const { game, gameById} = useGame();
