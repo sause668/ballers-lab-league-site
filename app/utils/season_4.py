@@ -481,30 +481,35 @@ schedule = [
         'games': [
             {
                 'name': 'Hoopers Division Game 1',
+                'sv_id': '',
                 'start_time': time(1, 0),
                 'end_time': time(2, 0),
                 'teams': ['BALL & ORDER', 'SWISH & TELL']
             },
             {
                 'name': 'Hoopers Division Game 2',
+                'sv_id': '',
                 'start_time': time(2, 0),
                 'end_time': time(3, 0),
                 'teams': ['LADY LEGENDS', 'FLYHIGH23']
             },
             {
                 'name': 'Hoopers Division Game 3',
+                'sv_id': '',
                 'start_time': time(3, 0),
                 'end_time': time(4, 0),
                 'teams': ['DREAMCHASERS', 'CRASHOUTS']
             },
             {
                 'name': 'Elite Division Game 4',
+                'sv_id': '',
                 'start_time': time(4, 0),
                 'end_time': time(6, 0),
                 'teams': ['PRESSURE PACK', '50 SHADES OF GAME']
             },
             {
                 'name': 'Elite Division Game 5',
+                'sv_id': '',
                 'start_time': time(5, 0),
                 'end_time': time(6, 0),
                 'teams': ['RUN IT BACK', 'MIAMI VIS']
@@ -517,30 +522,35 @@ schedule = [
         'games': [
             {
                 'name': 'Elite Division Game 1',
+                'sv_id': '634e4ed4-44dc-4f64-95f6-373f5bec1ddc',
                 'start_time': time(1, 0),
                 'end_time': time(2, 0),
                 'teams': ['50 SHADES OF GAME', 'MIAMI VIS']
             },
             {
                 'name': 'Elite Division Game 2',
+                'sv_id': '',
                 'start_time': time(2, 0),
                 'end_time': time(3, 0),
                 'teams': ['PRESSURE PACK', 'RUN IT BACK']
             },
             {
                 'name': 'Hoopers Division Game 3',
+                'sv_id': '',
                 'start_time': time(3, 0),
                 'end_time': time(4, 0),
                 'teams': ['LADY LEGENDS', 'DREAMCHASERS']
             },
             {
                 'name': 'Hoopers Division Game 4',
+                'sv_id': '',
                 'start_time': time(4, 0),
                 'end_time': time(6, 0),
                 'teams': ['BALL & ORDER', 'CRASHOUTS']
             },
             {
                 'name': 'Hoopers Division Game 5',
+                'sv_id': '',
                 'start_time': time(5, 0),
                 'end_time': time(6, 0),
                 'teams': ['SWISH & TELL', 'FLYHIGH23']
@@ -553,30 +563,35 @@ schedule = [
         'games': [
             {
                 'name': 'Hoopers Division Game 1',
+                'sv_id': '',
                 'start_time': time(1, 0),
                 'end_time': time(2, 0),
                 'teams': ['CRASHOUTS', 'SWISH & TELL']
             },
             {
                 'name': 'Hoopers Division Game 2',
+                'sv_id': '',
                 'start_time': time(2, 0),
                 'end_time': time(3, 0),
                 'teams': ['FLYHIGH23', 'DREAMCHASERS']
             },
             {
                 'name': 'Hoopers Division Game 3',
+                'sv_id': '',
                 'start_time': time(3, 0),
                 'end_time': time(4, 0),
                 'teams': ['BALL & ORDER', 'LADY LEGENDS']
             },
             {
                 'name': 'Elite Division Game 4',
+                'sv_id': 'deafd044-e658-4aea-a972-871f461711de',
                 'start_time': time(4, 0),
                 'end_time': time(6, 0),
                 'teams': ['RUN IT BACK', '50 SHADES OF GAME']
             },
             {
                 'name': 'Elite Division Game 5',
+                'sv_id': '6c6fff09-efc9-4217-82bd-238008576b32',
                 'start_time': time(5, 0),
                 'end_time': time(6, 0),
                 'teams': ['MIAMI VIS', 'PRESSURE PACK']
@@ -589,30 +604,35 @@ schedule = [
         'games': [
             {
                 'name': 'Elite Division Game 1',
+                'sv_id': '92e946c1-5bba-49c7-8580-3d65439af37d',
                 'start_time': time(1, 0),
                 'end_time': time(2, 0),
                 'teams': ['PRESSURE PACK', '50 SHADES OF GAME']
             },
             {
                 'name': 'Elite Division Game 2',
+                'sv_id': '9dc5c465-1874-4aa5-ae93-056e3fe7d438',
                 'start_time': time(2, 0),
                 'end_time': time(3, 0),
                 'teams': ['RUN IT BACK', 'MIAMI VIS']
             },
             {
                 'name': 'Hoopers Division Game 3',
+                'sv_id': '',
                 'start_time': time(3, 0),
                 'end_time': time(4, 0),
                 'teams': ['BALL & ORDER', 'FLYHIGH23']
             },
             {
                 'name': 'Hoopers Division Game 4',
+                'sv_id': '',
                 'start_time': time(4, 0),
                 'end_time': time(6, 0),
                 'teams': ['CRASHOUTS', 'LADY LEGENDS']
             },
             {
                 'name': 'Hoopers Division Game 5',
+                'sv_id': '',
                 'start_time': time(5, 0),
                 'end_time': time(6, 0),
                 'teams': ['DREAMCHASERS', 'SWISH & TELL']
@@ -625,30 +645,35 @@ schedule = [
         'games': [
             {
                 'name': 'Elite Division Game 1',
+                'sv_id': '7171f343-475e-41ab-8aa8-fc6b7b025902',
                 'start_time': time(1, 0),
                 'end_time': time(2, 0),
                 'teams': ['50 SHADES OF GAME', 'MIAMI VIS']
             },
             {
                 'name': 'Elite Division Game 2',
+                'sv_id': 'fef14d32-d96f-4ef1-8f0a-d3e7898170f7',
                 'start_time': time(2, 0),
                 'end_time': time(3, 0),
                 'teams': ['RUN IT BACK', 'PRESSURE PACK']
             },
             {
                 'name': 'Hoopers Division Game 3',
+                'sv_id': '',
                 'start_time': time(3, 0),
                 'end_time': time(4, 0),
                 'teams': ['LADY LEGENDS', 'SWISH & TELL']
             },
             {
                 'name': 'Hoopers Division Game 4',
+                'sv_id': '',
                 'start_time': time(4, 0),
                 'end_time': time(6, 0),
                 'teams': ['DREAMCHASERS', 'BALL & ORDER']
             },
             {
                 'name': 'Hoopers Division Game 5',
+                'sv_id': '',
                 'start_time': time(5, 0),
                 'end_time': time(6, 0),
                 'teams': ['FLYHIGH23', 'CRASHOUTS']
@@ -661,30 +686,35 @@ schedule = [
         'games': [
             {
                 'name': 'Hoopers Division Game 1',
+                'sv_id': '',
                 'start_time': time(1, 0),
                 'end_time': time(2, 0),
                 'teams': ['CRASHOUTS', 'DREAMCHASERS']
             },
             {
                 'name': 'Hoopers Division Game 2',
+                'sv_id': '',
                 'start_time': time(2, 0),
                 'end_time': time(3, 0),
                 'teams': ['FLYHIGH23', 'LADY LEGENDS']
             },
             {
                 'name': 'Hoopers Division Game 3',
+                'sv_id': '',
                 'start_time': time(3, 0),
                 'end_time': time(4, 0),
                 'teams': ['SWISH & TELL', 'BALL & ORDER']
             },
             {
                 'name': 'Elite Division Game 4',
+                'sv_id': 'ede1f57c-c9f0-43c4-a46f-7f77244e9b6b',
                 'start_time': time(4, 0),
                 'end_time': time(6, 0),
                 'teams': ['RUN IT BACK', '50 SHADES OF GAME']
             },
             {
                 'name': 'Elite Division Game 5',
+                'sv_id': '3fc4ea49-a33f-402a-9b80-65c186519220',
                 'start_time': time(5, 0),
                 'end_time': time(6, 0),
                 'teams': ['MIAMI VIS', 'PRESSURE PACK']

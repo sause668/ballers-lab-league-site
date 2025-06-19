@@ -8,6 +8,7 @@ class Game(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     game_day_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('game_days.id')), nullable=False)
+    # sv_id = db.Column(db.String)
     name = db.Column(db.String(40), nullable=False)
     start_time = db.Column(db.Time, nullable=False)
     end_time = db.Column(db.Time, nullable=False)
@@ -20,6 +21,7 @@ class Game(db.Model):
         return {
             'id': self.id,
             'game_day_id': self.game_day_id,
+            # 'sv_id': self.sv_id,
             'name': self.name,
             'start_time': str(self.start_time),
             'end_time': str(self.end_time),
@@ -49,6 +51,7 @@ class Game(db.Model):
         return {
             'id': self.id,
             'game_day_id': self.game_day_id,
+            # 'sv_id': self.sv_id,
             'name': self.name,
             'start_time': str(self.start_time),
             'end_time': str(self.end_time),
