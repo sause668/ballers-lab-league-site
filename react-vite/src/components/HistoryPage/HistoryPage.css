@@ -1,0 +1,54 @@
+#mainConHI {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+/* Image */
+#imageConHI {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15rem;
+    width: 100%;
+    overflow-y: hidden;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+}
+
+#imageHI {
+    width: 100%;
+    margin: -2rem 0rem -2rem;
+}
+
+/* Info */
+#infoConHI {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 80%;
+}
+
+#titleHI {
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-stretch: expanded;
+    margin-bottom: 2rem;
+}
+
+.infoHI {
+    font-size: 1.2rem;
+    font-weight: 200;
+    font-stretch: expanded;
+    line-height: 1.7;
+}
+
+@media (min-width:700px) {
+    #imageConHI {
+        height: 25rem;
+    }
+}

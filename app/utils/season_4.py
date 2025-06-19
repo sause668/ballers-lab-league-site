@@ -3,6 +3,7 @@ from datetime import time, date
 roster = [
     {
         'name': 'BALL & ORDER',
+        'name': 'BALL & ORDER',
         'players': [
             {
                 'first_name': 'Rachel',
@@ -476,7 +477,7 @@ roster = [
 schedule = [
     {
         'name': 'Ballers Lab League Season 4 Week 1',
-        'date': date(2024, 6, 1),
+        'date': date(2025, 6, 1),
         'games': [
             {
                 'name': 'Hoopers Division Game 1',
@@ -512,7 +513,7 @@ schedule = [
     },
     {
         'name': 'Ballers Lab League Season 4 Week 2',
-        'date': date(2024, 6, 8),
+        'date': date(2025, 6, 8),
         'games': [
             {
                 'name': 'Elite Division Game 1',
@@ -548,7 +549,7 @@ schedule = [
     },
     {
         'name': 'Ballers Lab League Season 4 Week 3',
-        'date': date(2024, 6, 14),
+        'date': date(2025, 6, 14),
         'games': [
             {
                 'name': 'Hoopers Division Game 1',
@@ -584,7 +585,7 @@ schedule = [
     },
     {
         'name': 'Ballers Lab League Season 4 Week 4',
-        'date': date(2024, 2, 22),
+        'date': date(2025, 6, 22),
         'games': [
             {
                 'name': 'Elite Division Game 1',
@@ -620,7 +621,7 @@ schedule = [
     },
     {
         'name': 'Ballers Lab League Season 4 Week 5',
-        'date': date(2024, 2, 29),
+        'date': date(2025, 6, 29),
         'games': [
             {
                 'name': 'Elite Division Game 1',
@@ -656,7 +657,7 @@ schedule = [
     },
     {
         'name': 'Ballers Lab League Season 4 Week 6',
-        'date': date(2024, 7, 6),
+        'date': date(2025, 7, 6),
         'games': [
             {
                 'name': 'Hoopers Division Game 1',

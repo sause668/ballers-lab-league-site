@@ -1,0 +1,62 @@
+#mainConHM {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Logo */
+#logoConHM {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+    padding-top: 6rem;
+}
+
+#logoHM {
+    width: 18rem;
+}
+
+/* Title */
+#titleConHM {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 4rem;
+}
+
+.titleHM {
+
+}
+#t1HP {
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+#t2HP {
+
+}
+#t3HP {
+
+}
+
+/* Video */
+#videoConHM {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+#videoHM {
+    width: 180%;
+    height: 100%;
+}
+
+@media (min-width:700px) {
+    #logoHM {
+        width: 40rem;
+    }
+}

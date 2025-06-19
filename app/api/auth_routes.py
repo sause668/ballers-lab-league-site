@@ -32,7 +32,7 @@ def login():
         user = User.query.filter(User.username == form.data['username']).first()
         login_user(user)
         return {'user': user.to_dict()}
-    return {'errors': form.errors}, 401
+    return form.errors, 401
 
 
 @auth_routes.route('/logout')
@@ -54,4 +54,4 @@ def unauthorized():
     """
     Returns unauthorized JSON when flask-login authentication fails
     """
-    return {'errors': {'message': 'Unauthorized'}}, 401
+    return {'message': 'Unauthorized'}, 401

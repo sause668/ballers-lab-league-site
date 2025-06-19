@@ -7,6 +7,7 @@ team_routes = Blueprint('teams', __name__)
 
 
 @team_routes.route('')
+@login_required
 def teams():
     """
     Get all Teams
@@ -15,14 +16,16 @@ def teams():
     return {'teams': [team.teams_info() for team in teams]}
 
 @team_routes.route('/list')
+@login_required
 def teams_list():
     """
     Get all Teams List
     """
     teams = Team.query.all()
-    return {'teams': [team.list_info() for team in teams]}
+    return {'teamsList': [team.list_info() for team in teams]}
 
 @team_routes.route('/<int:team_id>')
+@login_required
 def team(team_id):
     """
     Get Team by ID

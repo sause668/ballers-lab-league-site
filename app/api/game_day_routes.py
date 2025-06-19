@@ -9,10 +9,10 @@ game_day_routes = Blueprint('game-days', __name__)
 @game_day_routes.route('')
 def game_days():
     """
-    Get all Game Days IDs
+    Get all Game Days 
     """
     game_days = Game_Day.query.all()
-    return {'game_days': [game_day.game_days_info() for game_day in game_days]}
+    return {'gameDays': [game_day.game_days_info() for game_day in game_days]}
 
 @game_day_routes.route('/<int:game_day_id>')
 def game_day(game_day_id):
@@ -24,7 +24,7 @@ def game_day(game_day_id):
     if not game_day:
         return jsonify({"message": "Game Day not found"}), 404
     
-    return {'game_day': game_day.game_day_info()}
+    return {'gameDay': game_day.game_day_info()}
 
 @game_day_routes.route('/list')
 def game_days_list():
@@ -32,7 +32,7 @@ def game_days_list():
     Get all Game Days List
     """
     game_days = Game_Day.query.all()
-    return {'game_days': [game_day.list_info() for game_day in game_days]}
+    return {'gameDaysList': [game_day.list_info() for game_day in game_days]}
 
 @game_day_routes.route('', methods=['POST'])
 @login_required
@@ -56,7 +56,7 @@ def create_game_day():
         db.session.commit()
 
         game_days = Game_Day.query.all()
-        return {'game_days': [game_day.game_days_info() for game_day in game_days]}, 201
+        return {'gameDays': [game_day.game_days_info() for game_day in game_days]}, 201
 
     return form.errors, 400
 
@@ -84,7 +84,7 @@ def edit_game_day(game_day_id):
         db.session.commit()
 
         game_days = Game_Day.query.all()
-        return {'game_days': [game_day.game_days_info() for game_day in game_days]}, 201
+        return {'gameDays': [game_day.game_days_info() for game_day in game_days]}, 201
 
     return form.errors, 400
 
@@ -104,7 +104,7 @@ def delete_game_day(game_day_id):
     db.session.commit()
 
     game_days = Game_Day.query.all()
-    return {'game_days': [game_day.game_days_info() for game_day in game_days]}, 200
+    return {'gameDays': [game_day.game_days_info() for game_day in game_days]}, 200
 
 """
 Game Routes
@@ -113,16 +113,24 @@ Game Routes
 @game_day_routes.route('/<int:game_day_id>/games/list')
 def games_list(game_day_id):
     """
-    Get all Game Days List
+    Get all Games List
     """
     games = Game.query.filter_by(game_day_id=game_day_id).all()
-    return {'games': [game.list_info() for game in games]}
+    return {'gamesList': [game.list_info() for game in games]}
+
+@game_day_routes.route('/<int:game_day_id>/games/list/first')
+def games_list_first(game_day_id):
+    """
+    Get first Game in List
+    """
+    game = Game.query.filter_by(game_day_id=game_day_id).first()
+    return {'gamesListFirst': game.list_info()}
 
 @game_day_routes.route('/<int:game_day_id>/games', methods=['POST'])
 @login_required
 def create_game(game_day_id):
     """
-    New Game ****Add to GameDay Routes******
+    New Game
     """
     form = Game_Form()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -144,7 +152,7 @@ def create_game(game_day_id):
         db.session.commit()
 
         game_day = Game_Day.query.filter_by(id=game_day_id).first()
-        return {'game_day': game_day.game_day_info()}
+        return {'gameDay': game_day.game_day_info()}
 
     return form.errors, 400
 
@@ -176,7 +184,7 @@ def edit_game(game_day_id, game_id):
         db.session.commit()
 
         game_day = Game_Day.query.filter_by(id=game_day_id).first()
-        return {'game_day': game_day.game_day_info()}
+        return {'gameDay': game_day.game_day_info()}
 
     return form.errors, 400
 
@@ -201,6 +209,6 @@ def delete_game(game_day_id, game_id):
     db.session.commit()
 
     game_day = Game_Day.query.filter_by(id=game_day_id).first()
-    return {'game_day': game_day.game_day_info()}
+    return {'gameDay': game_day.game_day_info()}
 
 
