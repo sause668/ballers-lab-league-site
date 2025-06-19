@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Game, Team_Stat, Player, Player_Stat
 from app.forms import Team_Stat_Form, Player_Stat_Form
+import requests
 
 game_routes = Blueprint('games', __name__)
 
@@ -163,4 +164,25 @@ def edit_player_stats(game_id, player_id):
         return {'gameStats': game.game_stats_info()}
 
     return form.errors, 400
+
+@game_routes.route('/<int:game_id>/all-stats', methods=['GET'])
+@login_required
+def import_stats(game_id):
+    """
+    Import Team & Player Stats from Sport Visio API
+    """
+    # print('bah')
+    res = requests.get('https://prod.sportsvisio-api.com/programs/divisions/games/list/f12ebdf3-b517-4009-b018-7ae78d61787a/890d2a05-50ba-401b-97dc-8955846285cd/6ba54ff1-9f20-47f0-b0a5-118814b640fc', {
+         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ4ZDUyOS1kOWE1LTQ1ZTItOTcwOS1mNTk3YTYzOTNlNzgiLCJhY2NvdW50SWQiOiJmM2JkYzBmMC1mMjFlLTRlYTQtOTVmNC0yMWE1NGJmZmRkMTEiLCJpYXQiOjE3NDk3NjUwNzMsImV4cCI6MTc4MTMwMTA3M30.1ll6_AbywgP6YiEm4EuwKrjvY_x4cV1zGIlct9upt6Q',
+        #  'Host': 'localhost'
+         })
+    # res = requests.request('GET','https://prod.sportsvisio-api.com/programs/divisions/games/list/f12ebdf3-b517-4009-b018-7ae78d61787a/890d2a05-50ba-401b-97dc-8955846285cd/6ba54ff1-9f20-47f0-b0a5-118814b640fc', {
+    #      'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ4ZDUyOS1kOWE1LTQ1ZTItOTcwOS1mNTk3YTYzOTNlNzgiLCJhY2NvdW50SWQiOiJmM2JkYzBmMC1mMjFlLTRlYTQtOTVmNC0yMWE1NGJmZmRkMTEiLCJpYXQiOjE3NDk3NjUwNzMsImV4cCI6MTc4MTMwMTA3M30.1ll6_AbywgP6YiEm4EuwKrjvY_x4cV1zGIlct9upt6Q',
+    #     #  'Host': 'localhost'
+    #      })
+    print('res',res.json())
+    print('headers',request.headers)
+    if res: 
+        return {'res', res.json()}
+    return {'test': 'nah', 'game_id': game_id}, 200
 
