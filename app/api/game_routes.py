@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Game, Team_Stat, Player, Player_Stat
+from app.models import db, Game, Team_Stat, Player, Player_Stat, Team
 from app.forms import Team_Stat_Form, Player_Stat_Form
+from datetime import datetime
 import requests
 
 game_routes = Blueprint('games', __name__)
@@ -171,18 +172,132 @@ def import_stats(game_id):
     """
     Import Team & Player Stats from Sport Visio API
     """
+    game = Game.query.filter_by(id=game_id,).first()
+
+    if not game:
+            return jsonify({"message": "Game not found"}), 404
     print('bah')
-    res = requests.get('https://prod.sportsvisio-api.com/programs/divisions/games/list/f12ebdf3-b517-4009-b018-7ae78d61787a/890d2a05-50ba-401b-97dc-8955846285cd/6ba54ff1-9f20-47f0-b0a5-118814b640fc', {
-         'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ4ZDUyOS1kOWE1LTQ1ZTItOTcwOS1mNTk3YTYzOTNlNzgiLCJhY2NvdW50SWQiOiJmM2JkYzBmMC1mMjFlLTRlYTQtOTVmNC0yMWE1NGJmZmRkMTEiLCJpYXQiOjE3NDk3NjUwNzMsImV4cCI6MTc4MTMwMTA3M30.1ll6_AbywgP6YiEm4EuwKrjvY_x4cV1zGIlct9upt6Q',
-         'Host': 'localhost'
-         })
-    # res = requests.request('GET','https://prod.sportsvisio-api.com/programs/divisions/games/list/f12ebdf3-b517-4009-b018-7ae78d61787a/890d2a05-50ba-401b-97dc-8955846285cd/6ba54ff1-9f20-47f0-b0a5-118814b640fc', {
+
+    game_info = game.game_stats_info()
+    game_time = [int(dt) for dt in f"{game_info['date']}:{game_info['start_time']}".replace('-', ':').split(':')]
+    game_ts = datetime(game_time[0], game_time[1], game_time[2], game_time[3], game_time[4]).timestamp()
+
+    #Get Game Info
+    div_id_sv = 'sv_hoopers_id' if game_info['team_stats'][0]['team']['division'] == 'Hoopers' else "sv_elite_id"
+    # res = requests.get('https://prod.sportsvisio-api.com/programs/divisions/games/list/f12ebdf3-b517-4009-b018-7ae78d61787a/890d2a05-50ba-401b-97dc-8955846285cd/6ba54ff1-9f20-47f0-b0a5-118814b640fc', {
     #      'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ4ZDUyOS1kOWE1LTQ1ZTItOTcwOS1mNTk3YTYzOTNlNzgiLCJhY2NvdW50SWQiOiJmM2JkYzBmMC1mMjFlLTRlYTQtOTVmNC0yMWE1NGJmZmRkMTEiLCJpYXQiOjE3NDk3NjUwNzMsImV4cCI6MTc4MTMwMTA3M30.1ll6_AbywgP6YiEm4EuwKrjvY_x4cV1zGIlct9upt6Q',
-    #     #  'Host': 'localhost'
+    #      'Host': 'localhost'
     #      })
-    print('res',res.json())
-    print('headers',request.headers)
-    if res: 
-        return {'res', res.json()}
-    return {'test': 'nah', 'game_id': game_id}, 200
+    # print('res',res.json())
+    # print('headers',request.headers)
+    
+    # games_sv = res['items']
+    games_sv = []
+    
+    def is_game(game_sv):
+         game_sv['startTime'] == game_ts
+    
+
+    # Get Game Info (Teams)
+    game_id_sv = filter(is_game, games_sv)['id']
+    # res = requests.get('https://prod.sportsvisio-api.com/programs/divisions/games/list/f12ebdf3-b517-4009-b018-7ae78d61787a/890d2a05-50ba-401b-97dc-8955846285cd/6ba54ff1-9f20-47f0-b0a5-118814b640fc', {
+    #      'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ4ZDUyOS1kOWE1LTQ1ZTItOTcwOS1mNTk3YTYzOTNlNzgiLCJhY2NvdW50SWQiOiJmM2JkYzBmMC1mMjFlLTRlYTQtOTVmNC0yMWE1NGJmZmRkMTEiLCJpYXQiOjE3NDk3NjUwNzMsImV4cCI6MTc4MTMwMTA3M30.1ll6_AbywgP6YiEm4EuwKrjvY_x4cV1zGIlct9upt6Q',
+    #      'Host': 'localhost'
+    #      })
+
+    #game_teams_sv = res 
+    game_teams_sv = []
+    teams_sv = [{
+         'name': team['team']['name'],
+         'points': team['score']
+         } for team in game_teams_sv]
+    
+    #Find Win
+    # if teams_sv[0]['points'] > teams_sv[1]['points']: teams_sv[0]['win'] = True
+    # else: teams_sv[1]['win'] = True
+
+    for team_sv in teams_sv:
+        #On Query
+        # team_stat = Team_Stat.query.\
+        #     join(Team, Team_Stat.team_id == Team.id).\
+        #     filter_by(team_sv['name'].upper(), name=team_sv['name'].upper()).first()
+        # Join Example
+        # class_ = Class.query.\
+        #     join(StudentClass, Class.id == StudentClass.class_id).\
+        #     filter_by(student_id=student_id, class_id=class_id).first()
+        
+        team = Team.query.filter_by(name=team_sv['name'].upper()).first()
+
+        if not team:
+            return jsonify({"message": "Team not found"}), 404
+        
+        team_stat_edit = Team_Stat.query.filter_by(game_id=game_id, team_id=team.id).first()
+
+        team_stat_edit.points = int(team_sv['points'])
+
+
+    # Get Game Info (Players)
+    # res = requests.get('https://prod.sportsvisio-api.com/programs/divisions/games/list/f12ebdf3-b517-4009-b018-7ae78d61787a/890d2a05-50ba-401b-97dc-8955846285cd/6ba54ff1-9f20-47f0-b0a5-118814b640fc', {
+    #      'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ4ZDUyOS1kOWE1LTQ1ZTItOTcwOS1mNTk3YTYzOTNlNzgiLCJhY2NvdW50SWQiOiJmM2JkYzBmMC1mMjFlLTRlYTQtOTVmNC0yMWE1NGJmZmRkMTEiLCJpYXQiOjE3NDk3NjUwNzMsImV4cCI6MTc4MTMwMTA3M30.1ll6_AbywgP6YiEm4EuwKrjvY_x4cV1zGIlct9upt6Q',
+    #      'Host': 'localhost'
+    #      })
+
+    #game_teams_sv = res 
+    game_players_sv = []
+    players_sv = [{
+         'name': player['player']['name'],
+         'number': player['player']['number'],
+         'points': player['summary']['totalPoints'],
+         'rebounds': player['summary']['totalRebounds'],
+         'assists': player['summary']['assists']
+         } for player in game_players_sv]
+
+    for player_sv in players_sv:
+        player_name = player_sv['name']
+        i_name = player_name.index(" ")
+        player_fn= player_name[0:i_name]
+        player_ln= player_name[i_name:]
+
+        #On Query
+        # Player_stat = Player_Stat.query.\
+        #     join(Player, Player_Stat.player_id == Player.id).\
+        #     filter_by(
+        #       first_name=player_fn.upper(), 
+        #       last_name=player_ln.upper(), 
+        #       number= int(player_sv['number']
+        #      )).first()
+        # Join Example
+        # class_ = Class.query.\
+        #     join(StudentClass, Class.id == StudentClass.class_id).\
+        #     filter_by(student_id=student_id, class_id=class_id).first()
+        
+
+        player = Player.query.filter_by(
+            first_name=player_fn.upper(), 
+            last_name=player_ln.upper(), 
+            number= int(player_sv['number'])
+        ).first()
+
+        if not player:
+            return jsonify({"message": "Player not found"}), 404
+        
+        player_stat_edit = Player_Stat.query.filter_by(game_id=game_id, player_id=player.id).first()
+
+        player_stat_edit.points = int(player_sv['points'])
+        player_stat_edit.rebounds = int(player_sv['rebounds'])
+        player_stat_edit.assists = int(player_sv['assists'])
+
+    db.session.commit()
+
+    game_cur = Game.query.filter_by(id=game_id).first()
+    return {'gameStats': game_cur.game_stats_info()}
+
+    return {
+         'game_time': game_time,
+         'time_stamp': game_ts
+         }, 200
+
+    # if res: 
+    #     return {'res', res.json()}
+    # return {'test': 'nah', 'game_id': game_id}, 200
 

@@ -7,7 +7,8 @@ def seed_teams():
 
     for team in roster:
         db.session.add(Team(
-            name=team['name']
+            name=team['name'],
+            division=team['division']
         ))
 
     db.session.commit()

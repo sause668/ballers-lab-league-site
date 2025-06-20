@@ -3,7 +3,7 @@ from datetime import time, date
 roster = [
     {
         'name': 'BALL & ORDER',
-        'name': 'BALL & ORDER',
+        'division': 'hoopers',
         'players': [
             {
                 'first_name': 'Rachel',
@@ -49,6 +49,7 @@ roster = [
     },
     {
         'name': 'SWISH & TELL',
+        'division': 'hoopers',
         'players': [
             {
                 'first_name': 'Sabrina',
@@ -139,6 +140,7 @@ roster = [
     },
     {
         'name': 'FLYHIGH23',
+        'division': 'hoopers',
         'players': [
             {
                 'first_name': 'Aimee',
@@ -184,6 +186,7 @@ roster = [
     },
     {
         'name': 'DREAMCHASERS',
+        'division': 'hoopers',
         'players': [
             {
                 'first_name': 'Rosa',
@@ -229,6 +232,7 @@ roster = [
     },
     {
         'name': 'CRASHOUTS',
+        'division': 'hoopers',
         'players': [
             {
                 'first_name': 'Daniella',
@@ -274,6 +278,7 @@ roster = [
     },
     {
         'name': 'PRESSURE PACK',
+        'division': 'elite',
         'players': [
             {
                 'first_name': 'Kathyann',
@@ -324,6 +329,7 @@ roster = [
     },
     {
         'name': '50 SHADES OF GAME',
+        'division': 'elite',
         'players': [
             {
                 'first_name': 'Melanie',
@@ -374,6 +380,7 @@ roster = [
     },
     {
         'name': 'RUN IT BACK',
+        'division': 'elite',
         'players': [
             {
                 'first_name': 'Mayra',
@@ -424,6 +431,7 @@ roster = [
     },
     {
         'name': 'MIAMI VIS',
+        'division': 'elite',
         'players': [
             {
                 'first_name': 'Florencia',

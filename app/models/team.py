@@ -8,6 +8,7 @@ class Team(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=False, unique=True)
+    division = db.Column(db.String(20), nullable=False)
 
     players = db.relationship("Player", uselist=True, back_populates="team", cascade="all, delete-orphan")
     team_stats = db.relationship("Team_Stat", uselist=True, back_populates="team", cascade="all, delete-orphan")
@@ -28,6 +29,7 @@ class Team(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'division': self.division,
             'record': self.get_record([team_stat.record() for team_stat in self.team_stats])
         }
     
@@ -35,6 +37,7 @@ class Team(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'division': self.division,
             'record': self.get_record([team_stat.record() for team_stat in self.team_stats])
         }
     
@@ -42,6 +45,7 @@ class Team(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'division': self.division,
             'record': self.get_record([team_stat.record() for team_stat in self.team_stats]),
             'players': [player.team_info() for player in self.players]
         }
@@ -56,6 +60,7 @@ class Team(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'division': self.division,
             'record': self.get_record([team_stat.record() for team_stat in self.team_stats])
         }
 

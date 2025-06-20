@@ -51,6 +51,7 @@ class Game(db.Model):
         return {
             'id': self.id,
             'game_day_id': self.game_day_id,
+            'date': self.game_day.date,
             # 'sv_id': self.sv_id,
             'name': self.name,
             'start_time': str(self.start_time),
