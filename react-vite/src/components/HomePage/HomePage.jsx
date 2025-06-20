@@ -1,6 +1,10 @@
 import "./HomePage.css";
 
 export default function HomePage() {
+  const url = ''
+  if (import.meta.env.MODE === "production") {
+    url = '/ballers-lab-league-site:10000/bll/disk/'
+  }
 
   return (
     <div id="mainConHM" className="fadein">
@@ -14,7 +18,7 @@ export default function HomePage() {
      </div>
      <div id="videoConHM">
       <video id="videoHM" width="320" height="240" autoPlay loop muted>
-        <source src="videos/home-video.mp4" type="video/mp4"/>
+        <source src={`${url}videos/home-video.mp4`} type="video/mp4"/>
         Video Not Available
       </video>
      </div>

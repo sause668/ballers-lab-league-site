@@ -95,6 +95,7 @@ roster = [
     },
     {
         'name': 'LADY LEGENDS',
+        'division': 'hoopers',
         'players': [
             {
                 'first_name': 'Mary',

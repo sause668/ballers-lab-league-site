@@ -166,6 +166,65 @@ def edit_player_stats(game_id, player_id):
 
     return form.errors, 400
 
+
+
+
+
+
+
+
+
+
+
+@game_routes.route('/<int:game_id>/all-stats-test', methods=['GET'])
+@login_required
+def import_stats_test(game_id):
+    res = requests.get("https://prod.sportsvisio-api.com/annotations/stats/game-player-rollup/634e4ed4-44dc-4f64-95f6-373f5bec1ddc", headers={
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ4ZDUyOS1kOWE1LTQ1ZTItOTcwOS1mNTk3YTYzOTNlNzgiLCJhY2NvdW50SWQiOiJmM2JkYzBmMC1mMjFlLTRlYTQtOTVmNC0yMWE1NGJmZmRkMTEiLCJpYXQiOjE3NDk3NjUwNzMsImV4cCI6MTc4MTMwMTA3M30.1ll6_AbywgP6YiEm4EuwKrjvY_x4cV1zGIlct9upt6Q',
+         })
+    print('req', request)
+    print('req', request.headers)
+    
+    return {
+         'response': res.json(),
+
+         }
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @game_routes.route('/<int:game_id>/all-stats', methods=['GET'])
 @login_required
 def import_stats(game_id):
