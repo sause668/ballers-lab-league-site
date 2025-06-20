@@ -3,7 +3,7 @@ import "./HomePage.css";
 export default function HomePage() {
   let url = '';
   if (import.meta.env.MODE === "production") {
-    url = 'http://ballers-lab-league-site:10000/bll/disk/'
+    url = 'ballers-lab-league-site:10000/bll/disk/'
   }
 
   return (
