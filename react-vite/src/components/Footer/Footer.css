@@ -6,6 +6,15 @@
     width: 100%;
 }
 
+#titleFO {
+    font-size: 1.5rem;
+    font-weight: 200;
+    font-stretch: expanded;
+    color: #ababab;
+    padding: 0rem;
+    margin-top: 1rem;
+}
+
 /* Sponsors */
 #sponsorsConFO {
     display: flex;
@@ -13,7 +22,7 @@
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    padding: 1rem 0rem;
+    padding: .5rem 1rem 1rem 1rem;
     margin-bottom: 1rem;
 }
 

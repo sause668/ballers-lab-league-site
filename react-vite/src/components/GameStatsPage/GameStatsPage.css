@@ -180,6 +180,47 @@
     margin-bottom: 1rem;
 }
 
+/* Sports VIsion Model */
+#mainConSV {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+
+    /* width: 80%; */
+}
+
+#logoSV {
+    width: 10rem;
+}
+
+#infoSV {
+    font-size: 1.5rem;
+    font-weight: 200;
+    font-stretch: expanded;
+    text-align: center;
+
+}
+
+#linkSV {
+    font-weight: 500;
+    color: #ff9045;
+    transition: color .3s ;
+}
+
+#linkSV:hover {
+    color: #ffb600;
+    transition: color .3s ;
+}
+
+#sponserSV {
+    margin-top: 1rem;
+    width: 20rem;
+}
+
+
 @media (min-width:700px) {
     #teamStatsConGS {
         top: 3.8rem;

@@ -6,6 +6,7 @@ import { useUser } from "../../context/User";
 import { useModal } from "../../context/Modal";
 import EditTeamStatModel from "./EditTeamStatModel";
 import EditPlayerStatModel from "./EditPlayerStatModel";
+import SportsVisioModel from "./SportsVisioModel";
 
 export default function GameStatsPage() {
   const { setModalContent } = useModal();
@@ -108,10 +109,11 @@ export default function GameStatsPage() {
                     {playerTeamStats.map((playerStat, iPlayerStat) => (
                       <tr className="tableBodyRowGS" key={`playerStatRow${iPlayerStat}`}>
                         <td className="tableCellGS tableBodyCellGS playerNumberCellGS">{playerStat.player.number}</td>
-                        <td className="tableCellGS tableBodyCellGS playerInfoCellGS">
-                          <a href="" className="playerLinkGS">
-                            <h6 className="playerNameGS">{playerStat.player.first_name} {playerStat.player.last_name}</h6>
-                          </a>
+                        <td 
+                          className="tableCellGS tableBodyCellGS playerInfoCellGS"
+                          onClick={()=>user && setModalContent(<SportsVisioModel />)}
+                        >
+                          <h6 className="playerNameGS">{playerStat.player.first_name} {playerStat.player.last_name}</h6>
                         </td>
                         {tableBody.map((stat, iStat) => (
                           <td 
