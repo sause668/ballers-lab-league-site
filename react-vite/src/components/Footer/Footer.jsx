@@ -6,12 +6,13 @@ import { FaMeta } from "react-icons/fa6";
 import "./Footer.css";
 
 export default function Footer() {
+  let url = import.meta.env.MODE === "production" ? '/disk':''
   return (
     <div id="mainConFO">
       <div id="sponsorsConFO">
         {sponsors.map((sponsor, index) => (
           <div className="spLogoConFO " key={`spLogoCon${index}`}>
-            <img className="spLogoFO blackout" src={sponsor.img} alt={sponsor.name} width={50}/>
+            <img className="spLogoFO blackout" src={`${url}${sponsor.img}`} alt={sponsor.name} width={50}/>
           </div>
         ))}
       </div>

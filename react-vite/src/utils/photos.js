@@ -1,7 +1,7 @@
 export const seasonPhotos = [
     {
         season: 1,
-        photoMain: 'imgs/s-1-main.jpg',
+        photoMain: '/imgs/s-1-main.jpg',
         photos: [
             '/imgs/season-photos/season-1/s-1-01.jpg',
             '/imgs/season-photos/season-1/s-1-02.jpg',
@@ -22,7 +22,7 @@ export const seasonPhotos = [
     },
     {
         season: 2,
-        photoMain: 'imgs/s-2-main.jpg',
+        photoMain: '/imgs/s-2-main.jpg',
         photos: [
             '/imgs/season-photos/season-2/div-h/s-2-01.jpg',
             '/imgs/season-photos/season-2/div-h/s-2-02.jpg',
@@ -52,7 +52,7 @@ export const seasonPhotos = [
     },
     {
         season: 3,
-        photoMain: 'imgs/s-3-main.jpg',
+        photoMain: '/imgs/s-3-main.jpg',
         photos: [
             '/imgs/season-photos/season-3/div-h/s-3-01.jpg',
             '/imgs/season-photos/season-3/div-h/s-3-02.jpg',

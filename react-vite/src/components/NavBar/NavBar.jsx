@@ -16,6 +16,7 @@ export default function NavBar() {
   const [menu, setMenu] = useState(false);
   const [showChildren, setShowChildren] = useState('');
   const [message, setMessage] = useState(null);
+  let url = import.meta.env.MODE === "production" ? 'disk/':''
   if (message) console.log(message);
 
   const navItems = [
@@ -107,7 +108,7 @@ export default function NavBar() {
       <>
         <div id="navMobileDashN">
           <a id="navLogoConN" href={'/'}>
-            <img id="navLogoN" src="/imgs/logo-main.png" alt="Logo" />
+            <img id="navLogoN" src={`${url}/imgs/logo-main.png`} alt="Logo" />
           </a>
           <div id="mobileButtonN" onClick={toggleMenu}>
             {!menu ? <IoMenu className="mobileButtonIconN"/> :  <IoMdClose className="mobileButtonIconN"/>}
