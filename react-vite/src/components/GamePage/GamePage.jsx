@@ -15,6 +15,7 @@ import { useGame } from "../../context/Game";
 import { apiFetchLight } from "../../context/fetches";
 import RemoveTeamModel from "./RemoveTeamModel";
 import AddTeamModel from "./AddTeam";
+import { convDateFull, convTime } from "../../utils/format-convesions";
 
 
 export default function GamePage() {
@@ -33,6 +34,11 @@ export default function GamePage() {
   const dateNow = new Date().getTime();
 
   const isPlayed = parseFloat(gameDate) < parseFloat(dateNow);
+
+  const newDate = game && convDateFull(game.game_day.date);
+  const newDateF = newDate && newDate.slice(0, newDate.length - 21);
+  const newStartTime = game && convTime(game.start_time);
+  const newEndTime = game && convTime(game.end_time);
 
   if (message) console.log(message);
   if (import.meta.env.MODE !== "production") {
@@ -129,7 +135,7 @@ export default function GamePage() {
         {!isPlayed ? 
         // Pregame
         <div id="preGameInfoConG">
-          <h4 id="preGameTimeG">{game.start_time} {game.end_time}</h4>
+          <h4 id="preGameTimeG">{newStartTime} {newEndTime}</h4>
           <h6 id="preGameDurG">1 hour</h6>
           <h3 id="preGameNameG">{game.name}</h3>
           <div id="preGameLocConG">
@@ -167,7 +173,7 @@ export default function GamePage() {
           <div id="gameInfoSubConG">
             <div id="gameDateConG">
               <SlCalender id="gameDateIconG"/>
-              <h3 id="gameDateInfoG">{game.game_day.date}</h3>
+              <h3 id="gameDateInfoG">{newDateF}</h3>
             </div>
             <div id='gameLocConG'>
               <SlLocationPin id='gameLocIconG'/>

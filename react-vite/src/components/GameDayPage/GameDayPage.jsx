@@ -8,6 +8,7 @@ import { SlArrowRight } from "react-icons/sl";
 import { useUser } from "../../context/User";
 import NewGameModel from "./NewGameModel";
 import EditGameModel from "./EditGameModel";
+import { convDate, convLoc, convTime } from "../../utils/format-convesions";
 
 export default function GameDayPage() {
   const { user } = useUser();
@@ -22,6 +23,12 @@ export default function GameDayPage() {
     console.log('GameDay', gameDay);
   }
 
+  const newDate = gameDay && convDate(gameDay.date);
+  const newDateF = newDate && newDate.slice(0, newDate.length - 4);
+  const newStartTimeGD = gameDay && convTime(gameDay.start_time);
+  const newEndTimeGD = gameDay && convTime(gameDay.end_time);
+  const newLocation = gameDay && convLoc(gameDay.location)
+
   
   useEffect(() => {
     if (!isLoaded) gameDayById({gameDayId, setIsLoaded, setMessage})
@@ -34,8 +41,9 @@ export default function GameDayPage() {
         <div id="infoConGD">
           <h1 id='titleGD'>Schedule</h1>
           <h5 id='disNameGD'>{gameDay.name}</h5>
-          <h5 id='disDateGD'>{gameDay.date}{gameDay.start_time}{gameDay.end_time}</h5>
-          <h5 id='disLocationGD'>{gameDay.location}</h5>
+          <h5 id='disDateGD'>{newDate} {newStartTimeGD} - {newEndTimeGD}</h5>
+          <h5 id='disLocationGD'>{newLocation[0]}</h5>
+          <h5 id='disLocationGD'>{newLocation[1]}, {newLocation[2]}, {newLocation[3]}, {newLocation[4]}</h5>
           {user && <OpenModalButton
             buttonText={'New Game'}
             modalComponent={<NewGameModel gameDayId={gameDayId}/>}
@@ -43,12 +51,15 @@ export default function GameDayPage() {
           />}
         </div>
         
-        <h2 id='dateGD'>{gameDay.date}</h2>
+        <h2 id='dateGD'>{newDateF}</h2>
         <div className="borderGD"></div>
-        {gameDay.games.map((game, index) => (
+        {gameDay.games.map((game, index) => {
+          const newStartTimeG = convTime(game.start_time);
+          const newEndTimeG = convTime(game.end_time);
+          return(
           <div className="gameInfoConGD" key={`gameInfo${index}`}>
             <div className="gameInfoSubCon1GD">
-              <h4 className="gameTimeGD">{game.start_time} {game.end_time}</h4>
+              <h4 className="gameTimeGD">{newStartTimeG} {newEndTimeG}</h4>
               <h6 className="gameDurGD">1 hour</h6>
             </div>
             <div className="gameInfoSubCon2GD">
@@ -71,7 +82,7 @@ export default function GameDayPage() {
             </div>
             <div className="borderGD"></div>
           </div>
-        ))}
+        )})}
       </div>}
     </div>
   );

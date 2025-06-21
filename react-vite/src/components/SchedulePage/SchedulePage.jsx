@@ -9,6 +9,7 @@ import { IoMdClose } from "react-icons/io";
 import { useUser } from "../../context/User";
 import NewGameDayModel from "./NewGameDayModel";
 import EditGameDayModel from "./EditGameDayModel";
+import { convDate, convLoc, convTime } from "../../utils/format-convesions";
 
 
 export default function SchedulePage() {
@@ -18,6 +19,7 @@ export default function SchedulePage() {
   const [menu, setMenu] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
   const [message, setMessage] = useState(null);
+  let url = import.meta.env.MODE === "production" ? '/disk':''
 
   if (message) console.log(message);
   if (import.meta.env.MODE !== "production") {
@@ -46,7 +48,14 @@ export default function SchedulePage() {
           cssClasses={'buttonS newS'}
         />}
         <div id="cardsConS">
-          {gameDays.map((gameDay, index) => (
+          {gameDays.map((gameDay, index) => {
+              const newDate = convDate(gameDay.date);
+              const newDateF = newDate.slice(0, newDate.length - 4)
+              const newStartTime = convTime(gameDay.start_time);
+              const newEndTime = convTime(gameDay.end_time);
+              const newLocation = convLoc(gameDay.location)
+
+            return (
             <div className="cardS" key={`gameDayCard${index}`}>
               {deskTop && 
                 <div className={`moreInfoConS ${menu !== gameDay.id && 'hidden'} fadein`}>
@@ -58,16 +67,17 @@ export default function SchedulePage() {
                   </div>
                   <h3 className='nameS nameMS'>{gameDay.name}</h3>
                   {/* <h4 className="dateS" >{gameDay.date}</h4> */}
-                  <h5 className="dateTimeS dateTimeMS">{`${gameDay.date}, ${gameDay.start_time}, ${gameDay.end_time}`}</h5>
-                  <h5 className="locationS locationMS">{gameDay.location}</h5>
+                  <h5 className="dateTimeS dateTimeMS">{`${newDate}, ${newStartTime}, ${newEndTime}`}</h5>
+                  <h5 className="locationS locationMS">{newLocation[0]}</h5>
+                  <h5 className="locationS locationMS">{newLocation[1]}, {newLocation[2]}, {newLocation[3]}, {newLocation[4]}</h5>
                 </div>
               }
               <div className="imgConS">
-                <img className="imgS" src="" alt="Game Day Pic" />
+                <img className="imgS" src={`${url}/imgs/game-day.jpg`} alt="Game Day Pic" />
               </div>
               <div className={`infoCon ${menu == gameDay.id && 'hiddenS'}`}>
                 <h3 className='nameS'>{gameDay.name}</h3>
-                <h4 className="dateS" >{gameDay.date}</h4>
+                <h4 className="dateS" >{newDateF}</h4>
                 <div className="moreInfoToggleConS" onClick={() => toggleMenu(gameDay.id)}>
                   <h5 className="moreInfoTextS">{menu == gameDay.id ? 'Less Info':'More Info'}</h5>
                   <div className="moreInfoIconConS" >
@@ -76,8 +86,9 @@ export default function SchedulePage() {
                 </div>
                 {!deskTop && 
                   <div className={`moreInfoConS ${menu !== gameDay.id && 'hidden'}`}>
-                      <h5 className="dateTimeS">{`${gameDay.date}, ${gameDay.start_time}, ${gameDay.end_time}`}</h5>
-                      <h5 className="location">{gameDay.location}</h5>
+                      <h5 className="dateTimeS">{`${newDate}, ${newStartTime}, ${newEndTime}`}</h5>
+                      <h5 className="locationS">{newLocation[0]}</h5>
+                      <h5 className="locationS">{newLocation[1]}, {newLocation[2]}, {newLocation[3]}, {newLocation[4]}</h5>
                   </div>
                 }
               </div>
@@ -88,7 +99,7 @@ export default function SchedulePage() {
                 cssClasses={'buttonS editS'}
               />}
               </div>
-          ))}
+          )})}
         </div>
       </div>}
     </>

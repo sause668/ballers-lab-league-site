@@ -16,7 +16,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className='formCon'>
+    <div id="mainConLG" className="fadein">
+      <div className='formCon mainConLG'>
         <h1 className='inputTitle'>Login</h1>
         <form onSubmit={handleSubmit}>
         {/* Username */}
@@ -41,7 +42,7 @@ export default function LoginPage() {
           <label htmlFor='password'>
             <p className='labelTitle'>
               Password
-            </p>
+              </p>
           </label>
           <input
             className='formInput'
@@ -65,6 +66,9 @@ export default function LoginPage() {
         </div>
         {message?.errors.message && <p className='labelTitle error'>{message.errors.message}</p>}
         </form>
+      </div>
     </div>
+    
+            
   );
 }

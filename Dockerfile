@@ -21,9 +21,9 @@ RUN pip install -r requirements.txt
 RUN pip install psycopg2
 
 COPY . .
-RUN flask seed undo
-RUN flask db downgrade base
+# RUN flask seed undo
+# RUN flask db downgrade base
 RUN flask db upgrade head
-RUN flask seed all
+# RUN flask seed all
 RUN flask seed cur
 CMD gunicorn app:app
