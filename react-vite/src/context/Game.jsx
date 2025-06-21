@@ -48,11 +48,13 @@ export function GameProvider({children}) {
         }, gameStatsState, setGameStats, setIsLoaded, setMessage)
     }
     
-
-    
+    async function importStats(params) {
+        const { gameId, setIsLoaded, setMessage } = params;
+        return await apiFetch(`/api/games/${gameId}/import-stats`, {}, gameStatsState, setGameStats, setIsLoaded, setMessage)
+    }
 
     return (
-        <GameContext.Provider value={{game, gameStats, gameById, gameByIdStats, addTeam, removeTeam, editTeamStats, editPlayerStats}}>
+        <GameContext.Provider value={{game, gameStats, gameById, gameByIdStats, addTeam, removeTeam, editTeamStats, editPlayerStats, importStats}}>
             {children}
         </GameContext.Provider>
     )

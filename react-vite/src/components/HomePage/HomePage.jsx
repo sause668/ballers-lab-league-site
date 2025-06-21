@@ -1,15 +1,12 @@
 import "./HomePage.css";
 
 export default function HomePage() {
-  let url = '';
-  if (import.meta.env.MODE === "production") {
-    url = 'disk/'
-  }
+  let url = import.meta.env.MODE === "production" ? 'disk/':''
 
   return (
     <div id="mainConHM" className="fadein">
      <div id="logoConHM">
-      <img id="logoHM" src="imgs/logo-main.png" alt="" />
+      <img id="logoHM" src={`${url}imgs/logo-main.png`} alt="" />
      </div>
      <div id="titleConHM">
       <h1 id="t1HP" className="titleHM">Season 4</h1>

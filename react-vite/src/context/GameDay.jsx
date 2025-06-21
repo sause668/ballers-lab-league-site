@@ -68,11 +68,12 @@ export function GameDayProvider({children}) {
     }
 
     async function newGame(params) {
-        const { gameDayId, name, startTime, endTime, setIsLoaded, setMessage } = params;
+        const { gameDayId, name, division, startTime, endTime, setIsLoaded, setMessage } = params;
         return await apiFetch(`/api/game-days/${gameDayId}/games`, {
             method: 'POST',
             body: JSON.stringify({
                 name, 
+                division,
                 start_time: startTime,
                 end_time: endTime
             })
@@ -80,11 +81,12 @@ export function GameDayProvider({children}) {
     }
 
     async function editGame(params) {
-        const { gameDayId, gameId, name, startTime, endTime, setIsLoaded, setMessage } = params;
+        const { gameDayId, gameId, name, division, startTime, endTime, setIsLoaded, setMessage } = params;
         return await apiFetch(`/api/game-days/${gameDayId}/games/${gameId}`, {
             method: 'PUT',
             body: JSON.stringify({
                 name, 
+                division,
                 start_time: startTime,
                 end_time: endTime
             })

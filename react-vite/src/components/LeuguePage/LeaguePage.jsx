@@ -3,6 +3,7 @@ import "./LeaguePage.css";
 
 export default function LeaguePage() {
   const deskTop = !useMediaQuery({ query: '(max-width: 700px)' });
+  let url = import.meta.env.MODE === "production" ? '/disk':''
 
   return (
     <div id='mainConLE' className="fadein">
@@ -13,7 +14,7 @@ export default function LeaguePage() {
       {/* <div id="borderLE"/> */}
       <div id="pageBodyConLE">
         <div id="imgConLE">
-          <img id="imgLE" className="grayscale"  src="/imgs/league-main.jpg" alt="" />
+          <img id="imgLE" className="grayscale"  src={`${url}/imgs/league-main.jpg`} alt="" />
         </div>
         <div id="infoConLE">
           <h4 id="titlePreLE">Our league consist of 2 Divisions :</h4>

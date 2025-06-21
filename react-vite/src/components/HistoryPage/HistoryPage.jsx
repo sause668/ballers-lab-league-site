@@ -1,12 +1,12 @@
 import "./HistoryPage.css";
 
 export default function HistoryPage() {
-  // const imgScale = 5;
+  let url = import.meta.env.MODE === "production" ? '/disk':''
    
   return (
     <div id="mainConHI">
       <div id="imageConHI">
-        <img id="imageHI" src="/imgs/history-main.jpg" alt="" />
+        <img id="imageHI" src={`${url}/imgs/history-main.jpg`} alt="" />
       </div>
       <div id="infoConHI">
         <h1 id="titleHI">OUR MISSION</h1>

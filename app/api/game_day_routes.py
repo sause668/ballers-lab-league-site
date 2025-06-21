@@ -144,6 +144,7 @@ def create_game(game_day_id):
         game_new = Game(
             game_day_id=game_day_id,
             name=form.data['name'],
+            division=form.data['division'],
             start_time=form.data['start_time'],
             end_time=form.data['end_time']
         )
@@ -178,6 +179,7 @@ def edit_game(game_day_id, game_id):
         
         game_edit.game_day_id = game_day_id
         game_edit.name = form.data['name']
+        game_edit.division = form.data['division']
         game_edit.start_time = form.data['start_time']
         game_edit.end_time = form.data['end_time']
 
