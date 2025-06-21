@@ -9,13 +9,14 @@ function EditGameModel({game}) {
   const { editGame } = useGameDay();
     const [message, setMessage] = useState(null);
     const [name, setName] = useState(game.name);
+    const [division, setDivision] = useState(game.division);
     const [startTime, setStartTime] = useState(game.start_time.slice(0, 5));
     const [endTime, setEndTime] = useState(game.end_time.slice(0, 5));
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    editGame({gameDayId: game.game_day_id, gameId: game.id, name, startTime, endTime, setMessage})
+    editGame({gameDayId: game.game_day_id, gameId: game.id, name, division, startTime, endTime, setMessage})
     .then((res) => {if (res) closeModal();})
     .catch(()=>setMessage({errors: {message: 'Error with request'}}));
   };
@@ -43,6 +44,19 @@ function EditGameModel({game}) {
             required
           />
           {message?.errors.name && <p className='labelTitle error'>{message.errors.name}</p>}
+        </div>
+        {/* Division */}
+        <div className='inputCon'>
+            <select 
+                name="division" 
+                id="division" 
+                className="formInput"
+                value={division} 
+                onChange={(e) => setDivision(e.target.value)}
+            >
+              <option value={`Hoopers`}>Hoopers</option>
+              <option value={`Elite`}>Elite</option>
+            </select>
         </div>
         {/* Start Time */}
         <div className='inputCon'>

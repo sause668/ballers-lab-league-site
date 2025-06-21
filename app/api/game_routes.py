@@ -1,8 +1,14 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Game, Team_Stat, Player, Player_Stat
+from app.models import db, Game, Team_Stat, Player, Player_Stat, Team
 from app.forms import Team_Stat_Form, Player_Stat_Form
+from app.utils import sv_data
+from datetime import datetime
 import requests
+import json
+import os
+
+API_KEY = os.environ.get("API_KEY")
 
 game_routes = Blueprint('games', __name__)
 
@@ -165,24 +171,103 @@ def edit_player_stats(game_id, player_id):
 
     return form.errors, 400
 
-@game_routes.route('/<int:game_id>/all-stats', methods=['GET'])
+@game_routes.route('/<int:game_id>/import-stats', methods=['GET'])
 @login_required
 def import_stats(game_id):
     """
     Import Team & Player Stats from Sport Visio API
     """
-    # print('bah')
-    res = requests.get('https://prod.sportsvisio-api.com/programs/divisions/games/list/f12ebdf3-b517-4009-b018-7ae78d61787a/890d2a05-50ba-401b-97dc-8955846285cd/6ba54ff1-9f20-47f0-b0a5-118814b640fc', {
-         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ4ZDUyOS1kOWE1LTQ1ZTItOTcwOS1mNTk3YTYzOTNlNzgiLCJhY2NvdW50SWQiOiJmM2JkYzBmMC1mMjFlLTRlYTQtOTVmNC0yMWE1NGJmZmRkMTEiLCJpYXQiOjE3NDk3NjUwNzMsImV4cCI6MTc4MTMwMTA3M30.1ll6_AbywgP6YiEm4EuwKrjvY_x4cV1zGIlct9upt6Q',
-        #  'Host': 'localhost'
+    game = Game.query.filter_by(id=game_id,).first()
+
+    if not game:
+            return jsonify({"message": "Game not found"}), 404
+    
+    game_info = game.game_stats_info() 
+
+    # Get Game Info (Teams)
+    game_teams_sv_res = requests.get(f"https://prod.sportsvisio-api.com/scheduled-games/{game_info['sv_id']}", headers={
+        'Authorization': f'Bearer {API_KEY}',
          })
-    # res = requests.request('GET','https://prod.sportsvisio-api.com/programs/divisions/games/list/f12ebdf3-b517-4009-b018-7ae78d61787a/890d2a05-50ba-401b-97dc-8955846285cd/6ba54ff1-9f20-47f0-b0a5-118814b640fc', {
-    #      'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTQ4ZDUyOS1kOWE1LTQ1ZTItOTcwOS1mNTk3YTYzOTNlNzgiLCJhY2NvdW50SWQiOiJmM2JkYzBmMC1mMjFlLTRlYTQtOTVmNC0yMWE1NGJmZmRkMTEiLCJpYXQiOjE3NDk3NjUwNzMsImV4cCI6MTc4MTMwMTA3M30.1ll6_AbywgP6YiEm4EuwKrjvY_x4cV1zGIlct9upt6Q',
-    #     #  'Host': 'localhost'
-    #      })
-    print('res',res.json())
-    print('headers',request.headers)
-    if res: 
-        return {'res', res.json()}
-    return {'test': 'nah', 'game_id': game_id}, 200
+    
+    if not game_teams_sv_res.ok:
+         return {'message':'Issue with API call'}, game_teams_sv_res.status_code
+
+    game_teams_sv = game_teams_sv_res.json()
+
+    if game_teams_sv['status'] != 'final-approved':
+            return jsonify({"message": "Game stats not Ready"}), 404
+
+    teams_sv = [{
+         'name': team['team']['name'],
+         'points': team['score'],
+         'win': False
+         } for team in game_teams_sv['teamGameAssn']]
+        
+    #Find Win
+    if teams_sv[0]['points'] > teams_sv[1]['points']: teams_sv[0]['win'] = True
+    else: teams_sv[1]['win'] = True
+
+    for team_sv in teams_sv:
+        team_stat_edit = Team_Stat.query.\
+            filter_by(game_id=game_id).\
+            join(Team, Team_Stat.team_id == Team.id).\
+            filter_by(name=team_sv['name'].replace('and', '&').upper()).first()
+
+        if not team_stat_edit:
+            return jsonify({"message": "Team Stat not found"}), 404
+
+        team_stat_edit.points = int(team_sv['points'])
+        team_stat_edit.win = True if team_sv['win'] == True else False
+
+        db.session.commit()
+
+    # Get Game Info (Players)
+    game_players_sv_res = requests.get(f"https://prod.sportsvisio-api.com/annotations/stats/game-player-rollup/{game_info['sv_id']}", headers={
+        'Authorization': f'Bearer {API_KEY}',
+         })
+    
+    if not game_players_sv_res.ok:
+         return {'message':'Issue with API call'}, game_players_sv_res.status_code
+
+    game_players_sv = game_players_sv_res.json()
+
+    players_sv = [{
+         'name': player['player']['name'],
+         'number': player['player']['number'],
+         'points': player['summary']['totalPoints'],
+         'rebounds': player['summary']['totalRebounds'],
+         'assists': player['summary']['assists']
+         } for player in game_players_sv]
+         
+    # return {'l': game_players_sv}
+
+    for player_sv in players_sv:
+        player_name = player_sv['name']
+        if not ' ' in player_name: continue
+        i_name = player_name.index(" ")
+        player_fn= player_name[0:i_name]
+        player_ln= player_name[i_name+1:]
+        
+        player_stat_edit = Player_Stat.query.\
+            filter_by(game_id=game_id).\
+            join(Player, Player_Stat.player_id == Player.id).\
+            filter_by(
+              first_name=player_fn, 
+              last_name=player_ln, 
+              number= int(player_sv['number']
+             )).first()
+
+        if not player_stat_edit:
+            return jsonify({"message": "Player Stat not found"}), 404
+
+        player_stat_edit.points = int(player_sv['points'])
+        player_stat_edit.rebounds = int(player_sv['rebounds'])
+        player_stat_edit.assists = int(player_sv['assists'])
+
+    game.stats_imported = True
+
+    db.session.commit()
+
+    game_cur = Game.query.filter_by(id=game_id).first()
+    return {'gameStats': game_cur.game_stats_info()}
 

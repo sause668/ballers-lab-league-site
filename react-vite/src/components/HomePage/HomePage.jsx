@@ -1,7 +1,7 @@
 import "./HomePage.css";
 
 export default function HomePage() {
-  let url = '';
+  let url = ''
   if (import.meta.env.MODE === "production") {
     url = 'disk/'
   }

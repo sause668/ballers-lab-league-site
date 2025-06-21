@@ -8,9 +8,10 @@ import EditTeamStatModel from "./EditTeamStatModel";
 import EditPlayerStatModel from "./EditPlayerStatModel";
 
 export default function GameStatsPage() {
+  const { setModalContent } = useModal();
   const { gameId } = useParams();
   const { user } = useUser();
-  const {gameStats, gameByIdStats } = useGame();
+  const {gameStats, gameByIdStats, importStats } = useGame();
   const teamStats = [
     gameStats?.team_stats[0],
     gameStats?.team_stats[1]
@@ -21,6 +22,8 @@ export default function GameStatsPage() {
   ];
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [statsChecked, setStatsChecked] = useState(gameStats?.stats_imported);
+  const [statsStatus, setStatsStatus] = useState('');
   const [message, setMessage] = useState(null);
 
   if (import.meta.env.MODE !== "production") {
@@ -32,11 +35,33 @@ export default function GameStatsPage() {
   const tableHeaders = ['PPG', 'RPG', 'APG'];
   const tableBody = ['points', 'rebounds', 'assists'];
 
-  const { setModalContent } = useModal();
+  function handleImport() {
+    importStats({gameId, setMessage})
+      .then((res) => {
+        if (res) setStatsStatus('');
+        else setStatsStatus('Stats not Ready');
+      });
+  }
   
   useEffect(() => {
     if (!isLoaded) gameByIdStats({gameId, setIsLoaded, setMessage})
-  }, [gameByIdStats, gameId, isLoaded, setIsLoaded, setMessage]);
+    else if (!statsChecked) {
+      
+      const gameDate = new Date(gameStats?.date.split('-')).getTime();
+      const dateNow = new Date().getTime();
+
+      if (parseFloat(gameDate) < parseFloat(dateNow)) {
+        importStats({gameId, setMessage})
+          .then((res) => {
+            if (res) setStatsStatus('');
+            else setStatsStatus('Stats not Ready');
+          });
+      }
+      else setStatsStatus('Game not Played');
+      setStatsChecked(true);
+    }
+  
+  }, [gameByIdStats, importStats, gameId, isLoaded, setIsLoaded, setMessage, gameStats?.date, statsChecked, setStatsStatus]);
 
   return (
     <>
@@ -75,11 +100,11 @@ export default function GameStatsPage() {
                     <tr className="tableHeadRowGS">
                         <td className="tableCellGS tableHeadCellGS" colSpan="2">Players</td>
                       {tableHeaders.map((header, iHeader) => (
-                        <td className="tableCellGS tableHeadCellGS" key={`tableHeadGS${iHeader}`}>{header}</td>
+                        <td className="tableCellGS tableHeadCellGS tableHeadStatCellGS" key={`tableHeadGS${iHeader}`}>{header}</td>
                       ))}
                     </tr>
                   </thead>
-                  <tbody className="tableBodyGB">
+                  <tbody className="tableBodyGS">
                     {playerTeamStats.map((playerStat, iPlayerStat) => (
                       <tr className="tableBodyRowGS" key={`playerStatRow${iPlayerStat}`}>
                         <td className="tableCellGS tableBodyCellGS playerNumberCellGS">{playerStat.player.number}</td>
@@ -104,6 +129,12 @@ export default function GameStatsPage() {
           );
         })}
       </div>
+      {statsStatus &&
+        <h3 id="statsStatusGS">{statsStatus}</h3>
+      }
+      {user && 
+        <button id="importBtn" onClick={handleImport}>Import Stats</button>
+      }
      </div>)}
     </>
   );

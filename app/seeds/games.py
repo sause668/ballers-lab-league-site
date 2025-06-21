@@ -12,6 +12,8 @@ def seed_games():
             db.session.add(Game(
                 game_day_id=game_day_cur['id'],
                 name=game['name'],
+                division=game['division'],
+                sv_id=game['sv_id'],
                 start_time=game['start_time'],
                 end_time=game['end_time'],
             ))
