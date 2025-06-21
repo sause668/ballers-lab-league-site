@@ -41,10 +41,10 @@ export default function NavBar() {
       title: 'SCHEDULE',
       link: '/schedule'
     },
-    {
-      title: 'PHOTOS',
-      link: '/photos'
-    },
+    // {
+    //   title: 'PHOTOS',
+    //   link: '/photos'
+    // },
   ]
 
   async function handleLogout() {

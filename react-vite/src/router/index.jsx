@@ -9,8 +9,8 @@ import HomePage from '../components/HomePage/HomePage';
 import LeaguePage from '../components/LeuguePage/LeaguePage';
 import RulesPage from '../components/RulesPage/RulesPage';
 import HistoryPage from '../components/HistoryPage/HistoryPage';
-import PhotosPage from '../components/PhotosPage/PhotosPage';
-import SeasonPhotosPage from '../components/SeasonPhotosPage/SeasonPhotosPage';
+// import PhotosPage from '../components/PhotosPage/PhotosPage';
+// import SeasonPhotosPage from '../components/SeasonPhotosPage/SeasonPhotosPage';
 
 export const router = createBrowserRouter([
   {
@@ -72,18 +72,18 @@ export const router = createBrowserRouter([
           },
         ]
       },
-      {
-        path: "photos/",
-        children: [
-          {
-            path: "",
-            element: <PhotosPage/>,
-          },{
-            path: ":seasonId",
-            element: <SeasonPhotosPage/>,
-          },
-        ]
-      },
+      // {
+      //   path: "photos/",
+      //   children: [
+      //     {
+      //       path: "",
+      //       element: <PhotosPage/>,
+      //     },{
+      //       path: ":seasonId",
+      //       element: <SeasonPhotosPage/>,
+      //     },
+      //   ]
+      // },
       {
         path: "teams/",
         children: [
