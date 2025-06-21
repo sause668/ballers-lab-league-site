@@ -1,9 +1,9 @@
 import "./HomePage.css";
 
 export default function HomePage() {
-  const url = ''
+  let url = ''
   if (import.meta.env.MODE === "production") {
-    url = '/ballers-lab-league-site:10000/bll/disk/'
+    url = 'disk/'
   }
 
   return (

@@ -25,3 +25,6 @@ dist-ssr
 
 #Disk files
 public/videos/
+public/imgs/
+dist/imgs/
+dist/videos/

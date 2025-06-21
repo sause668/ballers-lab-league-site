@@ -18,14 +18,14 @@ import AddTeamModel from "./AddTeam";
 
 
 export default function GamePage() {
-  // const { user } = useUser();
-  const user  = null;
+  const { user } = useUser();
   const nav = useNavigate();
   const { gameDayId, gameId } = useParams();
-  const { game, gameById} = useGame();
+  const { game, gameById, importStats} = useGame();
   const { gamesList, gameDaysList, allGamesList, allGameDaysList } = useGameDay();
   const [gameDaySel, setGameDaySel] = useState(gameDayId);
   const [gameSel, setGameSel] = useState(false);
+  const [statsChecked, setStatsChecked] = useState(game?.stats_imported);
   const [isLoaded, setIsLoaded] = useState(false);
   const [message, setMessage] = useState(null);
   const teamSetup = [0, 1];
@@ -64,12 +64,22 @@ export default function GamePage() {
   }
   
   useEffect(() => {
-    if (!isLoaded) {
-      gameById({gameId, setIsLoaded, setMessage})
-      allGameDaysList({setMessage})
-      allGamesList({gameDayId, setMessage})
-    }
-  }, [gameById, allGameDaysList, allGamesList, gameId, gameDayId, isLoaded, setIsLoaded, setMessage]);
+      if (!isLoaded) {
+        gameById({gameId, setIsLoaded, setMessage})
+        allGameDaysList({setMessage})
+        allGamesList({gameDayId, setMessage})
+      }
+      else if (!statsChecked) {
+        if (isPlayed) {
+          importStats({gameId, setMessage})
+            .then((res) => {
+              if (res) gameById({gameId, setIsLoaded, setMessage});
+            });
+        }
+        setStatsChecked(true);
+      }
+    
+  }, [gameById, allGameDaysList, allGamesList, importStats, gameId, gameDayId, isLoaded, setIsLoaded, setMessage, statsChecked, isPlayed]);
 
   return (
     <>
@@ -132,7 +142,7 @@ export default function GamePage() {
             {game.teams[isHome] ? 
               <div className="preGameTeamConG">
                 {user && <OpenModalButton
-                  buttonText={<IoMdClose className="buttonIcon" />}
+                  buttonText={<IoMdClose className="buttonIconG" />}
                   modalComponent={<RemoveTeamModel gameId={game.id} team={game.teams[isHome].team} />}
                   cssClasses={'buttonG pregameBnG removeG'}
                 />}
@@ -201,7 +211,6 @@ export default function GamePage() {
               <h3 id="gameStatsLinkTextG">View Stats</h3>
             </a>
           </div>
-          
         </div>
         }
       </div>}

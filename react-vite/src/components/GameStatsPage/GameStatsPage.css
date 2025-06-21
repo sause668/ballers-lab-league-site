@@ -79,7 +79,7 @@
     margin: 0rem .5rem;
 }
 .winningTeamGS {
-
+    color: #ff9045;
 }
 
 /* Player Stats */
@@ -112,7 +112,7 @@
 .tableHeadGS {
 
 }
-.tableBodyGB {
+.tableBodyGS {
 
 }
 
@@ -133,6 +133,9 @@
     /* font-stretch: expanded; */
     padding: .25rem .3rem;
 
+}
+.tableHeadStatCellGS {
+    text-align: center;
 }
 .tableBodyCellGS {
     font-size: 1rem;
@@ -164,6 +167,16 @@
     font-stretch: expanded;
     color: #ff9045;
 
+}
+
+#importBtn {
+
+}
+#statsStatusGS {
+    font-size: 1.5rem;
+    font-weight: 200;
+    font-stretch: expanded;
+    margin-bottom: 1rem;
 }
 
 @media (min-width:700px) {

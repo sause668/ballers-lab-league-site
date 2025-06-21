@@ -1,7 +1,6 @@
 import "./HistoryPage.css";
 
 export default function HistoryPage() {
-  const imgScale = 5;
    
   return (
     <div id="mainConHI">
