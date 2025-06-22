@@ -59,7 +59,7 @@ export default function GameDayPage() {
           return(
           <div className="gameInfoConGD" key={`gameInfo${index}`}>
             <div className="gameInfoSubCon1GD">
-              <h4 className="gameTimeGD">{newStartTimeG} {newEndTimeG}</h4>
+              <h4 className="gameTimeGD">{newStartTimeG} - {newEndTimeG}</h4>
               <h6 className="gameDurGD">1 hour</h6>
             </div>
             <div className="gameInfoSubCon2GD">

@@ -66,6 +66,7 @@
     -moz-appearance: none; 
     -webkit-appearance: none; 
     appearance: none;
+    cursor: pointer;
     /* appearance: none; */
     /* -webkit-appearance: none; */
     /* width: 100%; */
@@ -283,8 +284,8 @@
 #gameStatsLinkG {
     /* box-sizing: border-box;
     padding: 9rem; */
-
 }
+
 
 #gameStatsLinkTextG {
     font-size: 1.3rem;
@@ -292,6 +293,12 @@
     font-stretch: expanded;
     text-align: center;
     color: #fdfdfd;
+
+    transition: color .3s ;
+}
+#gameStatsLinkTextG:hover {
+    color: #ffb600;
+    transition: color .3s ;
 }
 
 .buttonG {
