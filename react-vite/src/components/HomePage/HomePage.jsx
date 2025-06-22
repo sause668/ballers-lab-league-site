@@ -1,11 +1,12 @@
 import { useEffect } from "react";
+import ReactPlayer from 'react-player'
 import "./HomePage.css";
 
 export default function HomePage() {
   let url = import.meta.env.MODE === "production" ? 'disk/':''
 
   useEffect(() => {
-    document.getElementById('videoHM').play();
+    // document.getElementById('videoHM').play();
 
   }, []);
 
@@ -20,9 +21,19 @@ export default function HomePage() {
       <h1 id="t3HP" className="titleHM">2025</h1>
      </div>
      <div id="videoConHM">
-      <video id="videoHM" width="320" height="240" autoPlay loop muted>
+      {/* <video id="videoHM" width="320" height="240" autoPlay loop muted>
         <source src={`${url}videos/home-video.mp4`} type="video/mp4"/>
-      </video>
+      </video> */}
+      <ReactPlayer 
+        id="videoHM" 
+        width="320" 
+        height="240" 
+        playing={true} 
+        muted={true} 
+        loop={true} 
+        playsinline
+        url={`${url}videos/home-video.mp4`}
+      />
      </div>
     </div>
   );
