@@ -2,8 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Game, Team_Stat, Player, Player_Stat, Team
 from app.forms import Team_Stat_Form, Player_Stat_Form
-from app.utils import sv_data
-from datetime import datetime
+from datetime import date
 import requests
 import json
 import os
@@ -22,7 +21,11 @@ def game(game_id):
     if not game:
         return jsonify({"message": "Game not found"}), 404
     
-    return {'game': game.game_info()}
+    game_info = game.game_info()
+    date_arr = [int(game_date) for game_date in game_info['game_day']['date'][0:10].split('-')]
+    game_info['played'] = False if date(date_arr[0], date_arr[1], date_arr[2]) > date.today() else True
+
+    return {'game': game_info}
 
 @game_routes.route('/<int:game_id>/stats')
 def game_stats(game_id):
@@ -34,7 +37,11 @@ def game_stats(game_id):
     if not game:
         return jsonify({"message": "Game not found"}), 404
     
-    return {'gameStats': game.game_stats_info()}
+    game_stats_info = game.game_stats_info()
+    date_arr = [int(game_date) for game_date in game_stats_info['date'][0:10].split('-')]
+    game_stats_info['played'] = False if date(date_arr[0], date_arr[1], date_arr[2]) > date.today() else True
+
+    return {'gameStats': game_stats_info}
 
 
 """

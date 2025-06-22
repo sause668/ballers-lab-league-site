@@ -14,8 +14,8 @@ export default function GameStatsPage() {
   const { user } = useUser();
   const {gameStats, gameByIdStats, importStats } = useGame();
   const teamStats = [
-    gameStats?.team_stats[0],
-    gameStats?.team_stats[1]
+    gameStats && gameStats?.team_stats[0],
+    gameStats && gameStats?.team_stats[1]
   ];
   const playerStats = [
     teamStats[0] && gameStats.player_stats.filter(playerStat => playerStat.player.team_id == teamStats[0].team.id),
@@ -39,30 +39,24 @@ export default function GameStatsPage() {
   function handleImport() {
     importStats({gameId, setMessage})
       .then((res) => {
-        if (res) setStatsStatus('');
+        if (!res) setStatsStatus('');
         else setStatsStatus('Stats not Ready');
       });
   }
   
   useEffect(() => {
-    if (!isLoaded) gameByIdStats({gameId, setIsLoaded, setMessage})
-    else if (!statsChecked) {
-      
-      const gameDate = new Date(gameStats?.date.split('-')).getTime();
-      const dateNow = new Date().getTime();
-
-      if (parseFloat(gameDate) < parseFloat(dateNow)) {
-        importStats({gameId, setMessage})
-          .then((res) => {
-            if (res) setStatsStatus('');
-            else setStatsStatus('Stats not Ready');
-          });
+    if (!isLoaded) gameByIdStats({gameId, setIsLoaded, setMessage});
+    else {
+      if (!gameStats?.stats_imported) {
+        if (user && !statsChecked) {
+          importStats({gameId, setMessage})
+            .then((res) => { if (!res) setStatsStatus('Stats not Ready');});
+          setStatsChecked(true);
+        } else setStatsStatus('Stats not Ready');
       }
-      else setStatsStatus('Game not Played');
-      setStatsChecked(true);
+      
     }
-  
-  }, [gameByIdStats, importStats, gameId, isLoaded, setIsLoaded, setMessage, gameStats?.date, statsChecked, setStatsStatus]);
+  }, [gameByIdStats, importStats, gameId, user, isLoaded, setIsLoaded, setMessage, statsChecked, setStatsChecked, setStatsStatus, gameStats?.stats_imported]);
 
   return (
     <>
