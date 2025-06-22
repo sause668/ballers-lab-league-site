@@ -9,6 +9,7 @@ import { IoMdClose } from "react-icons/io";
 import { FiPlus } from "react-icons/fi";
 import { BiSolidBasketball } from "react-icons/bi";
 import { CiCalendar } from "react-icons/ci";
+import { IoIosArrowDown } from "react-icons/io";
 
 import { useUser } from "../../context/User";
 import { useGame } from "../../context/Game";
@@ -36,7 +37,7 @@ export default function GamePage() {
   const isPlayed = game && game.played;
 
   const newDate = game && convDateFull(game.game_day.date);
-  const newDateF = newDate && newDate.slice(0, newDate.length - 21);
+  const newDateF = newDate && newDate.slice(0, newDate.length - 6);
   const newStartTime = game && convTime(game.start_time);
   const newEndTime = game && convTime(game.end_time);
 
@@ -115,6 +116,7 @@ export default function GamePage() {
                 </option>
               ))}
             </select>
+            <IoIosArrowDown className="selIconG"/>
           </div>
           <div className="selectConG gameSelConG">
             <select 
@@ -128,6 +130,7 @@ export default function GamePage() {
                 <option value={gameOpt.id} key={`gameSelOpt${index}`}>{gameOpt.name.replace('Division ', '')}</option>
               ))}
             </select>
+            <IoIosArrowDown className="selIconG"/>
           </div>
         </div>
         {!isPlayed ? 
