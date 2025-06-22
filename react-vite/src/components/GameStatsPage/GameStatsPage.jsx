@@ -105,7 +105,7 @@ export default function GameStatsPage() {
                         <td className="tableCellGS tableBodyCellGS playerNumberCellGS">{playerStat.player.number}</td>
                         <td 
                           className="tableCellGS tableBodyCellGS playerInfoCellGS"
-                          onClick={()=>user && setModalContent(<SportsVisioModel />)}
+                          onClick={()=>setModalContent(<SportsVisioModel />)}
                         >
                           <h6 className="playerNameGS">{playerStat.player.first_name} {playerStat.player.last_name}</h6>
                         </td>

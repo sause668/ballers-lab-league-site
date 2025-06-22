@@ -67,6 +67,13 @@ export default function GamePage() {
     gameById({gameId: gameSelId, setIsLoaded, setMessage})
     allGamesList({gameDayId, setMessage})
   }
+
+  function sortGames(game1, game2) {
+    const time1 = parseFloat(game1.start_time.slice(0,3));
+    const time2 = parseFloat(game2.start_time.slice(0,3));
+
+    return time1 - time2;
+  }
   
   useEffect(() => {
       if (!isLoaded) {
@@ -126,7 +133,9 @@ export default function GamePage() {
               value={gameSel} 
               onChange={(e) => gameSelChange(e)}
             >
-              {gamesList && gamesList.map((gameOpt, index) => (
+              {gamesList && gamesList
+                .sort((a, b)=> sortGames(a, b))
+                .map((gameOpt, index) => (
                 <option value={gameOpt.id} key={`gameSelOpt${index}`}>{gameOpt.name.replace('Division ', '')}</option>
               ))}
             </select>

@@ -67,7 +67,7 @@ export default function SchedulePage() {
                   </div>
                   <h3 className='nameS nameMS'>{gameDay.name}</h3>
                   {/* <h4 className="dateS" >{gameDay.date}</h4> */}
-                  <h5 className="dateTimeS dateTimeMS">{`${newDate}, ${newStartTime}, ${newEndTime}`}</h5>
+                  <h5 className="dateTimeS dateTimeMS">{`${newDate}, ${newStartTime} - ${newEndTime}`}</h5>
                   <h5 className="locationS locationMS">{newLocation[0]}</h5>
                   <h5 className="locationS locationMS">{newLocation[1]}, {newLocation[2]}, {newLocation[3]}, {newLocation[4]}</h5>
                 </div>
