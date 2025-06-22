@@ -121,6 +121,9 @@ a:link, a:visited, a:active { color: #fdfdfd; }
 a:active {
     background-color: #0d0d0d00;
 }
+a:hover {
+    background-color: #0d0d0d00;
+}
 
 .curser {
     cursor: pointer;

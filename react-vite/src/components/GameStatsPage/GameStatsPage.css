@@ -221,9 +221,20 @@
     transition: color .3s ;
 }
 
+#linkSponV {
+    transition: color .3s ;
+}
+
 #sponserSV {
+    padding: .5rem;
     margin-top: 1rem;
     width: 20rem;
+    transition: background-color .3s ;
+}
+#sponserSV:hover {
+    background-color: #ff8f4546;
+    border-radius: .25rem;
+    transition: background-color .3s ;
 }
 
 
