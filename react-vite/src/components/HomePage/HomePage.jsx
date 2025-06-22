@@ -1,7 +1,13 @@
+import { useEffect } from "react";
 import "./HomePage.css";
 
 export default function HomePage() {
   let url = import.meta.env.MODE === "production" ? 'disk/':''
+
+  useEffect(() => {
+    document.getElementById('videoHM').play();
+
+  }, []);
 
   return (
     <div id="mainConHM" className="fadein">
@@ -16,7 +22,6 @@ export default function HomePage() {
      <div id="videoConHM">
       <video id="videoHM" width="320" height="240" autoPlay loop muted>
         <source src={`${url}videos/home-video.mp4`} type="video/mp4"/>
-        Video Not Available
       </video>
      </div>
     </div>

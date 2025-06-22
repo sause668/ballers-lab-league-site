@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Game, Team_Stat, Player, Player_Stat, Team
 from app.forms import Team_Stat_Form, Player_Stat_Form
-from datetime import date
+from datetime import datetime
 import requests
 import json
 import os
@@ -23,7 +23,8 @@ def game(game_id):
     
     game_info = game.game_info()
     date_arr = [int(game_date) for game_date in game_info['game_day']['date'][0:10].split('-')]
-    game_info['played'] = False if date(date_arr[0], date_arr[1], date_arr[2]) > date.today() else True
+    time_arr = [int(game_time) for game_time in game_info['start_time'][0:5].split(':')]
+    game_info['played'] = False if datetime(date_arr[0], date_arr[1], date_arr[2], time_arr[0], time_arr[1]) > datetime.today() else True
 
     return {'game': game_info}
 
@@ -39,7 +40,8 @@ def game_stats(game_id):
     
     game_stats_info = game.game_stats_info()
     date_arr = [int(game_date) for game_date in game_stats_info['date'][0:10].split('-')]
-    game_stats_info['played'] = False if date(date_arr[0], date_arr[1], date_arr[2]) > date.today() else True
+    time_arr = [int(game_time) for game_time in game_stats_info['start_time'][0:5].split(':')]
+    game_stats_info['played'] = False if datetime(date_arr[0], date_arr[1], date_arr[2], time_arr[0], time_arr[1]) > datetime.today() else True
 
     return {'gameStats': game_stats_info}
 
