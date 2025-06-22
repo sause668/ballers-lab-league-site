@@ -108,13 +108,16 @@ a {
     text-decoration: none;
 }
 
-a:visited {
+/* a:visited {
     color: #fdfdfd;
 }
 
 a:active {
-    color: #0d0d0d;
-}
+    color: #fdfdfd;
+} */
+
+a:link, a:visited, a:hover, a:active { color: #fdfdfd; }
+
 
 
 

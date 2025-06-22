@@ -16,7 +16,7 @@ export default function NavBar() {
   const [menu, setMenu] = useState(false);
   const [showChildren, setShowChildren] = useState('');
   const [message, setMessage] = useState(null);
-  let url = import.meta.env.MODE === "production" ? 'disk/':''
+  let url = import.meta.env.MODE === "production" ? '/disk':''
   if (message) console.log(message);
 
   const navItems = [

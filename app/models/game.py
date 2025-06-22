@@ -55,7 +55,7 @@ class Game(db.Model):
         return {
             'id': self.id,
             'game_day_id': self.game_day_id,
-            'date': self.game_day.date,
+            'date': self.game_day.game_info()['date'],
             'sv_id': self.sv_id,
             'division': self.division,
             'name': self.name,
