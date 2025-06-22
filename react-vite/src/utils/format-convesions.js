@@ -8,10 +8,10 @@ export function convDateFull(date) {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: true // Use 12-hour format with AM/PM
+        // hour: 'numeric',
+        // minute: 'numeric',
+        // second: 'numeric',
+        // hour12: true // Use 12-hour format with AM/PM
       })
 }
 

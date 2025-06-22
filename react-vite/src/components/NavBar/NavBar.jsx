@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 import "./NavBar.css";
 import { useUser } from "../../context/User";
@@ -12,6 +12,8 @@ import { SlArrowUp } from "react-icons/sl";
 export default function NavBar() {
   const { logout, user } = useUser();
   const nav = useNavigate();
+  const location = useLocation();
+  const pathN = location.pathname;
   const mobile = !useMediaQuery({ query: '(min-width: 700px)' });
   const [menu, setMenu] = useState(false);
   const [showChildren, setShowChildren] = useState('');
@@ -82,7 +84,7 @@ export default function NavBar() {
             onMouseEnter={()=>changeChildren(navItem.title)} 
             onMouseLeave={()=>changeChildren()}
           >
-            <a className="navLinkN"  href={navItem.link}>
+            <a className={`navLinkN ${pathN == navItem.link && 'linkCurN'}`}  href={navItem.link}>
               <h3 className="navItem">{navItem.title}</h3>
             </a>
             {/* Children */}
@@ -90,7 +92,7 @@ export default function NavBar() {
               <div className={`navConN childConN ${showChildren !== navItem.title && 'hidden'}`}>
                 {navItem.children.map((navChild, iNavChild) => (
                   <a 
-                  className="navLinkN childLinkN" 
+                  className={`navLinkN childLinkN ${pathN == navChild.link && 'linkCurN'}`}
                   key={`navChildN${iNavChild}`}
                   href={navChild.link}
                 >
@@ -117,9 +119,18 @@ export default function NavBar() {
         {/* Mobile Menu */}
         <div className={`mobileConN ${!menu && 'hidden'} fadein`}>
         {navItems.map((navItem, iNavItem) => {
+            const onPage = pathN == navItem.link && 'linkCurN';
+            // let onPage = '';
+            // const pathS = navItem.link;
+            // if (pathN == '/') onPage = 'linkCurN';
+            // else if (pathN !== '/' && pathN.includes(pathS)) onPage = 'linkCurN';
+
             return !navItem.children ? 
             <div key={`navLinkN${iNavItem}`}>
-              <a className="mobileLinkN"  href={navItem.link} >
+              <a 
+                className={`mobileLinkN ${onPage}`}  
+                href={navItem.link} 
+              >
                 <h3 className="mobileItemN">{navItem.title}</h3>
                 <div className="borderN"/>
               </a>
@@ -134,9 +145,8 @@ export default function NavBar() {
                     <SlArrowUp className="toggleIconN"/>
                   }
                 </div>
-                <a className="mobileLinkN"  href={navItem.link} >
+                <a className={`mobileLinkN ${onPage}`}  href={navItem.link} >
                   <h3 className="mobileItemN">{navItem.title}</h3>
-                  
                 </a>
               </div>
               {/* Children */}
@@ -144,7 +154,7 @@ export default function NavBar() {
                 <div  className={`mobileConN mobileChildConN ${showChildren !== navItem.title && 'hidden'}`} >
                   {navItem.children.map((navChild, iNavChild) => (
                     <a 
-                    className="mobileLinkN mobileChildLinkN" 
+                    className={`mobileLinkN mobileChildLinkN ${pathN == navChild.link && 'linkCurN'}`}
                     key={`navChildN${iNavChild}`}
                     href={navChild.link}
                   >

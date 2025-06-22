@@ -19,12 +19,19 @@
     border-radius: .25rem;
     position: absolute;
     padding: 0rem 0rem;
+    margin-top: ;
 }
 
 .navLinkN {
     color: #fdfdfd;
 }
+.navLinkN:hover {
+    color: #ffb600;
+}
 .childLinkN {
+}
+.linkCurN, .linkCurN:link, .linkCurN:visited, .linkCurN:active  {
+    color: #ffb600;
 }
 
 .navItem {
@@ -32,7 +39,7 @@
     font-size: 1.2rem;
     font-stretch: expanded;
     padding: .25rem 1rem;
-    color: #fdfdfd;
+    /* color: #fdfdfd; */
     transition: color .5s;
 
 }
@@ -54,6 +61,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #0d0d0d;
+    z-index: 50;
     /* box-shadow: 0px 3px 3px #0d0d0d69; */
     
 }
@@ -84,6 +92,7 @@
 
 .mobileConN {
     position: fixed;
+    top: 6rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -93,15 +102,19 @@
     height: 100%;
     background-color: #0d0d0d;
     padding-bottom: 2rem;
-    padding-top: 2rem;
+    padding-top: 4rem;
+    margin-top: -1rem;
     box-shadow: 0px 3px 3px #0d0d0d69;
+    z-index: 40;
 }
 .mobileChildConN {
     position: static;
+    top: 0rem;
     gap: 1rem;
     height: auto;
     padding-top: 1rem;
     padding-bottom: 0rem;
+    margin-top: 0rem;
     /* margin-bottom: 0rem; */
 }
 
@@ -115,6 +128,7 @@
 .mobileChildLinkN {
 
 }
+
 
 .mobileItemN {
     font-weight: 200;
@@ -135,7 +149,7 @@
 
 .mobileToggleBnN {
     position: absolute;
-    left: 32%;
+    left: 30%;
     /* display: flex;
     justify-content: center;
     align-items: center; */
@@ -158,7 +172,7 @@
     /* border: .001px solid #ffffff; */
     margin-top: 1rem;
     background-color: #ffffff93;
-    height: .05px;
+    height: .025rem;
     width: 15rem;
 }
 

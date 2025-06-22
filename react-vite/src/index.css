@@ -116,7 +116,11 @@ a:active {
     color: #fdfdfd;
 } */
 
-a:link, a:visited, a:hover, a:active { color: #fdfdfd; }
+a:link, a:visited, a:active { color: #fdfdfd; }
+
+a:active {
+    background-color: #0d0d0d00;
+}
 
 
 
