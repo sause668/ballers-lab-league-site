@@ -30,10 +30,10 @@ export default function GamePage() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [message, setMessage] = useState(null);
   const teamSetup = [0, 1];
-  const gameDate = new Date(game?.game_day.date.split('-')).getTime();
-  const dateNow = new Date().getTime();
+  // const gameDate = new Date(game?.game_day.date.split('-')).getTime();
+  // const dateNow = new Date().getTime();
 
-  const isPlayed = parseFloat(gameDate) < parseFloat(dateNow);
+  const isPlayed = game && game.played;
 
   const newDate = game && convDateFull(game.game_day.date);
   const newDateF = newDate && newDate.slice(0, newDate.length - 21);
@@ -46,8 +46,6 @@ export default function GamePage() {
     console.log('Game', game);
     console.log('GameDaysList', gameDaysList);
     console.log('GamesList', gamesList);
-    console.log('Game Date', gameDate);
-    console.log('Date Now', dateNow);
   }
   
 
