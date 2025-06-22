@@ -39,6 +39,7 @@
     flex-direction: row-reverse;
     justify-content: flex-end;
     align-items: center;
+    overflow: hidden;
     /* gap: -1rem; */
     width: 50%;
 }
@@ -167,7 +168,12 @@
     font-weight: 200;
     font-stretch: expanded;
     color: #ff9045;
-
+    transition: color .3s ;
+    cursor: pointer;
+}
+.playerNameGS:hover {
+    color: #ffb600;
+    transition: color .3s ;
 }
 
 #importBtn {

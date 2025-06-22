@@ -70,6 +70,7 @@ class Game(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'start_time': str(self.start_time),
         }
     
     
