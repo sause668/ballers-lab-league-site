@@ -15,7 +15,7 @@
 #teamStatsConGS {
     position: sticky;
     top: 5.5rem;
-    z-index: 80;
+    /* z-index: 80; */
     padding-bottom: .5rem;
     background-color: #0d0d0d;
     width: 100%;
