@@ -1,9 +1,12 @@
 export function convDate(date) {
-    return new Date(...date.split('-')).toDateString()
+    // return date
+    const dateArr = date.split('-').map(val=>parseFloat(val));
+    return new Date(dateArr[0], dateArr[1]-1, dateArr[2]).toDateString();
 }
 
 export function convDateFull(date) {
-    return new Date(...date.split('-')).toLocaleString('en-US', {
+    const dateArr = date.split('-').map(val=>parseFloat(val));
+    return new Date(dateArr[0], dateArr[1]-1, dateArr[2]).toLocaleString('en-US', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
