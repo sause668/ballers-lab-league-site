@@ -35,6 +35,7 @@ class Game(db.Model):
             'id': self.id,
             'game_day_id': self.game_day_id,
             'name': self.name,
+            'division': self.division,
             'start_time': str(self.start_time),
             'end_time': str(self.end_time),
         }

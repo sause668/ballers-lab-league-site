@@ -26,3 +26,10 @@ export function convTime(time) {
 export function convLoc(loc) {
     return loc.split(',')
 }
+
+export function sortGames(game1, game2) {
+    const time1 = parseFloat(game1.start_time.slice(0,3));
+    const time2 = parseFloat(game2.start_time.slice(0,3));
+
+    return time1 - time2;
+  }
