@@ -8,7 +8,7 @@ import { SlArrowRight } from "react-icons/sl";
 import { useUser } from "../../context/User";
 import NewGameModel from "./NewGameModel";
 import EditGameModel from "./EditGameModel";
-import { convDate, convLoc, convTime } from "../../utils/format-convesions";
+import { convDate, convLoc, convTime, sortGames } from "../../utils/format-convesions";
 
 export default function GameDayPage() {
   const { user } = useUser();
@@ -53,7 +53,9 @@ export default function GameDayPage() {
         
         <h2 id='dateGD'>{newDateF}</h2>
         <div className="borderGD"></div>
-        {gameDay.games.map((game, index) => {
+        {gameDay.games
+        .sort((a,b)=>sortGames(a,b))
+        .map((game, index) => {
           const newStartTimeG = convTime(game.start_time);
           const newEndTimeG = convTime(game.end_time);
           return(
